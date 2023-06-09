@@ -2,7 +2,6 @@ import React, { useRef, useEffect } from 'react';
 import { IfcViewerAPI } from 'web-ifc-viewer';
 import * as THREE from 'three';
 
-import { IfcTreeMenu } from '../../components';
 
 const IfcViewer = ({ifcProject}) => {
   const containerRef = useRef();
@@ -59,7 +58,7 @@ const IfcViewer = ({ifcProject}) => {
 
   return (
     <>
-    <IfcTreeMenu ifcProject= {ifcProject} />
+    
       <div  ref={containerRef} />
     </>
 
