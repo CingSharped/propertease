@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-//import IfcViewer from './IfcViewer';
 import {IfcViewer} from './Pages';
 import { Routes, Route } from 'react-router-dom';
 
