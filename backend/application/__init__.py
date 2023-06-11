@@ -15,7 +15,10 @@ mongodb_client = PyMongo(app)
     
 db = mongodb_client.db
 
+@app.route('/')
+def home():
+    return '<h1>Welcome to the PropertEase API </h1>'
 
     
 from application.routes.users import user_routes
-app.register_blueprint(user_routes)
+app.register_blueprint(user_routes, url_prefix='/users')
