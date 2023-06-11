@@ -1,5 +1,6 @@
 import bcrypt
 import os
+import jwt
 from application import db
 from application.models.User import User
 
@@ -19,7 +20,13 @@ def signup(username, password, user_type):
     return new_user
     
 
-def login(user):
+def login(username, password):
     # get user with user.username and check against user.password
-    # return username, type and token
-    return 'this features has not been implemented'
+    user = db.users.find_one({ 'username': username })
+    if not user:
+        return { 'error': 'User does not exist, please sign up before trying to log in'}
+    if bcrypt.checkpw(password.encode('utf-8'), user['password']):
+        token = jwt.encode({'_id': str(user['_id']), 'username': user['username']}, str(os.getenv('SECRET')), algorithm='HS256')
+        return {'_id': str(user['_id']), 'username': user['username'], 'user_type': user['user_type'], 'token': token}
+    else:
+        return { 'error': 'Incorrect credentials'}

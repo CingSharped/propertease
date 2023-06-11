@@ -23,3 +23,15 @@ def signup_user():
   else:  
     return {'error': 'All fields required'}
   
+@user_routes.route('/login', methods=['POST'])
+def login_user():
+  request_data = request.get_json()
+  username = None
+  password = None
+  if 'username' in request_data and 'password' in request_data:
+    username = str(request_data['username'].lower())
+    password = str(request_data['password'])
+    logged_in_user = users.login(username, password)
+    return logged_in_user
+  else:  
+    return {'error': 'All fields required'}
