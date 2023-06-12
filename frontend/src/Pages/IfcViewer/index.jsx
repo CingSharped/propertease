@@ -1,10 +1,11 @@
 import React, { useRef, useEffect } from "react";
 import { IfcViewerAPI } from "web-ifc-viewer";
 import * as THREE from "three";
-import './IfcViewer.css'
+import './IfcViewer.css';
 
 const IfcViewer = ({ ifcProject }) => {
   const containerRef = useRef();
+  const propsGUIRef = useRef();
 
   useEffect(() => {
     const ifcUrl = "../ifc-models/TESTED_Simple_project_01.ifc";
@@ -17,23 +18,39 @@ const IfcViewer = ({ ifcProject }) => {
     viewer.axes.setAxes();
     viewer.grid.setGrid();
 
-    //window.ondblclick = () => viewer.IFC.selector.pickIfcItem(true); //then get the properties etc
-
-    window.ondblclick = async () => {
+    const handleDoubleClick = async () => {
       const result = await viewer.IFC.selector.highlightIfcItem();
       if (!result) return;
       const { modelID, id } = result;
       const props = await viewer.IFC.getProperties(modelID, id, true, false);
       console.log(props);
-      createPropertiesMenu(props)
+      createPropertiesMenu(props);
     };
 
-    const propsGUI = document.getElementById("ifc-property-menu-root");
+    const handleMouseMove = () => viewer.IFC.selector.prePickIfcItem();
 
-    function createPropertiesMenu(properties) {
+    const handleKeyDown = (event) => {
+      if (event.code === "KeyP") {
+        viewer.clipper.createPlane();
+      } else if (event.code === "KeyO") {
+        viewer.clipper.deletePlane();
+      }
+    };
+
+    const loadIfc = async (url) => {
+      const model = await viewer.IFC.loadIfcUrl(url);
+
+      console.log("URL:" + url);
+
+      const ifcProject = await viewer.IFC.getSpatialStructure(model.modelID);
+
+      console.log(ifcProject);
+    };
+
+    const createPropertiesMenu = (properties) => {
       console.log(properties);
 
-      removeAllChildren(propsGUI);
+      removeAllChildren(propsGUIRef.current);
 
       delete properties.psets;
       delete properties.mats;
@@ -42,9 +59,9 @@ const IfcViewer = ({ ifcProject }) => {
       for (let key in properties) {
         createPropertyEntry(key, properties[key]);
       }
-    }
+    };
 
-    function createPropertyEntry(key, value) {
+    const createPropertyEntry = (key, value) => {
       const propContainer = document.createElement("div");
       propContainer.classList.add("ifc-property-item");
 
@@ -60,48 +77,27 @@ const IfcViewer = ({ ifcProject }) => {
       valueElement.textContent = value;
       propContainer.appendChild(valueElement);
 
-      propsGUI.appendChild(propContainer);
-    }
+      propsGUIRef.current.appendChild(propContainer);
+    };
 
-    function removeAllChildren(element) {
+    const removeAllChildren = (element) => {
       while (element.firstChild) {
         element.removeChild(element.firstChild);
       }
-    }
-
-    window.onmousemove = () => viewer.IFC.selector.prePickIfcItem();
-
-    //create clipping planes
-    viewer.clipper.active = true;
-    window.onkeydown = (event) => {
-      if (event.code === "KeyP") {
-        viewer.clipper.createPlane();
-      } else if (event.code === "KeyO") {
-        viewer.clipper.deletePlane();
-      }
     };
 
-    async function loadIfc(url) {
-      // Load the model
-      const model = await viewer.IFC.loadIfcUrl(url);
+    window.addEventListener("dblclick", handleDoubleClick);
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("keydown", handleKeyDown);
 
-      console.log("URL:" + url);
-
-      // Add dropped shadow and post-processing efect - not working properly - scaling issue
-
-      //   await viewer.shadowDropper.renderShadow(model.modelID);
-      //   viewer.context.renderer.postProduction.active = true;
-
-      // model.removeFromParent(); //enable/disable categories filter
-
-      const ifcProject = await viewer.IFC.getSpatialStructure(model.modelID);
-
-      console.log(ifcProject);
-    }
+    viewer.clipper.active = true;
 
     loadIfc(ifcUrl);
 
     return () => {
+      window.removeEventListener("dblclick", handleDoubleClick);
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("keydown", handleKeyDown);
       viewer.dispose();
     };
   }, []);
@@ -114,7 +110,7 @@ const IfcViewer = ({ ifcProject }) => {
           <div>Key</div>
           <div className="ifc-property-value">Value</div>
         </div>
-        <div id="ifc-property-menu-root"></div>
+        <div id="ifc-property-menu-root" ref={propsGUIRef}></div>
       </div>
     </>
   );
