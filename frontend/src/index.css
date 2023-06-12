@@ -1,8 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Lora&display=swap');
 
-:root {
+body {
   font-family:  'Lora', serif;
   margin: 0;
   padding: 0;
 }
-
