@@ -42,7 +42,8 @@ form {
     align-items: center;
 }
 
-input {
+input,
+select {
     margin-bottom: 0.5rem;
     padding: 0.5rem;
     border-radius: 4px;
