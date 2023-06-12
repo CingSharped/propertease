@@ -1,16 +1,18 @@
 import React from 'react';
-import './App.css';
-import {IfcViewer} from './Pages';
 import { Routes, Route } from 'react-router-dom';
+import * as Pages from "./pages";
+import { NavBar } from './components';
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      <h1>IFC Viewer with React</h1>
       <Routes>
-        <Route index element= {<IfcViewer />}/>
+        <Route path="/" element={<NavBar />}>
+          <Route index element={<Pages.Home />} />
+          <Route path="/ifc" element={<Pages.IfcViewer />} />
+        </Route>
       </Routes>
-      
     </div>
   );
 }
