@@ -4,7 +4,7 @@ import Carousel from '../../components/Carousel'
 import "./home.css"
 
 const Home = () => {
-  const data = [
+  const propertyImage = [
     "https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070_1280.jpg",
     "https://cdn.pixabay.com/photo/2017/08/01/09/34/white-2563976_1280.jpg",
     "https://cdn.pixabay.com/photo/2014/11/21/17/17/house-540796_1280.jpg"
@@ -13,7 +13,7 @@ const Home = () => {
   return (
     <div className='home'>
       
-      <Carousel data={data} />
+      <Carousel propertyImage={propertyImage} />
 
       <div className="mission-statement">
         <h2>Our mission</h2>

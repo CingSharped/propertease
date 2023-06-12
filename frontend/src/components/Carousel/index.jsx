@@ -2,13 +2,12 @@ import React, { useState, useEffect} from 'react'
 
 import './carousel.css'
 
-const Carousel = (data) => {
+const Carousel = ({ propertyImage }) => {
     const [currentIndex, setCurrentIndex] = useState(0)
-    const [length, setLength] = useState(data.data.length)
-    // console.log(data.data)
+    const [length, setLength] = useState(propertyImage.length)
 
     const slideshowInfiniteScroll = () => {
-      if (currentIndex === data.data.length-1) {
+      if (currentIndex === propertyImage.length-1) {
         return setCurrentIndex(0)
       }
       return setCurrentIndex(currentIndex+1)
@@ -36,22 +35,32 @@ const Carousel = (data) => {
         <div className='slideshow-container'>
   
           {currentIndex === 0 ? "": 
-            <button onClick={prev} className="left-arrow">
+            <button
+              role="previous-button" 
+              onClick={prev} 
+              className="left-arrow"
+              aria-label='previous image'>
               &lt;
             </button>
           }
           {
-            data.data.map((item, index) => {
+            propertyImage.map((item, index) => {
               return <img 
+                        role='slideshow-item'
                         className='slideshow-item'
                         style={{transform: `translate(-${currentIndex*100}%)`}}
-                        key={index} src={item}
+                        key={index} 
+                        src={item} alt='Building image'
                          />
             })
           }
   
-          {currentIndex === data.data.length-1 ? "" :
-            <button onClick={next} className="right-arrow">
+          {currentIndex === propertyImage.length-1 ? "" :
+            <button 
+              role="next-button"
+              onClick={next} 
+              className="right-arrow"
+              aria-label='next image'>
               &gt;
             </button>
           }
