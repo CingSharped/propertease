@@ -15,9 +15,10 @@ def signup(username, password, user_type):
     # create user
     user = User(username, hashed_password, user_type)
     new_user = user.create_user()
-    print(new_user)
-    # return username, type and token
-    return new_user
+    # create token
+    token = jwt.encode({'_id': str(new_user['_id']), 'username': new_user['username']}, str(os.getenv('SECRET')), algorithm='HS256')
+    # return user _id, username, type and a token
+    return {**new_user, 'token': token}
     
 
 def login(username, password):
