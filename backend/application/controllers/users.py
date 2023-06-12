@@ -1,14 +1,32 @@
+import bcrypt
+import os
+import jwt
+from application import db
+from application.models.User import User
 
 
-
-
-def signup(user):
-    # check username doesn't exist in 
-    # check & hash password
+def signup(username, password, user_type):
+    # check username doesn't exist in database
+    exists_in_db = db.users.find_one({ 'username': username})
+    if exists_in_db:
+        return { 'error': 'Username already exists'}
+    # hash password
+    hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(int(os.getenv('SALT'))))
     # create user
-    return 'this features has not been implemented'
+    user = User(username, hashed_password, user_type)
+    new_user = user.create_user()
+    print(new_user)
+    # return username, type and token
+    return new_user
     
 
-def login(user):
-    #
-    return 'this features has not been implemented'
+def login(username, password):
+    # get user with user.username and check against user.password
+    user = db.users.find_one({ 'username': username })
+    if not user:
+        return { 'error': 'User does not exist, please sign up before trying to log in'}
+    if bcrypt.checkpw(password.encode('utf-8'), user['password']):
+        token = jwt.encode({'_id': str(user['_id']), 'username': user['username']}, str(os.getenv('SECRET')), algorithm='HS256')
+        return {'_id': str(user['_id']), 'username': user['username'], 'user_type': user['user_type'], 'token': token}
+    else:
+        return { 'error': 'Incorrect credentials'}

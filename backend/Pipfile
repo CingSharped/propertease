@@ -8,6 +8,8 @@ flask = "*"
 flask-cors = "*"
 python-dotenv = "*"
 flask-pymongo = "*"
+bcrypt = "*"
+pyjwt = "*"
 
 [scripts]
 dev='python app.py'
