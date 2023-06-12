@@ -10,6 +10,7 @@ python-dotenv = "*"
 flask-pymongo = "*"
 bcrypt = "*"
 pyjwt = "*"
+gunicorn = "*"
 
 [scripts]
 dev='python app.py'
