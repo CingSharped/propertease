@@ -1,53 +1,14 @@
 /* Slideshow */
 .home {
   background-color: #F9F2EB;
-  height: 100vh;
 }
-
-.home .slideshow-container {
-  background: #222;
-  display: flex;
-  flex-wrap: nowrap;
-  overflow: hidden;
-}
-
-.home .slideshow-item {
-  height: 30rem;
-  min-width: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
-}
-
-.home .left-arrow, .right-arrow {
-  position: absolute;
-  z-index: 1;
-  top: 40%;
-  transform: translateY(-50%);
-  width: 2rem;
-  height: 2rem;
-  border-radius: 3rem;
-  background-color: white;
-  border: 1px solid #ddd;
-}
-
-.home .left-arrow {
-  left: 1em;
-}
-
-.right-arrow {
-  right: 1em;
-}
-
-.home img {
-  object-fit: cover;
-}
-
 
 .home h2 {
-  margin: 2rem;
+  margin-top: 2rem;
   color: #D39B0B;
   text-align: center;
+}
+
+.home p {
+  padding: 0em 1em;
 }
