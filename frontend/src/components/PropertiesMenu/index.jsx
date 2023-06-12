@@ -50,7 +50,8 @@ const PropertiesMenu = ({ properties }) => {
     createPropertiesMenu(properties);
   }, [properties]);
 
-  return <div id="ifc-property-menu-root"></div>;
+  return <div id="ifc-property-menu-root">
+  </div>;
 };
 
 export default PropertiesMenu;

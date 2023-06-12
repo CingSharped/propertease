@@ -42,7 +42,7 @@
     position: absolute;
     overflow-y: scroll;
     /* background-color: white; */
-    height: 100vh;
+    height: 85vh;
     
     background: var(--translucent-white);
     backdrop-filter: var(--blur-filter);

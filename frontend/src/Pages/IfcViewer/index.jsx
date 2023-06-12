@@ -139,7 +139,7 @@ const IfcViewer = ({ ifcProject }) => {
       };
 
       childNode.onclick = async () => {
-        viewer.IFC.selector.pickIfcItemsByID(0, [node.expressID]);
+        viewer.IFC.selector.pickIfcItemsByID(0, [node.expressID], true);
 
         let idsArray = [node.expressID];
 
@@ -173,8 +173,8 @@ const IfcViewer = ({ ifcProject }) => {
         </div>
         <PropertiesMenu properties={selectedProperties} />
       </div>
-      <div id="ifc-tree-menu"></div>
-      <ToolbarBottom/>
+      <div id="ifc-tree-menu" className= "ifc-tree-menu"></div>
+      {/* <ToolbarBottom/> */}
       {/* Add a root element for the tree menu */}
     </>
   );
