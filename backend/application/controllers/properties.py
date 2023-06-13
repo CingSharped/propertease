@@ -21,3 +21,7 @@ def create_property(name, owner_id, model_id, rent_date, tenant_id, rental_cost,
     return property_from_db
   else:
     return { 'error': 'Invalid option selected for tenure, property_type or council_tax_band'}
+
+def get_all_properties():
+  properties = Property.get_all_properties()
+  return properties
