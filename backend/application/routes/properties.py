@@ -30,5 +30,6 @@ def create_property():
   else:
     return { 'error': 'All required fields name, owner_id, bedrooms, bathrooms, property_type, description are required to create property'}
 
-
-
+@property_routes.route('', methods=['GET'])
+def get_all_properties():
+  return properties.get_all_properties()

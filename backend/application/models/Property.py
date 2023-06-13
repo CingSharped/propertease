@@ -47,3 +47,12 @@ class Property:
       return {**property_from_db, '_id': str(property_from_db['_id']) }
     else:
       return {'error': 'Error adding property to the database'}
+
+
+  def get_all_properties():
+    properties = []
+    db_properties = db.properties.find({})
+    for property in db_properties:
+        property['_id'] = str(property['_id'])
+        properties.append(property)
+    return properties
