@@ -29,10 +29,10 @@
 .bottom-right { position:absolute; bottom:0; right:0; } 
 
 #viewer-container {
-    top:0;
+    top:20vh;
     left:0;
     width: 100vw;
-    height: 100vh;
+    height: 80vh;
     position: absolute;
 }
 
