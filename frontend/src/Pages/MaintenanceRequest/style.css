@@ -1,0 +1,22 @@
+.maintenance-request {
+  background-color: #F9F2EB;
+}
+
+.maintenance-request .row {
+  display: flex;
+}
+
+.maintenance-request #right {
+  width: 25%;
+  padding: 0.1rem;
+  position: fixed;
+  right: -10px;
+
+}
+
+.maintenance-request #left {
+  width: 75%;
+  padding: 0.1rem;
+  height: 10000px;
+}
+

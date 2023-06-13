@@ -21,32 +21,32 @@ const Home = () => {
       </div>
 
       <div className="screenshots">
-        <div class="row">
-          <div class="column" style={{backgroundColor: 'Gray'}}>SCREENSHOT1</div>
-          <div class="column">
+        <div className="row">
+          <div className="column" style={{backgroundColor: 'Gray'}}>SCREENSHOT1</div>
+          <div className="column">
             <h3>Screnshot description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit deserunt quia sequi enim sunt, accusantium nihil id ut earum obcaecati magni culpa ipsam deleniti ab beatae, architecto dolorum iure asperiores!</h3>
           </div>
         </div>
 
-        <div class="row">
-          <div class="column">
+        <div className="row">
+          <div className="column">
             <h3>Screnshot description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit deserunt quia sequi enim sunt, accusantium nihil id ut earum obcaecati magni culpa ipsam deleniti ab beatae, architecto dolorum iure asperiores!</h3>
           </div>
-          <div class="column" style={{backgroundColor: 'Gray'}}>SCREENSHOT1</div>
+          <div className="column" style={{backgroundColor: 'Gray'}}>SCREENSHOT1</div>
         </div>
 
-        <div class="row">
-          <div class="column" style={{backgroundColor: 'Gray'}}>SCREENSHOT1</div>
-          <div class="column">
+        <div className="row">
+          <div className="column" style={{backgroundColor: 'Gray'}}>SCREENSHOT1</div>
+          <div className="column">
             <h3>Screnshot description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit deserunt quia sequi enim sunt, accusantium nihil id ut earum obcaecati magni culpa ipsam deleniti ab beatae, architecto dolorum iure asperiores!</h3>
           </div>
         </div>
 
-        <div class="row">
-          <div class="column">
+        <div className="row">
+          <div className="column">
             <h3>Screnshot description: Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit deserunt quia sequi enim sunt, accusantium nihil id ut earum obcaecati magni culpa ipsam deleniti ab beatae, architecto dolorum iure asperiores!</h3>
           </div>
-          <div class="column" style={{backgroundColor: 'Gray'}}>SCREENSHOT1</div>
+          <div className="column" style={{backgroundColor: 'Gray'}}>SCREENSHOT1</div>
         </div>
 
       </div>
