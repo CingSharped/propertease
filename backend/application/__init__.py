@@ -22,3 +22,6 @@ def home():
     
 from application.routes.users import user_routes
 app.register_blueprint(user_routes, url_prefix='/users')
+
+from application.routes.properties import property_routes
+app.register_blueprint(property_routes, url_prefix='/properties')
