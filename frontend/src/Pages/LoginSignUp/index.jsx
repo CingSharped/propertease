@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import './login.css'
+import React, { useState } from "react";
+import "./login.css";
 
 const LoginSignUp = () => {
-  const [activeTab, setActiveTab] = useState('login');
+  const [activeTab, setActiveTab] = useState("login");
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
@@ -24,6 +24,10 @@ const LoginSignUp = () => {
         <input type="text" placeholder="Username" />
         <input type="password" placeholder="Password" />
         <input type="email" placeholder="Email" />
+        <select>
+          <option value="landlord">Landlord</option>
+          <option value="tenant">Tenant</option>
+        </select>
         <button type="submit">Sign Up</button>
       </form>
     );
@@ -32,17 +36,21 @@ const LoginSignUp = () => {
   return (
     <div>
       <div>
-        <button onClick={() => handleTabChange('login')} className={activeTab === 'login' ? 'active' : ''}>
+        <button
+          onClick={() => handleTabChange("login")}
+          className={activeTab === "login" ? "active" : ""}
+        >
           Login
         </button>
-        <button onClick={() => handleTabChange('signup')} className={activeTab === 'signup' ? 'active' : ''}>
+        <button
+          onClick={() => handleTabChange("signup")}
+          className={activeTab === "signup" ? "active" : ""}
+        >
           Sign Up
         </button>
       </div>
 
-      <div>
-        {activeTab === 'login' ? LoginForm() : SignUpForm()}
-      </div>
+      <div>{activeTab === "login" ? LoginForm() : SignUpForm()}</div>
     </div>
   );
 };

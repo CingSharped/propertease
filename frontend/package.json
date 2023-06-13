@@ -6,27 +6,33 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "test": "vitest run --reporter verbose"
+    "test": "vitest run --reporter verbose",
+    "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "@testing-library/react": "^14.0.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "axios": "^1.4.0",
     "react-router-dom": "^6.12.1",
     "three": "^0.135.0",
     "vitest": "^0.32.0",
     "web-ifc-viewer": "^1.0.216"
   },
   "devDependencies": {
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.0.0",
+    "@vitest/coverage-c8": "^0.32.0",
+    "@vitest/coverage-v8": "^0.32.0",
     "eslint": "^8.38.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.3.4",
-    "vite": "^4.3.9"
+    "jest": "^29.5.0",
+    "jsdom": "^22.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "vite": "^4.3.9",
+    "vitest": "^0.32.0"
   }
 }
