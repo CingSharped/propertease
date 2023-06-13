@@ -46,12 +46,25 @@ const PropertiesMenu = ({ properties }) => {
     }
   };
 
+  const handleClick = () => {
+    for (let i = 0; i < Object.keys(properties).length; i++) {
+      if (Object.keys(properties)[i] == "GlobalId") {
+        const propertyValue = properties[Object.keys(properties)[i]].value;
+        console.log(propertyValue);
+      }
+    }
+  };
+
   React.useEffect(() => {
     createPropertiesMenu(properties);
   }, [properties]);
 
-  return <div id="ifc-property-menu-root">
-  </div>;
+  return (
+    <>
+      <button onClick={handleClick}>Log GlobalId</button>
+      <div id="ifc-property-menu-root"></div>
+    </>
+  );
 };
 
 export default PropertiesMenu;
