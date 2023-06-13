@@ -8,7 +8,7 @@ import "./IfcViewer.css";
 const IfcViewer = ({ ifcProject }) => {
   const containerRef = useRef();
   const [selectedProperties, setSelectedProperties] = useState({});
-  const [isPropertyMenuVisible, setPropertyMenuVisible] = useState(true);
+  const [isPropertyMenuVisible, setPropertyMenuVisible] = useState(false);
   const [isTreeMenuVisible, setTreeMenuVisible] = useState(true);
 
   useEffect(() => {
@@ -20,6 +20,9 @@ const IfcViewer = ({ ifcProject }) => {
       const { modelID, id } = result;
       const props = await viewer.IFC.getProperties(modelID, id, true, false);
       setSelectedProperties(props);
+
+      if (isPropertyMenuVisible == false) { togglePropertyMenu()}
+
     };
 
     const handleMouseMove = () => viewer.IFC.selector.prePickIfcItem();
@@ -119,6 +122,7 @@ const IfcViewer = ({ ifcProject }) => {
         let idsArray = [node.expressID];
         const props = await viewer.IFC.getProperties(0, idsArray[0], true, false);
         setSelectedProperties(props);
+        if (isPropertyMenuVisible == false) { togglePropertyMenu()}
       };
     };
 
@@ -136,7 +140,7 @@ const IfcViewer = ({ ifcProject }) => {
       window.removeEventListener("keydown", handleKeyDown);
       viewer.dispose();
     };
-  }, []);
+  }, [isTreeMenuVisible]);
 
   const togglePropertyMenu = () => {
     setPropertyMenuVisible(!isPropertyMenuVisible);

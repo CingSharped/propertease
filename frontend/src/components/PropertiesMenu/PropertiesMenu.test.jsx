@@ -1,47 +1,71 @@
-import React from 'react';
-import { render, screen } from '@testing-library/react';
-import PropertiesMenu from '../PropertiesMenu';
+import React from "react";
+import { render, unmountComponentAtNode } from "react-dom";
+import { act } from "vitest";
+import PropertiesMenu from ".";
 
-describe('PropertiesMenu', () => {
+let container = null;
+
+beforeEach(() => {
+  container = document.createElement("div");
+  document.body.appendChild(container);
+});
+
+afterEach(() => {
+  unmountComponentAtNode(container);
+  container.remove();
+  container = null;
+});
+
+it("renders the properties menu correctly", () => {
   const properties = {
-    name: 'Test Object',
-    description: 'This is a test object',
-    material: {
-      name: 'Test Material',
-      color: 'red',
-      opacity: 0.5,
-    },
-    length: 10,
-    width: 5,
-    height: 3,
+    // psets: { ... },
+    // mats: { ... },
+    // type: { ... },
+    // Other properties
   };
 
-  it('renders the properties menu with the correct number of entries', () => {
-    render(<PropertiesMenu properties={properties} />);
-    const propertyEntries = screen.getAllByTestId('property-entry');
-    expect(propertyEntries).toHaveLength(6);
+  act(() => {
+    render(<PropertiesMenu properties={properties} />, container);
   });
 
-  it('renders the property key and value correctly', () => {
-    render(<PropertiesMenu properties={properties} />);
-    const propertyEntries = screen.getAllByTestId('property-entry');
-    expect(propertyEntries[0]).toHaveTextContent('name');
-    expect(propertyEntries[0]).toHaveTextContent('Test Object');
+  // Assertions
+  expect(container.querySelector("#ifc-property-menu-root")).toBeTruthy();
+});
+
+it("creates property entries correctly", () => {
+  const properties = {
+    Key1: "Value1",
+    Key2: "Value2",
+    // Other properties
+  };
+
+  act(() => {
+    render(<PropertiesMenu properties={properties} />, container);
   });
 
-  it('renders undefined values as "undefined"', () => {
-    const undefinedProperties = { name: undefined };
-    render(<PropertiesMenu properties={undefinedProperties} />);
-    const propertyEntries = screen.getAllByTestId('property-entry');
-    expect(propertyEntries[0]).toHaveTextContent('name');
-    expect(propertyEntries[0]).toHaveTextContent('undefined');
+  // Assertions
+  expect(container.querySelectorAll(".ifc-property-item")).toHaveLength(2);
+  expect(container.querySelector(".ifc-property-item:nth-child(1) .ifc-property-value").textContent).toBe("Value1");
+  expect(container.querySelector(".ifc-property-item:nth-child(2) .ifc-property-value").textContent).toBe("Value2");
+});
+
+it("logs the GlobalId when button is clicked", () => {
+  const properties = {
+    GlobalId: { value: "123456" },
+    // Other properties
+  };
+
+  global.console.log = jest.fn();
+
+  act(() => {
+    render(<PropertiesMenu properties={properties} />, container);
   });
 
-  it('renders null values as "undefined"', () => {
-    const nullProperties = { name: null };
-    render(<PropertiesMenu properties={nullProperties} />);
-    const propertyEntries = screen.getAllByTestId('property-entry');
-    expect(propertyEntries[0]).toHaveTextContent('name');
-    expect(propertyEntries[0]).toHaveTextContent('undefined');
+  const button = container.querySelector("button");
+  act(() => {
+    button.dispatchEvent(new MouseEvent("click", { bubbles: true }));
   });
+
+  // Assertion
+  expect(global.console.log).toHaveBeenCalledWith("123456");
 });

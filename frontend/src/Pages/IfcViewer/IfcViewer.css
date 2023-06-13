@@ -28,12 +28,15 @@
 
 .bottom-right { position:absolute; bottom:0; right:0; } 
 
+.button-wrapper { bottom: 10px;}
+
 #viewer-container {
-    top:20vh;
+    top:0;
     left:0;
     width: 100vw;
-    height: 80vh;
+    height: 100vh;
     position: absolute;
+    z-index: -1;
 }
 
 /*Tree view: https://www.w3schools.com/howto/howto_js_treeview.asp*/
