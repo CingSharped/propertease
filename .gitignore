@@ -23,6 +23,7 @@ htmlcov/
 .coverage
 .coverage.*
 *,cover
+coverage/
 # Logs
 logs
 *.log
