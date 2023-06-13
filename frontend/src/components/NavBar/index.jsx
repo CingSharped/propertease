@@ -13,6 +13,9 @@ const NavBar = () => {
         <NavLink to="/ifc" style={styles}>
           IFC
         </NavLink>
+        <NavLink to="/login" style={styles}>
+          Login/Sign Up
+        </NavLink>
       </nav>
       <Outlet />
     </>
