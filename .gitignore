@@ -17,12 +17,16 @@ build/
 .idea/
 docs/_build/
 .vscode
+package-lock.json
+./frontend/package-lock.json
 
 # Coverage reports
 htmlcov/
 .coverage
 .coverage.*
+coverage
 *,cover
+coverage/
 # Logs
 logs
 *.log
