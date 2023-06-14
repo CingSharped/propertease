@@ -1,0 +1,16 @@
+.maintenance-request .row {
+  display: flex;
+}
+
+.maintenance-request #right {
+  width: 25%;
+  padding: 0.1rem;
+  position: fixed;
+  right: -10px;
+
+}
+
+.maintenance-request #left {
+  width: 75%;
+}
+
