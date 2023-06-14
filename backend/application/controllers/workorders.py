@@ -9,3 +9,7 @@ def create_workorder(title, description, work_type, location_id, cost, status, p
   new_workorder = Workorder(title, description, work_type, location_id, cost, status, priority, property_id, created_on, created_by)
   workorder_from_db = new_workorder.create_workorder()
   return workorder_from_db
+
+def get_all_workorders():
+  workorders = Workorder.get_all_workorders()
+  return workorders

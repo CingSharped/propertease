@@ -24,3 +24,7 @@ def create_workorder():
     return new_workorder
   else:
     return { 'error': 'All required fields title, description, work_type, location_id, priority, property_id and created_by are required to create a workorder'}
+
+@workorder_routes.route('', methods=['GET'])
+def get_all_workorders():
+  return workorders.get_all_workorders()
