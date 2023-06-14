@@ -40,9 +40,7 @@ class Property:
       'address': self.address,
       'postcode': self.postcode
     })
-    print(str(new_property.inserted_id))
     property_from_db = db.properties.find_one({'name': self.name, 'owner_id': self.owner_id})
-    print(property_from_db)
     if property_from_db:
       return {**property_from_db, '_id': str(property_from_db['_id']) }
     else:
