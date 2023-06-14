@@ -25,3 +25,6 @@ app.register_blueprint(user_routes, url_prefix='/users')
 
 from application.routes.properties import property_routes
 app.register_blueprint(property_routes, url_prefix='/properties')
+
+from application.routes.workorders import workorder_routes
+app.register_blueprint(workorder_routes, url_prefix='/workorders')
