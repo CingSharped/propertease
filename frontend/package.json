@@ -7,18 +7,25 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fix-deps": "npm rm -rf node_modules package-lock.json"
   },
   "dependencies": {
-    "react": "^18.2.0",
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.5",
+    "i": "^0.3.7",
+    "npm": "^9.7.1",
+    "react": "^17.0.0 || ^18.0.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.12.1",
-    "three": "^0.135.0",
-    "web-ifc-viewer": "^1.0.216"
+    "react-pro-sidebar": "^1.1.0-alpha.1",
+    "react-router-dom": "^6.12.1"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0 || ^18.0.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.37",
-    "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react": "^4.0.0",
     "eslint": "^8.38.0",
     "eslint-plugin-react": "^7.32.2",
