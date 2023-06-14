@@ -14,8 +14,13 @@ gunicorn = "*"
 
 [scripts]
 dev='python app.py'
+test='pytest .'
+coverage = "pytest --cov-report term-missing --cov=./tests"
 
 [dev-packages]
+pytest = "*"
+pytest-cov = "*"
+pytest-watch = "*"
 
 [requires]
 python_version = "3.9"
