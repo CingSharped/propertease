@@ -38,6 +38,8 @@ const PropertiesMenu = ({ buildingId, properties }) => {
         alert(`Create maintenance request for building expressID: ${buildingId} \n element expressID: ${propertyValue}`)
         // console.log("building id from properties: " + buildingId)
         // console.log(propertyValue);
+
+        //bring form to create workorder
       }
     }
   };
