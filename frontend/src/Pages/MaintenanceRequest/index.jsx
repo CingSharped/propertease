@@ -14,7 +14,7 @@ const MaintenanceRequest = () => {
   {"issue":"hot water not working",
   "location": "42 Panda land",
   "description": "no hot water in kitchen",
-  "completed": false}
+  "completed": true}
 ]
 
 
@@ -24,7 +24,7 @@ const MaintenanceRequest = () => {
 
       <div className="row">
 
-          <div className="column" id="left" style={{backgroundColor: 'Red'}} >
+          <div className="column" id="left">
             {<MaintenanceRequestList maintenanceRequest={mr_example} />}
           </div>
 

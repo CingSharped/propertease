@@ -2,8 +2,11 @@ import "./style.css"
 
 function MaintenanceRequestItem ({request}) {
   return (
-    <li className="maintenance-request-item">
-      {/* hello */}
+    request.completed 
+    ? <li className="maintenance-request-item"></li> 
+    : <li className="maintenance-request-item">
+    {/* <li className="maintenance-request-item"> */}
+      <div className="image-container">IMAGE PLACEHOLDER</div>
       <table>
         <tr>
           <th>Issue</th>
