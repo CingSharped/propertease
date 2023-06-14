@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "test": "vitest run --reporter verbose",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview",
+    "test": "vitest --reporter verbose",
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
@@ -16,6 +18,7 @@
     "web-ifc-viewer": "^1.0.216"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.37",
@@ -23,6 +26,7 @@
     "@vitejs/plugin-react": "^4.0.0",
     "@vitest/coverage-c8": "^0.32.0",
     "@vitest/coverage-v8": "^0.32.0",
+    "@vue/test-utils": "^2.3.2",
     "eslint": "^8.38.0",
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
