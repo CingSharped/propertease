@@ -12,7 +12,7 @@ def create_property():
   owner_id = request_data['owner_id'] if 'owner_id' in request_data else None
   model_id = request_data['model_id'] if 'model_id' in request_data else None
   rent_date = request_data['rent_date'] if 'rent_date' in request_data else None
-  tenant_id = request_data['tenant_id'] if 'tenant_id' in request_data else None
+  tenant_username = request_data['tenant_username'] if 'tenant_username' in request_data else None
   rental_cost = request_data['rental_cost'] if 'rental_cost' in request_data else None
   bedrooms = request_data['bedrooms'] if 'bedrooms' in request_data else None
   bathrooms = request_data['bathrooms'] if 'bathrooms' in request_data else None
@@ -25,7 +25,7 @@ def create_property():
   address = request_data['address'] if 'address' in request_data else None
   postcode = request_data['postcode'] if 'postcode' in request_data else None
   if all(data is not None for data in (name, owner_id, bedrooms, bathrooms, property_type, description, address, postcode)):
-    new_property = properties.create_property(name, owner_id, model_id, rent_date, tenant_id, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode)
+    new_property = properties.create_property(name, owner_id, model_id, rent_date, tenant_username, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode)
     return new_property 
   else:
     return { 'error': 'All required fields name, owner_id, bedrooms, bathrooms, property_type, description are required to create property'}
