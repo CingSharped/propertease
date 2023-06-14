@@ -2,7 +2,7 @@
 from application import db
 from application.models.Property import Property
 
-def create_property(name, owner_id, model_id, rent_date, tenant_id, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode):
+def create_property(name, owner_id, model_id, rent_date, tenant_username, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode):
   # check types
   exists_in_db = db.properties.find_one({'name': name, 'owner_id': owner_id})
   if exists_in_db:
@@ -15,7 +15,7 @@ def create_property(name, owner_id, model_id, rent_date, tenant_id, rental_cost,
   council_tax_band_valid = council_tax_band in council_tax_options
   # create instance of prop with data
   if all([tenure_valid, property_type_valid, council_tax_band_valid]):
-    new_property = Property(name, owner_id, model_id, rent_date, tenant_id, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode)
+    new_property = Property(name, owner_id, model_id, rent_date, tenant_username, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode)
     # run create_property
     property_from_db = new_property.create_property()
     return property_from_db
