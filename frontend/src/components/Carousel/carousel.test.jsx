@@ -34,7 +34,6 @@ describe('carousel component', () => {
   it("renders a 'next' button", async() => {
     const nextImageButton = screen.getByRole('next-button')
     expect(nextImageButton).toBeInTheDocument()
-    const one = await userEvent.click(nextImageButton)
   })
 
   it("does not render a 'previous' button when first image is displayed", async () => {
