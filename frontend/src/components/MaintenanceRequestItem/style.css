@@ -70,3 +70,47 @@
 .request-editor {
   width: 20%;
 }
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 800,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.maintenance-request-item-completed .request-editor{
+  display: flex;
+  justify-content: center;
+}
+
+.maintenance-request-item-completed .request-editor button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.maintenance-request-item .request-editor{
+  display: flex;
+  justify-content: center;
+}
+
+.maintenance-request-item .request-editor button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.complete-btn {
+  color: green;
+}
+
+.trash-btn {
+  color: red;
+}
