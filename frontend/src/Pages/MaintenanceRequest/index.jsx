@@ -28,8 +28,6 @@ const MaintenanceRequest = () => {
             {<MaintenanceRequestList maintenanceRequest={mr_example} />}
           </div>
 
-
-
           <div className="column" id="right" style={{backgroundColor: 'Gray'}}>Add form button</div>
         </div>
     </div>
