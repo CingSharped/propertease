@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const PropertiesMenu = ({ properties }) => {
+const PropertiesMenu = ({ buildingId, properties }) => {
   const removeNullUndefinedKeys = (obj) => {
     const newObj = { ...obj };
     delete newObj.psets;
@@ -9,61 +9,50 @@ const PropertiesMenu = ({ properties }) => {
     return newObj;
   };
 
-  const removeAllChildren = (element) => {
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
-    }
-  };
-
   const createPropertyEntry = (key, value) => {
-    const propContainer = document.createElement("div");
-    propContainer.classList.add("ifc-property-item");
-
     if (value === null || value === undefined) value = "undefined";
     else if (value.value) value = value.value;
 
-    const keyElement = document.createElement("div");
-    keyElement.textContent = key;
-    propContainer.appendChild(keyElement);
-
-    const valueElement = document.createElement("div");
-    valueElement.classList.add("ifc-property-value");
-    valueElement.textContent = value;
-    propContainer.appendChild(valueElement);
-
-    return propContainer;
+    return (
+      <div className="ifc-property-item" key={key}>
+        <div>{key}</div>
+        <div className="ifc-property-value">{value}</div>
+      </div>
+    );
   };
 
-  const createPropertiesMenu = (properties) => {
-    const propsGUI = document.getElementById("ifc-property-menu-root");
-    removeAllChildren(propsGUI);
-
+  const renderPropertyEntries = (properties) => {
     const filteredProperties = removeNullUndefinedKeys(properties);
-
-    for (let key in filteredProperties) {
-      const propEntry = createPropertyEntry(key, filteredProperties[key]);
-      propsGUI.appendChild(propEntry);
-    }
+    return Object.entries(filteredProperties).map(([key, value]) =>
+      createPropertyEntry(key, value)
+    );
   };
 
   const handleClick = () => {
     for (let i = 0; i < Object.keys(properties).length; i++) {
-      if (Object.keys(properties)[i] == "GlobalId") {
-        const propertyValue = properties[Object.keys(properties)[i]].value;
-        alert(`Create maintenance request for element id: ${propertyValue}`)
-        console.log(propertyValue);
+
+      // console.log(Object.keys(properties)[i], Object.values(properties)[i])
+      if (Object.keys(properties)[i] == "expressID") {
+        const propertyValue = Object.values(properties)[i]
+        //const propertyValue = properties[Object.keys(properties)[i]].value;
+        alert(`Create maintenance request for building expressID: ${buildingId} \n element expressID: ${propertyValue}`)
+        // console.log("building id from properties: " + buildingId)
+        // console.log(propertyValue);
       }
     }
   };
 
-  React.useEffect(() => {
-    createPropertiesMenu(properties);
+  useEffect(() => {
   }, [properties]);
+
+  const propertyEntries = renderPropertyEntries(properties);
 
   return (
     <>
       <button onClick={handleClick}>Create Maintenance request</button>
-      <div id="ifc-property-menu-root"></div>
+      <div id="ifc-property-menu-root">
+        {propertyEntries}
+      </div>
     </>
   );
 };
