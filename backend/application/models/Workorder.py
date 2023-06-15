@@ -31,3 +31,11 @@ class Workorder:
       return { **new_workorder, '_id': str(new_workorder['_id']) }
     else:
       return { 'error': 'Error creating new workorder' }
+
+  def get_all_workorders():
+    workorders = []
+    db_workorders = db.workorders.find({})
+    for property in db_workorders:
+        property['_id'] = str(property['_id'])
+        workorders.append(property)
+    return workorders
