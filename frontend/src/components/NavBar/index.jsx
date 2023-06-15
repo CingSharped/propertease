@@ -5,7 +5,7 @@ import './style.css'
 
 const NavBar = () => {
   const styles = ({ isActive }) => ({ color: isActive ? "#ECD444" : "white" });
-
+  
   return (
     <div>
       <nav className="NavBar">

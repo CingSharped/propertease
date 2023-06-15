@@ -3,11 +3,26 @@
   border-radius: 0;
   height: 5rem;
   color: white;
+  margin: 0;
+
+  position: -webkit-sticky;
+	position: sticky;
+	top: 0;
 }
 
 .NavBar a {
   text-decoration: none;
   margin-left: 1.5rem;
+}
+
+.NavBar a:hover {
+  /* color: red; */
+  background-color: #D39B0B;
+  /* position: relative; */
+  /* text-decoration: underline; */
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px -10px yello;
+  
 }
 
 .NavBar .logo-container {
