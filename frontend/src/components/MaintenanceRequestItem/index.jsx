@@ -1,6 +1,7 @@
 import "./style.css"
 
 function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
+  console.log(request)
   return (
     request.completed 
     ? <li className="maintenance-request-item-completed" role="reqest-item">
@@ -8,8 +9,8 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
       <table className="details-container">
         <tbody>
           <tr>
-            <th>Issue</th>
-            <td>{request.issue}</td>
+            <th>Title:</th>
+            <td>{request.title}</td>
           </tr>
           <tr>
             <th>Location</th>
@@ -36,16 +37,24 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
       <table className="details-container">
         <tbody>
           <tr>
-            <th>Issue</th>
-            <td>{request.issue}</td>
+            <th>Work type </th>
+            <td>{request.work_type}</td>
+          </tr>
+          <tr>
+            <th>Title</th>
+            <td>{request.title}</td>
           </tr>
           <tr>
             <th>Location</th>
-            <td>{request.location}</td>
+            <td>{request.location_id}</td>
           </tr>
           <tr>
             <th>Description</th>
             <td>{request.description}</td>
+          </tr>
+          <tr>
+            <th>Created</th>
+            <td>{request.created_on}</td>
           </tr>
         </tbody>
       </table>

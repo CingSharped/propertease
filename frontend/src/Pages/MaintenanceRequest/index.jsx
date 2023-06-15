@@ -1,7 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import "./style.css"
-// import styles from "../../components/xxx/Modal.module.css";
 import styles from "../../components/Modal/Modal.module.css";
 import { MaintenanceRequestList } from '../../components'
 import { NewRequestForm } from '../../components';
@@ -10,6 +9,7 @@ import { Modal } from '../../components'
 
 const MaintenanceRequest = () => {
 
+  
   // TO BE REMOVED ONCE CONNECTED TO FRONT END
   const mr_example = [
   {"issue":"Leaking tap",
@@ -20,7 +20,7 @@ const MaintenanceRequest = () => {
   "location": "42 Panda land",
   "description": "no hot water in kitchen",
   "completed": true}
-]
+  ]
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -32,7 +32,7 @@ const MaintenanceRequest = () => {
 
         <div className="column" id="left">
 
-          {<MaintenanceRequestList maintenanceRequest={mr_example} />}
+          {<MaintenanceRequestList />}
         </div>
 
         <div className="column" id="right">
