@@ -95,18 +95,19 @@ class Dashboards extends React.Component {
           <div id="box3" className="fade-in" onClick={() => this.navigateTo('')}>
             
           </div>
-        </div>
-
-        <div id="main-container">
+    
           <div id="box4" className="fade-in" onClick={() => this.navigateTo('')}>
           
           </div>
           <div id="box5" className="fade-in" onClick={() => this.navigateTo('')}>
            
-          {/* </div>
-          <div id="box6" className="fade-in" onClick={() => this.navigateTo('map.html')}> */}
+          </div>
+          <div id="box6" className="fade-in" onClick={() => this.navigateTo('')}>
             
           </div>
+          <div id="box7" className="fade-in" onClick={() => this.navigateTo('')}>
+            
+            </div>
         </div>
       </div>
     </div>
