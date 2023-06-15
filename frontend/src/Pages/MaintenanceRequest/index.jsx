@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 
 import "./style.css"
-import styles from "../../components/NewRequestForm/Modal.module.css";
-import MaintenanceRequestList from '../../components/MaintenanceRequestList'
-import NewRequestForm from '../../components/NewRequestForm'
+// import styles from "../../components/xxx/Modal.module.css";
+import styles from "../../components/Modal/Modal.module.css";
+import { MaintenanceRequestList } from '../../components'
+import { NewRequestForm } from '../../components';
+import { Modal } from '../../components'
 
 
 const MaintenanceRequest = () => {
@@ -29,6 +31,7 @@ const MaintenanceRequest = () => {
       <div className="row">
 
         <div className="column" id="left">
+
           {<MaintenanceRequestList maintenanceRequest={mr_example} />}
         </div>
 
@@ -38,7 +41,8 @@ const MaintenanceRequest = () => {
             onClick={() => setIsOpen(true)}>
             Open Modal
           </button>
-          {isOpen && <NewRequestForm setIsOpen={setIsOpen} />}
+          {/* {isOpen && <NewRequestForm setIsOpen={setIsOpen} />} */}
+          {isOpen && <Modal children={<NewRequestForm />} setIsOpen={setIsOpen} />}
             
         </div>
       </div>
