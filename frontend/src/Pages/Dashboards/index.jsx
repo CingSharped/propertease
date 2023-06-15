@@ -2,51 +2,6 @@ import React from 'react';
 import './Dashboards.css';
 
 class Dashboards extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       slidePosition: 1,
-//     };
-//   }
-
-//   componentDidMount() {
-//     this.slideShow(this.state.slidePosition);
-//   }
-
-//   plusSlides = (n) => {
-//     this.slideShow(this.state.slidePosition + n);
-//   }
-
-//   currentSlide = (n) => {
-//     this.slideShow(n);
-//   }
-
-//   slideShow = (n) => {
-//     const slides = document.getElementsByClassName('Containers');
-//     const circles = document.getElementsByClassName('dots');
-
-//     if (n > slides.length) {
-//       n = 1;
-//     }
-//     if (n < 1) {
-//       n = slides.length;
-//     }
-
-//     for (let i = 0; i < slides.length; i++) {
-//       slides[i].style.display = 'none';
-//     }
-
-//     for (let i = 0; i < circles.length; i++) {
-//       circles[i].className = circles[i].className.replace(' enable', '');
-//     }
-
-//     slides[n - 1].style.display = 'block';
-//     circles[n - 1].className += ' enable';
-
-//     this.setState({
-//       slidePosition: n,
-//     });
-//   }
 
   navigateTo = (url) => {
     document.body.classList.add('fade-out');
@@ -59,30 +14,33 @@ class Dashboards extends React.Component {
     return (
       <div>
           
-        
-
         <div id="main-container">
-          <div id="box1" className="fade-in" onClick={() => this.navigateTo('./IfcViewer')}>
-            
+          <div id="box1" className="fade-in" onClick={() => this.navigateTo('./ifc')}>
+            Total Number of Tenants: 
           </div>
           <div id="box2" className="fade-in" onClick={() => this.navigateTo('')}>
-            
+          Total Number of Properties: 
           </div>
           <div id="box3" className="fade-in" onClick={() => this.navigateTo('')}>
-            
+          Amount of Outstanding Maintenance Orders:
           </div>
-    
           <div id="box4" className="fade-in" onClick={() => this.navigateTo('')}>
-          
+          Bar Graph
           </div>
           <div id="box5" className="fade-in" onClick={() => this.navigateTo('')}>
-           
+          Property Listing 1<br></br>
+          Property Location:<br></br>
+          Current Tenant: 
           </div>
           <div id="box6" className="fade-in" onClick={() => this.navigateTo('')}>
-            
+          Property Listing 2<br></br>
+          Property Location:<br></br>
+          Current Tenant: 
           </div>
           <div id="box7" className="fade-in" onClick={() => this.navigateTo('')}>
-            
+          Property Listing 3<br></br>
+          Property Location:<br></br>
+          Current Tenant: 
             </div>
         </div>
       </div>
