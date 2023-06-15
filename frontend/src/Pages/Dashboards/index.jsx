@@ -58,31 +58,7 @@ class Dashboards extends React.Component {
   render() {
     return (
       <div>
-
-        <div id="socials" className="socials">
-          {/* <div className="slideshow-container fade">
-            <div className="Containers">
-             
-            </div>
-            <div className="Containers">
-             
-            </div>
-            <div className="Containers">
-              
-            </div>
-            <div className="Containers">
-              
-            </div>
-            <a className="Back" onClick={() => this.plusSlides(-1)}>&#10094;</a>
-            <a className="forward" onClick={() => this.plusSlides(1)}>&#10095;</a>
-          </div>
-          <br />
-          <div style={{ textAlign: 'center' }}>
-            <span className="dots" onClick={() => this.currentSlide(1)}></span>
-            <span className="dots" onClick={() => this.currentSlide(2)}></span>
-            <span className="dots" onClick={() => this.currentSlide(3)}></span>
-            <span className="dots" onClick={() => this.currentSlide(4)}></span>
-          </div> */}
+          
         
 
         <div id="main-container">
@@ -110,7 +86,7 @@ class Dashboards extends React.Component {
             </div>
         </div>
       </div>
-    </div>
+    
     );
   }
 }
