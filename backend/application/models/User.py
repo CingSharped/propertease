@@ -12,4 +12,4 @@ class User:
       if new_user:
         return {'_id': str(new_user['_id']), 'username': new_user['username'], 'user_type': new_user['user_type']}
       else:
-        return {'error': 'User could not be created'}
+        return {'error': 'Error created user'}
