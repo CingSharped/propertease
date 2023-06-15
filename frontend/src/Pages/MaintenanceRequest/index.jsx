@@ -1,7 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import "./style.css"
-import MaintenanceRequestList from '../../components/MaintenanceRequestList'
+// import styles from "../../components/xxx/Modal.module.css";
+import styles from "../../components/Modal/Modal.module.css";
+import { MaintenanceRequestList } from '../../components'
+import { NewRequestForm } from '../../components';
+import { Modal } from '../../components'
+
 
 const MaintenanceRequest = () => {
 
@@ -17,21 +22,39 @@ const MaintenanceRequest = () => {
   "completed": true}
 ]
 
+  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className='maintenance-request'>
-      <h1>Maintenance Requests</h1>
+      <h2>Maintenance Requests</h2>
 
       <div className="row">
 
-          <div className="column" id="left">
-            {<MaintenanceRequestList maintenanceRequest={mr_example} />}
-          </div>
+        <div className="column" id="left">
 
-          <div className="column" id="right" style={{backgroundColor: 'Gray'}}>Add form button</div>
+          {<MaintenanceRequestList maintenanceRequest={mr_example} />}
         </div>
+
+        <div className="column" id="right">
+          <button 
+            className={styles.primaryBtn} 
+            onClick={() => setIsOpen(true)}>
+            Open Modal
+          </button>
+          {/* {isOpen && <NewRequestForm setIsOpen={setIsOpen} />} */}
+          {isOpen && <Modal children={<NewRequestForm />} setIsOpen={setIsOpen} />}
+            
+        </div>
+      </div>
+        
+
     </div>
   )
+
+    
+
+
+
 }
 
 export default MaintenanceRequest

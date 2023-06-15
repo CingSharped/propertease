@@ -98,7 +98,7 @@
   justify-content: center;
 }
 
-.maintenance-request-item .request-editor button {
+.maintenance-request-item .request-editor .complete-btn, .trash-btn {
   background-color: transparent;
   background-repeat: no-repeat;
   border: none;
