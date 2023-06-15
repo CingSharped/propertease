@@ -96,7 +96,7 @@
   #box2, #box3, #box4, #box5, #box6 {
       
     border: 1px solid rgba(211, 154, 11, 0.273);
-      /* border-radius: 20px; */
+      border-radius: 20px;
       box-shadow: 0px 0px 40px #ffffff;
   }
   
@@ -117,22 +117,22 @@
       justify-content: space-evenly;
       margin: 20px 0;
     }
-  #box1 {
+  /* #box1 {
     background-image: url("../../assets/images/Screenshot 2023-06-14 at 19.47.33.png");
     background-position: center;
     background-size: 125%;
       /* background-position: center;
       background-size: cover; */
-      width: 25%;
+      /* width: 25%;
       height: 450px;
       padding: 20px;
-      margin-left: -50px;
+      margin-left: -50px; */
       /* border: 1px solid white; */
       
-      border-radius: 10px;
-    }
+      /* border-radius: 10px;
+    } */ */
   
- 
+/*  
     #box2 {
         background-image: url("./images/canal.jpeg");
         background-position: center;
@@ -142,23 +142,23 @@
         padding: 20px;
         margin-left: 85px;
         /* border: 1px solid rgba(211, 155, 11, 1); */
-        background-color: #F9F2EB;;
+        /* background-color: #F9F2EB;; */
         /* border-radius: 10px; */
-    }
+    /* } */ */
     
-    #box3 {
-        background-image: url("./images/pub.jpeg");
-        background-position: center;
-        background-size: cover;
+    #box1, #box2, #box3, #box4, #box5, #box6, #box7 {
+        /* background-image: url("./images/pub.jpeg"); */
+        /* background-position: center;
+        background-size: cover; */
         width: 20%;
         height: 150px;
         padding: 20px;
-        /* border: 1px solid rgba(211, 155, 11, 1); */
+        border: 1px solid rgba(211, 155, 11, 1);
         background-color: #F9F2EB;;
         /* border-radius: 10px; */
     }
     
-    #box4 {
+    /* #box4 {
       background-image: url("./images/castle.jpeg");
       background-position: center;
       background-size: cover;
@@ -168,11 +168,11 @@
       margin-top: -280px; 
       margin-left: 420px; 
       /* border: 1px solid rgba(211, 155, 11, 1); */
-      background-color: #F9F2EB;;
+      /* background-color: #F9F2EB;; */
       /* border-radius: 10px; */
-    }
-    
-    #box5 {
+    /* } */
+     /* */ */
+    /* #box5 {
       background-image: url("./images/castle.jpeg");
       background-position: center;
       background-size: cover;
@@ -181,9 +181,9 @@
       padding: 20px;
       margin-top: -280px; 
       /* border: 1px solid rgba(211, 155, 11, 1); */
-      background-color: #F9F2EB;
+      /* background-color: #F9F2EB; */
       /* border-radius: 10px; */
-    }
+    /* } */ */
   
   /* #box6 {
     background-image: url("./images/ferry-boat.jpeg");
