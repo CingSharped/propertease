@@ -22,7 +22,10 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
         </tbody>
       </table>
       <div className="request-editor">
-        <button className="trash-btn" onClick={() => deleteRequest(request)}>
+        <button 
+          aria-label="delete request" 
+          className="trash-btn" 
+          onClick={() => deleteRequest(request)}>
         <span className="material-symbols-outlined">delete</span>
         </button>
       </div>
@@ -50,12 +53,14 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
         <button 
           className="complete-btn" 
           role="complete-btn"
+          aria-label="complete request"
           onClick={() => completeRequest(request)}>
         <span className="material-symbols-outlined">done_outline</span>
         </button>
         <button 
           className="trash-btn" 
           role="delete-btn"
+          aria-label="delete request"
           onClick={() => deleteRequest(request)}>
         <span className="material-symbols-outlined">delete</span>
         </button>
