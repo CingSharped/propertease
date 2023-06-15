@@ -1,0 +1,30 @@
+.NavBar {
+  background-color: #1A273E;
+  border-radius: 0;
+  height: 5rem;
+  color: white;
+}
+
+.NavBar a {
+  text-decoration: none;
+  margin-left: 1.5rem;
+}
+
+.NavBar .logo-container {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.NavBar img {
+  height: 80%;
+}
+
+.NavBar h3 {
+  margin-left: 1rem;
+  font-size: 2rem;
+  color: #D39B0B;
+
+}
