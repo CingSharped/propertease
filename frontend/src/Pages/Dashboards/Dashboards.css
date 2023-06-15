@@ -93,11 +93,15 @@
     }
   
   
-  #box2, #box3, #box4, #box5, #box6 {
+  #box1, #box2, #box3, #box4, #box5, #box6, #box7 {
       
     border: 1px solid rgba(211, 154, 11, 0.273);
       border-radius: 20px;
       box-shadow: 0px 0px 40px #ffffff;
+      border: 1px solid rgba(211, 155, 11, 1);
+      background-color: #F9F2EB;
+      padding: 20px;
+
   }
   
   div[id^='box'] {
@@ -130,7 +134,7 @@
       /* border: 1px solid white; */
       
       /* border-radius: 10px;
-    } */ */
+    } */ 
   
 /*  
     #box2 {
@@ -146,17 +150,16 @@
         /* border-radius: 10px; */
     /* } */ */
     
-    #box1, #box2, #box3, #box4, #box5, #box6, #box7 {
+    /* #box1, #box2, #box3, #box4, #box5, #box6, #box7 {
         /* background-image: url("./images/pub.jpeg"); */
         /* background-position: center;
         background-size: cover; */
-        width: 20%;
-        height: 150px;
-        padding: 20px;
-        border: 1px solid rgba(211, 155, 11, 1);
-        background-color: #F9F2EB;;
+        /* width: 20%;
+        height: 150px; */
+        
+       
         /* border-radius: 10px; */
-    }
+    /* } */
     
     /* #box4 {
       background-image: url("./images/castle.jpeg");
@@ -207,7 +210,7 @@ border:solid 1px rgba(211, 154, 11, 0.273);
 width: 90%;
 padding: -10px;
 
-margin-left: 5%;
+margin-left: 0%;
     /* background-image: url("../../assets/images/Screenshot 2023-06-14 at 19.28.21.png");
     background-position: center;
     background-size: 45%; */
