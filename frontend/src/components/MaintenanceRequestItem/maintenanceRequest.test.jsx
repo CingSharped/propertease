@@ -5,7 +5,7 @@ import userEvent from "@testing-library/user-event";
 import matchers from "@testing-library/jest-dom/matchers";
 expect.extend(matchers);
 
-import MaintenanceRequestList from '.';
+import MaintenanceRequestItem from '.';
 
 describe('Maintenance request item', () => {
   const maintenanceCompletedRequest = [
@@ -24,7 +24,7 @@ describe('Maintenance request item', () => {
 
   beforeEach(() => {
     render(
-      < MaintenanceRequestList request={maintenanceCompletedRequest}/>
+      < MaintenanceRequestItem request={maintenanceCompletedRequest}/>
     )
   })
 
@@ -55,11 +55,11 @@ describe('Maintenance request item', () => {
   it('Displays a container to property details', () => {
     const td = document.getElementsByClassName('details-container');
     console.log(td)
-    expect(td).toBeTruthy()
+    expect(td).toBeInTheDocument()
   })
 
   it('has a button', () => {
     const btn = document.querySelector('button');
-    expect(btn).toBeTruthy()
+    expect(btn).toBeInTheDocument()
   })
 })
