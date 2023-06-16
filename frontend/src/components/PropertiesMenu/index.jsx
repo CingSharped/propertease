@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
+import Modal from "../Modal";
+import NewRequestForm from "../NewRequestForm";
 
 const PropertiesMenu = ({ buildingId, properties }) => {
+
+  const [isOpen, setIsOpen] = useState(false);
+
+
+
   const removeNullUndefinedKeys = (obj) => {
     const newObj = { ...obj };
     delete newObj.psets;
@@ -33,9 +40,10 @@ const PropertiesMenu = ({ buildingId, properties }) => {
 
       // console.log(Object.keys(properties)[i], Object.values(properties)[i])
       if (Object.keys(properties)[i] == "expressID") {
-        const propertyValue = Object.values(properties)[i]
+        const locationId = Object.values(properties)[i]
         //const propertyValue = properties[Object.keys(properties)[i]].value;
-        alert(`Create maintenance request for building expressID: ${buildingId} \n element expressID: ${propertyValue}`)
+        alert(`Create maintenance request for building expressID: ${buildingId} \n element expressID: ${locationId}`)
+
         // console.log("building id from properties: " + buildingId)
         // console.log(propertyValue);
 
@@ -51,7 +59,13 @@ const PropertiesMenu = ({ buildingId, properties }) => {
 
   return (
     <>
-      <button onClick={handleClick}>Create Maintenance request</button>
+      {/* <button onClick={handleClick}>Create Maintenance request</button> */}
+      <button 
+           
+            onClick={() => setIsOpen(true)}>
+            Create Maintenance request
+          </button>
+      {isOpen && <Modal children={<NewRequestForm />} setIsOpen={setIsOpen} />}
       <div id="ifc-property-menu-root">
         {propertyEntries}
       </div>

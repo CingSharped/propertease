@@ -12,8 +12,13 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "axios": "^1.4.0",
+    "chart.js": "^4.3.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-icons": "^4.9.0",
     "react-router-dom": "^6.12.1",
+    "save": "^2.9.0",
     "three": "^0.135.0",
     "vitest": "^0.32.0",
     "web-ifc-viewer": "^1.0.216"
