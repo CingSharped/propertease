@@ -51,3 +51,27 @@
   padding: 0.75rem 2rem;
   font-weight: 800;
 }
+
+.new-request-form .defualt-message {
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  padding: .5rem;
+  border-radius: 1rem;
+  color: #222
+}
+
+.new-request-form .created-message {
+  border-top: 1px solid green;
+  border-bottom: 1px solid green;
+  padding: .5rem;
+  border-radius: 1rem;
+  color: green;
+}
+
+.new-request-form .error-message {
+  border-top: 1px solid red;
+  border-bottom: 1px solid red;
+  padding: .5rem;
+  border-radius: 1rem;
+  color: red;
+}

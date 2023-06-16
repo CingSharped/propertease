@@ -10,6 +10,8 @@ const NewRequestForm = () => {
   const [cost, setCost] = useState(null)
   const [location, setLocation] = useState()
   const [propertyID, setPropertyID] = useState()
+  const [message, setMessage] = useState("Input request details")
+  const [errorMessage, setErrorMessage] = useState("none")
 
   async function handleSubmit (e) {
     e.preventDefault()
@@ -41,11 +43,25 @@ const NewRequestForm = () => {
     if (res.ok) {
       console.log("new request added", json) 
 
-      setTitle("")
-      setDescription("")
-      setCost(0)
-      setPriority("")
-      setWorkType("")
+      
+      if (json.error) {
+        setMessage("Work order already exists")
+        setErrorMessage("error")
+      }
+      
+      if (json._id) {
+        setTitle("")
+        setDescription("")
+        setCost("")
+        setPriority("")
+        setWorkType("")
+        // setPropertyID("")
+        setErrorMessage("created")
+        setMessage("New work order created")
+
+        setIsOpen(false)
+      }
+      
     }
   }
   
@@ -109,6 +125,14 @@ const NewRequestForm = () => {
           </div>
 
         </form>
+
+        <div className='form-message'>
+          <h4 className={errorMessage === "none" 
+                          ? "defualt-message" 
+                          : errorMessage === "created" ? "created-message" : "error-message" }>
+            {message}
+          </h4>
+        </div>
       </div>
     </div>
 
