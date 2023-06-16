@@ -3,13 +3,13 @@ import React, { useState } from 'react'
 import "./style.css";
 
 const NewRequestForm = () => {
-  const [workType, setWorkType] = useState()
-  const [priority, setPriority] = useState()
-  const [title, setTitle] = useState()
-  const [description, setDescription] = useState()
-  const [cost, setCost] = useState(null)
-  const [location, setLocation] = useState()
-  const [propertyID, setPropertyID] = useState()
+  const [workType, setWorkType] = useState("")
+  const [priority, setPriority] = useState("")
+  const [title, setTitle] = useState("")
+  const [description, setDescription] = useState("")
+  const [cost, setCost] = useState("null")
+  const [location, setLocation] = useState("")
+  const [propertyID, setPropertyID] = useState("")
   const [message, setMessage] = useState("Input request details")
   const [errorMessage, setErrorMessage] = useState("none")
 
@@ -70,48 +70,67 @@ const NewRequestForm = () => {
       <div className="container">
         <h3>New maintenance request</h3>
         <p> * indicates required fields</p>
-        <form onSubmit={handleSubmit}>
+        <form role="form" onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="input-data">
               <label htmlFor="work-title">Title *</label>
-              <input id="work-title" type="text" onChange={e => setTitle(e.target.value)} value={title} required/>
+              <input id="work-title" type="text" onChange={e => {
+                setMessage("Input request details")
+                setErrorMessage("none")
+                setTitle(e.target.value)
+                }} value={title} required/>
             </div>
           </div>
 
           <div className="form-row">
             <div className="input-data">
               <label htmlFor="work-description">Description *</label>
-              <textarea required row={10} cols={50} type="text" id="work-description" onChange={e => setDescription(e.target.value)} value={description}/>
+              <textarea required row={10} cols={50} type="text" id="work-description" onChange={e => {
+                setMessage("Input request details")
+                setErrorMessage("none")
+                setDescription(e.target.value)}} value={description}/>
             </div>
           </div>
 
           <div className="form-row">
             <div className="input-data">
               <label htmlFor="cost">Cost £</label>
-              <input id="cost" type="number" min="0.00" step="0.01" onChange={e => setCost(e.target.value)} value={cost}/>
+              <input id="cost" type="number" min="0.00" step="0.01" onChange={e => {
+                setCost(e.target.value)
+                setMessage("Input request details")
+                setErrorMessage("none")
+                }} value={cost}/>
             </div>
           </div>
 
           <div className="form-row">
             <div className="input-data">
               <label htmlFor="work-type">Work type *</label>
-              <select id='work-type' required onChange={e => setWorkType(e.target.value)}>
+              <select role="work-type-dropdown" id='work-type' required onChange={e => {
+                setWorkType(e.target.value)
+                setMessage("Input request details")
+                setErrorMessage("none")
+                }}>
                 <option value=""></option>
-                <option value="electrical">Electrical</option>
-                <option value="plumbing">Plumbing</option>
-                <option value="gas">Gas</option>
-                <option value="repairs">Repair</option>
-                <option value="improvements">Improvements</option>
-                <option value="other">Other</option>
+                <option role="menuitem" value="electrical">Electrical</option>
+                <option role="menuitem" value="plumbing">Plumbing</option>
+                <option role="menuitem" value="gas">Gas</option>
+                <option role="menuitem" value="repairs">Repair</option>
+                <option role="menuitem" value="improvements">Improvements</option>
+                <option role="menuitem" value="other">Other</option>
               </select>
             </div>
             <div className="input-data">
               <label htmlFor="priority">Priority *</label>
-              <select id='priority' required onChange={e => setPriority(e.target.value)}>
+              <select role="priority-dropdown" id='priority' required onChange={e => {
+                setPriority(e.target.value)
+                setMessage("Input request details")
+                setErrorMessage("none")
+                }}>
                 <option value=""></option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
+                <option role="priority-menuitem" value="high">High</option>
+                <option role="priority-menuitem" value="medium">Medium</option>
+                <option role="priority-menuitem" value="low">Low</option>
               </select>
             </div>
           </div>
@@ -127,9 +146,7 @@ const NewRequestForm = () => {
         </form>
 
         <div className='form-message'>
-          <h4 className={errorMessage === "none" 
-                          ? "defualt-message" 
-                          : errorMessage === "created" ? "created-message" : "error-message" }>
+          <h4 className={errorMessage === "none" ? "defualt-message" : errorMessage === "created" ? "created-message" : "error-message" }>
             {message}
           </h4>
         </div>
