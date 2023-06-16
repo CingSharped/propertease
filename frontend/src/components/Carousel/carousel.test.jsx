@@ -34,13 +34,10 @@ describe('carousel component', () => {
   it("renders a 'next' button", async() => {
     const nextImageButton = screen.getByRole('next-button')
     expect(nextImageButton).toBeInTheDocument()
-    const one = await userEvent.click(nextImageButton)
   })
 
   it("does not render a 'previous' button when first image is displayed", async () => {
-    await waitFor(()=>{
-      expect(screen.getByRole('previous-button')).not.toBeInTheDocument()
-    })
+    expect(screen.queryByRole('previous-button')).toBeNull()
   })
 
   it("renders a 'previous' button when next button is clicked", async () => {
@@ -50,4 +47,10 @@ describe('carousel component', () => {
     expect(previousImageButton).toBeInTheDocument()
   })
 
+  it("next button disappears when last image is displayed in carousel", async () => {
+    const nextImageButton = screen.getByRole('next-button')
+    await userEvent.click(nextImageButton)
+    await userEvent.click(nextImageButton)
+    expect(screen.queryByRole('next-button')).toBeNull()
+  })
 })

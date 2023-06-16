@@ -1,12 +1,12 @@
 from application import db
 
 class Property:
-  def __init__(self, name, owner_id, model_id, rent_date, tenant_id, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode):
+  def __init__(self, name, owner_id, model_id, rent_date, tenant_username, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode):
     self.name = name # required
     self.owner_id = owner_id # required
     self.model_id = model_id
     self.rent_date = rent_date
-    self.tenant_id = tenant_id
+    self.tenant_username = tenant_username
     self.rental_cost = rental_cost
     self.bedrooms = bedrooms # required
     self.bathrooms = bathrooms # required
@@ -27,7 +27,7 @@ class Property:
       'owner_id': self.owner_id,
       'model_id': self.model_id,
       'rent_date': self.rent_date,
-      'tenant_id': self.tenant_id,
+      'tenant_username': self.tenant_username,
       'rental_cost': self.rental_cost,
       'bedrooms': self.bedrooms,
       'bathrooms': self.bathrooms,
@@ -40,9 +40,7 @@ class Property:
       'address': self.address,
       'postcode': self.postcode
     })
-    print(str(new_property.inserted_id))
     property_from_db = db.properties.find_one({'name': self.name, 'owner_id': self.owner_id})
-    print(property_from_db)
     if property_from_db:
       return {**property_from_db, '_id': str(property_from_db['_id']) }
     else:

@@ -34,7 +34,8 @@ const Carousel = ({ propertyImage }) => {
       <div className='carousel'>
         <div className='slideshow-container'>
   
-          {currentIndex === 0 ? "": 
+          {currentIndex === 0 ? 
+            "" : 
             <button
               role="previous-button" 
               onClick={prev} 

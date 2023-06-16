@@ -12,3 +12,17 @@
 .home p {
   padding: 0em 1em;
 }
+
+.home h3 {
+  color: #D39B0B;
+  padding: 0.5em 1em;
+  text-align: center;
+}
+
+.home .row {
+  display: flex;
+}
+
+.home .column {
+  flex: 50%;
+}
