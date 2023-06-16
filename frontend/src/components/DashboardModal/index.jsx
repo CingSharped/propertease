@@ -1,14 +1,8 @@
 import React from 'react';
 import './dashboardmodal.css';
 
-function DashboardModal() {
+const DashboardModal = () => {
 
-  // navigateTo = (url) => {
-  //   document.body.classList.add('fade-out');
-  //   setTimeout(() => {
-  //     window.location.href = url;
-  //   }, 500);
-  // }
     return (
       <div>
         <div id="main-container">
