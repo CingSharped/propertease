@@ -5,12 +5,11 @@ import "./style.css";
 const NewRequestForm = () => {
   const [workType, setWorkType] = useState()
   const [priority, setPriority] = useState()
-  const [location, setLocation] = useState()
-  const [propertyID, setPropertyID] = useState()
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [cost, setCost] = useState(null)
-  const [status, setStatus] = useState (false)
+  const [location, setLocation] = useState()
+  const [propertyID, setPropertyID] = useState()
 
   async function handleSubmit (e) {
     e.preventDefault()
@@ -19,12 +18,12 @@ const NewRequestForm = () => {
       "cost": cost,
       "created_by": "USER",
       "description": description,
-      "location_id": location,
       "priority": priority,
-      "property_id": propertyID,
       "status": false,
       "title": title,
-      "work_type": workType
+      "work_type": workType,
+      "location_id": "set by IFC",
+      "property_id": "set by IFC"
     }
 
     const res = await fetch("https://propertease-api.onrender.com/workorders", {
@@ -42,13 +41,11 @@ const NewRequestForm = () => {
     if (res.ok) {
       console.log("new request added", json) 
 
-    setCost(0)
-    setDescription("")
-    setLocation("")
-    setPriority("")
-    setTitle("")
-    setPriority("")
-    setWorkType("")
+      setTitle("")
+      setDescription("")
+      setCost(0)
+      setPriority("")
+      setWorkType("")
     }
   }
   
@@ -58,39 +55,6 @@ const NewRequestForm = () => {
         <h3>New maintenance request</h3>
         <p> * indicates required fields</p>
         <form onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="input-data">
-              <label htmlFor="work-type">Work type *</label>
-              <select id='work-type' required onChange={e => setWorkType(e.target.value)}>
-                <option value=""></option>
-                <option value="electrical">Electrical</option>
-                <option value="plumbing">Plumbing</option>
-                <option value="gas">Gas</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
-            <div className="input-data">
-              <label htmlFor="priority">Priority *</label>
-              <select id='priority' required onChange={e => setPriority(e.target.value)}>
-                <option value=""></option>
-                <option value="high">High</option>
-                <option value="medium">Medium</option>
-                <option value="low">Low</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="form-row">
-            <div className="input-data">
-              <label htmlFor="work-location">Location *</label>
-              <input id="work-location" type="text" onChange={e => setLocation(e.target.value)} value={location} required/>
-            </div>
-            <div className="input-data">
-              <label htmlFor="property-id">Property ID *</label>
-              <input  id="property-id" type="text" onChange={e => setPropertyID(e.target.value)} value={propertyID} required/>
-            </div>
-          </div>
-
           <div className="form-row">
             <div className="input-data">
               <label htmlFor="work-title">Title *</label>
@@ -112,10 +76,34 @@ const NewRequestForm = () => {
             </div>
           </div>
 
+          <div className="form-row">
+            <div className="input-data">
+              <label htmlFor="work-type">Work type *</label>
+              <select id='work-type' required onChange={e => setWorkType(e.target.value)}>
+                <option value=""></option>
+                <option value="electrical">Electrical</option>
+                <option value="plumbing">Plumbing</option>
+                <option value="gas">Gas</option>
+                <option value="repairs">Repair</option>
+                <option value="improvements">Improvements</option>
+                <option value="other">Other</option>
+              </select>
+            </div>
+            <div className="input-data">
+              <label htmlFor="priority">Priority *</label>
+              <select id='priority' required onChange={e => setPriority(e.target.value)}>
+                <option value=""></option>
+                <option value="high">High</option>
+                <option value="medium">Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+          </div>
+          
           <div className="form-row submit-btn">
             <div className="input-data">
               <div className="inner">
-                <input type="submit" value="submit" />
+                <input type="submit" value="Submit" />
               </div>
             </div>
           </div>
