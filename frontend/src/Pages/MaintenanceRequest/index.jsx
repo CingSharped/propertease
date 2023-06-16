@@ -39,9 +39,9 @@ const MaintenanceRequest = () => {
           <button 
             className={styles.primaryBtn} 
             onClick={() => setIsOpen(true)}>
-            Open Modal
+            New Request form
           </button>
-          {isOpen && <Modal children={<NewRequestForm />} setIsOpen={setIsOpen} />}
+          {isOpen && <Modal children={<NewRequestForm setIsOpen={setIsOpen}/>} setIsOpen={setIsOpen} />}
             
         </div>
       </div>

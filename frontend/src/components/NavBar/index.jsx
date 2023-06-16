@@ -21,6 +21,7 @@ const NavBar = () => {
           <NavLink to="/ifc" style={styles}>
             IFC
           </NavLink>
+          {/* Logic to be added */}
           <NavLink to="/login" style={styles}>
             Login/Sign Up
           </NavLink>
