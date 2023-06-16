@@ -5,7 +5,7 @@ import styles from "./Modal.module.css";
 
 const Modal = ({ children, setIsOpen }) => {
   return (
-    <div className='maintenance-request-form'>
+    <div className='modal-container' role='modal-container'>
       <div className={styles.modal_darkBG} onClick={() => setIsOpen(false)} />
         <div className={styles.modal_centered}>
           <div className={styles.modal_modal}>

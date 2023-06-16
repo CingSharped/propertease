@@ -2,8 +2,8 @@ import "./style.css"
 
 function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
   return (
-    request.status 
-    ? <li className="maintenance-request-item-completed" role="reqest-item">
+    request.status === true
+    ? <li className="maintenance-request-item-completed" role="completed-reqest-item">
       <div className="image-container">IMAGE PLACEHOLDER</div>
       <table className="details-container">
         <tbody>
@@ -39,9 +39,9 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
       </div>
     </li> 
 
-    : <li className="maintenance-request-item" role="reqest-item">
+    : <li className="maintenance-request-item" role="open-reqest-item">
       <div className="image-container">IMAGE PLACEHOLDER</div>
-      <table className="details-container">
+      <table className="details-container" role="details-container">
         <tbody>
           <tr>
             <th>Work type </th>
