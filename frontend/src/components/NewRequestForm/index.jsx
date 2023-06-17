@@ -12,6 +12,24 @@ const NewRequestForm = () => {
   const [cost, setCost] = useState(null)
   const [status, setStatus] = useState (false)
 
+
+
+//data for database
+
+  // {
+  //   "_id": "648b18d0ac763b34c9c4eaac",
+  //   "cost": 2000,
+  //   "created_by": "6486fe5ad8920f8b400b20ef",
+  //   "created_on": "Thu, 15 Jun 2023 13:57:36 GMT",
+  //   "description": "The taps in the kitchen has been dripping for the past day",
+  //   "location_id": "aeafvndoavbadv",
+  //   "priority": "High",
+  //   "property_id": "High",
+  //   "status": false,
+  //   "title": "Leaking tap",
+  //   "work_type": "Repair"
+  // }
+
   async function handleSubmit (e) {
     e.preventDefault()
 
