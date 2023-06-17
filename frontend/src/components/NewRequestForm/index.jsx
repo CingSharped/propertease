@@ -1,4 +1,6 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import BuildingIdContext from '../../context/BuildingIdContext';
+import CurrentElemIdContext from '../../context/CurrentElemIdContext';
 
 import "./style.css";
 
@@ -6,13 +8,19 @@ const NewRequestForm = () => {
   const [workType, setWorkType] = useState()
   const [priority, setPriority] = useState()
   const [location, setLocation] = useState()
-  const [propertyID, setPropertyID] = useState()
+  //const [propertyID, setPropertyID] = useState()
   const [title, setTitle] = useState()
   const [description, setDescription] = useState()
   const [cost, setCost] = useState(null)
   const [status, setStatus] = useState (false)
 
+  //setLocation(elemId)
+  const buildingId = useContext(BuildingIdContext)
+  const elemId = useContext(CurrentElemIdContext)
 
+  console.log("buiilding id: " + buildingId)
+  console.log("elemId from NewRequestForm: " + elemId)
+  //setPropertyID(buildingId)
 
 //data for database
 
@@ -37,9 +45,9 @@ const NewRequestForm = () => {
       "cost": cost,
       "created_by": "USER",
       "description": description,
-      "location_id": location,
+      "location_id": elemId,
       "priority": priority,
-      "property_id": propertyID,
+      "property_id": buildingId,
       "status": false,
       "title": title,
       "work_type": workType
@@ -101,11 +109,11 @@ const NewRequestForm = () => {
           <div className="form-row">
             <div className="input-data">
               <label htmlFor="work-location">Location *</label>
-              <input id="work-location" type="text" onChange={e => setLocation(e.target.value)} value={location} required/>
+              <input id="work-location" type="text" onChange={e => setLocation(e.target.value)} value={elemId} required/>
             </div>
             <div className="input-data">
               <label htmlFor="property-id">Property ID *</label>
-              <input  id="property-id" type="text" onChange={e => setPropertyID(e.target.value)} value={propertyID} required/>
+              <input  id="property-id" type="text" onChange={e => setPropertyID(e.target.value)} value={buildingId} required/>
             </div>
           </div>
 

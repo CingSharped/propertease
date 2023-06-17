@@ -10,10 +10,7 @@ const IfcViewer = ({ ifcProject }) => {
   const [selectedProperties, setSelectedProperties] = useState({});
   const [isPropertyMenuVisible, setPropertyMenuVisible] = useState(false);
   const [buildingId, setBuildingId] = useState(); //store the expressId of a building 
-  //const [isTreeMenuVisible, setTreeMenuVisible] = useState(true);
   const [loadingIfc, setLoadingIfc] = useState(true);
-  //const [viewerState, setViewerState] = useState({});
-  // const [changeFloorPlans, setChangeFloorPlans] = useState();
 
   useEffect(() => {
     //const ifcUrl = "../ifc-models/TESTED_Simple_project_01.ifc"
@@ -73,13 +70,6 @@ const IfcViewer = ({ ifcProject }) => {
       setBuildingId(ifcProject.expressID);
 
       //here assign useContext variable
-
-      //fix Tree menu using component
-      //createTreeMenu(ifcProject);
-
-      //const allPlans = await computeViewFloorPlans(model, viewer)
-
-      //getFloorPlans(viewer, model);
       
       console.log("loaded ifc");
       
@@ -105,57 +95,13 @@ const IfcViewer = ({ ifcProject }) => {
     };
   }, []); //buildingId inside array
 
-  // Floorplans - viewer.goTo not working
-  // const getFloorPlans = async (viewer, model) => {
-  //   //floorplans
-  //   await viewer.plans.computeAllPlanViews(model.modelID);
-
-  //   const lineMaterial = new THREE.LineBasicMaterial({ color: "black" });
-  //   const baseMaterial = new THREE.MeshBasicMaterial({
-  //     polygonOffset: true,
-  //     polygonOffsetFactor: 1,
-  //     polygonOffsetUnits: 1,
-  //   });
-  //   await viewer.edges.create(
-  //     "example",
-  //     model.modelID,
-  //     lineMaterial,
-  //     baseMaterial
-  //   );
-
-  //   // Floor plan viewing
-  //   const allPlans = viewer.plans.getAll(model.modelID);
-
-  //   for (const plan of allPlans) {
-  //     const currentPlan = viewer.plans.planLists[model.modelID][plan];
-  //     console.log(currentPlan);
-
-  //     const button = document.createElement("button");
-  //     button.textContent = currentPlan.name;
-  //     button.onclick = () => {
-  //       console.log(plan);
-  //       viewer.plans.goTo(model.modelID, plan); //need s to be outisde the useEffect or use some variable to update this??
-  //       viewer.edges.toggle("example", true);
-  //     };
-  //     containerRef.current.appendChild(button);
-  //   }
-
-  //   const exitButton = document.createElement("button");
-  //   exitButton.textContent = "Exit";
-  //   exitButton.onclick = () => {
-  //     viewer.plans.exitPlanView();
-  //     viewer.edges.toggle("example", false);
-  //   };
-  //   containerRef.current.appendChild(exitButton);
-  // };
-
   const togglePropertyMenu = () => {
     setPropertyMenuVisible(!isPropertyMenuVisible);
   };
 
   return (
     <>
-    <div>\Building id: {buildingId}</div>
+    <div>Building id: {buildingId}</div>
       <div className="button-wrapper">
         <button onClick={togglePropertyMenu}>Toggle Property Menu</button>
       </div>
