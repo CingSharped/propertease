@@ -1,23 +1,28 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext, createContext } from "react";
 import { IfcViewerAPI } from "web-ifc-viewer";
 import * as THREE from "three";
 import PropertiesMenu from "../../components/PropertiesMenu";
 import "./IfcViewer.css";
+import BuildingIdContext from "../../context/BuildingIdContext";
 
 const IfcViewer = ({ ifcProject }) => {
   const containerRef = useRef();
   const [selectedProperties, setSelectedProperties] = useState({});
   const [isPropertyMenuVisible, setPropertyMenuVisible] = useState(false);
-  const [buildingId, setBuildingId] = useState(0); //store the expressId of a building
+  const [buildingId, setBuildingId] = useState(); //store the expressId of a building 
   //const [isTreeMenuVisible, setTreeMenuVisible] = useState(true);
   const [loadingIfc, setLoadingIfc] = useState(true);
+  //const [viewerState, setViewerState] = useState({});
+  // const [changeFloorPlans, setChangeFloorPlans] = useState();
 
   useEffect(() => {
-    //const ifcUrl = "../ifc-models/TESTED_Simple_project_01.ifc";
-    
-    const ifcUrl = "../ifc-models/rac_basic_sample_project-IFC4-2.ifc"
+    //const ifcUrl = "../ifc-models/TESTED_Simple_project_01.ifc"
+    const ifcUrl = "../ifc-models/rac_basic_sample_project-IFC4-2.ifc";
 
-    //const ifcUrl = "../ifc-models/rac_advanced_sample_project-IFC4.ifc";
+    const viewer = new IfcViewerAPI({
+      container: containerRef.current,
+      backgroundColor: new THREE.Color(0xffffff),
+    });
 
     const handleDoubleClick = async () => {
       const result = await viewer.IFC.selector.pickIfcItem(true);
@@ -46,7 +51,6 @@ const IfcViewer = ({ ifcProject }) => {
     };
 
     const loadIfc = async (url) => {
- 
       //await viewer.IFC.setWasmPath("../../../");
       const model = await viewer.IFC.loadIfcUrl(url);
 
@@ -62,35 +66,26 @@ const IfcViewer = ({ ifcProject }) => {
       //post processing below causing the properties to not load on first click
       //  viewer.context.renderer.postProduction.active = true;
 
-      //for tree menu
+      //for tree menu, and to get building id
       ifcProject = await viewer.IFC.getSpatialStructure(model.modelID);
       //console.log(ifcProject.expressID);
 
       setBuildingId(ifcProject.expressID);
 
+      //here assign useContext variable
+
       //fix Tree menu using component
       //createTreeMenu(ifcProject);
 
-      //floorplans
+      //const allPlans = await computeViewFloorPlans(model, viewer)
 
-      // await viewer.plans.computeAllPlanViews(model.modelID);
-
-      // const allPlans = viewer.plans.getAll(model.modelID);
-
-      // for (const plan of allPlans) {
-      //   const currentPlan = viewer.plans.planLists[model.modelID][plan];
-      //   console.log(currentPlan);
-
-      // }
+      //getFloorPlans(viewer, model);
+      
       console.log("loaded ifc");
-
+      
       setLoadingIfc(false);
-    };
 
-    const viewer = new IfcViewerAPI({
-      container: containerRef.current,
-      backgroundColor: new THREE.Color(0xffffff),
-    });
+    };
 
     viewer.axes.setAxes();
     viewer.grid.setGrid();
@@ -108,7 +103,51 @@ const IfcViewer = ({ ifcProject }) => {
       window.removeEventListener("keydown", handleKeyDown);
       viewer.dispose();
     };
-  }, [buildingId]); //buildingId inside array
+  }, []); //buildingId inside array
+
+  // Floorplans - viewer.goTo not working
+  // const getFloorPlans = async (viewer, model) => {
+  //   //floorplans
+  //   await viewer.plans.computeAllPlanViews(model.modelID);
+
+  //   const lineMaterial = new THREE.LineBasicMaterial({ color: "black" });
+  //   const baseMaterial = new THREE.MeshBasicMaterial({
+  //     polygonOffset: true,
+  //     polygonOffsetFactor: 1,
+  //     polygonOffsetUnits: 1,
+  //   });
+  //   await viewer.edges.create(
+  //     "example",
+  //     model.modelID,
+  //     lineMaterial,
+  //     baseMaterial
+  //   );
+
+  //   // Floor plan viewing
+  //   const allPlans = viewer.plans.getAll(model.modelID);
+
+  //   for (const plan of allPlans) {
+  //     const currentPlan = viewer.plans.planLists[model.modelID][plan];
+  //     console.log(currentPlan);
+
+  //     const button = document.createElement("button");
+  //     button.textContent = currentPlan.name;
+  //     button.onclick = () => {
+  //       console.log(plan);
+  //       viewer.plans.goTo(model.modelID, plan); //need s to be outisde the useEffect or use some variable to update this??
+  //       viewer.edges.toggle("example", true);
+  //     };
+  //     containerRef.current.appendChild(button);
+  //   }
+
+  //   const exitButton = document.createElement("button");
+  //   exitButton.textContent = "Exit";
+  //   exitButton.onclick = () => {
+  //     viewer.plans.exitPlanView();
+  //     viewer.edges.toggle("example", false);
+  //   };
+  //   containerRef.current.appendChild(exitButton);
+  // };
 
   const togglePropertyMenu = () => {
     setPropertyMenuVisible(!isPropertyMenuVisible);
@@ -116,6 +155,7 @@ const IfcViewer = ({ ifcProject }) => {
 
   return (
     <>
+    <div>\Building id: {buildingId}</div>
       <div className="button-wrapper">
         <button onClick={togglePropertyMenu}>Toggle Property Menu</button>
       </div>
@@ -134,10 +174,12 @@ const IfcViewer = ({ ifcProject }) => {
             <div>Key</div>
             <div className="ifc-property-value">Value</div>
           </div>
+          <BuildingIdContext.Provider value={buildingId}>
           <PropertiesMenu
             buildingId={buildingId}
             properties={selectedProperties}
           />
+          </BuildingIdContext.Provider>
         </div>
       )}
     </>

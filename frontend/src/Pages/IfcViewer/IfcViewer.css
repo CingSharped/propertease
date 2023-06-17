@@ -39,6 +39,20 @@
     z-index: -1;
 }
 
+#button-container {
+    z-index: 2;
+    position: absolute;
+    margin: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+
+#button-container * {
+    margin: 0.5rem;
+    padding: 8px;
+}
+
 /*Tree view: https://www.w3schools.com/howto/howto_js_treeview.asp*/
 
 .ifc-tree-menu {

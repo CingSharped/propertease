@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext,useContext } from "react";
 import Modal from "../Modal";
 import NewRequestForm from "../NewRequestForm";
+import BuildingIdContext from "../../context/BuildingIdContext";
 
-const PropertiesMenu = ({ buildingId, properties }) => {
+
+const PropertiesMenu = ({  properties }) => {
+  const buildingId = useContext(BuildingIdContext)
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -59,13 +62,13 @@ const PropertiesMenu = ({ buildingId, properties }) => {
 
   return (
     <>
-      {/* <button onClick={handleClick}>Create Maintenance request</button> */}
-      <button 
+      <button onClick={handleClick}>Create Maintenance request</button>
+      {/* <button 
            
             onClick={() => setIsOpen(true)}>
             Create Maintenance request
           </button>
-      {isOpen && <Modal children={<NewRequestForm />} setIsOpen={setIsOpen} />}
+      {isOpen && <Modal children={<NewRequestForm />} setIsOpen={setIsOpen} />} */}
       <div id="ifc-property-menu-root">
         {propertyEntries}
       </div>
