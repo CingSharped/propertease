@@ -94,7 +94,7 @@ const IfcViewer = ({ ifcProject }) => {
       window.removeEventListener("keydown", handleKeyDown);
       viewer.dispose();
     };
-  }, []); //buildingId inside array
+  }, []);
 
   const togglePropertyMenu = () => {
     setPropertyMenuVisible(!isPropertyMenuVisible);
@@ -109,7 +109,7 @@ const IfcViewer = ({ ifcProject }) => {
       </div> */}
       {loadingIfc && (
         <div id="loader-container">
-          <svg viewBox="25 25 50 50">
+          <svg id="loading" viewBox="25 25 50 50">
             <circle r="20" cy="50" cx="50"></circle>
           </svg>
           <p>Loading...</p>

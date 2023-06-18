@@ -1,8 +1,19 @@
 import React, { useEffect, useState, createContext, useContext } from "react";
 import Modal from "../Modal";
 import NewRequestForm from "../NewRequestForm";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from "@mui/material";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+} from "@mui/material";
 import CurrentElemIdContext from "../../context/CurrentElemIdContext";
+
+import { Box } from "@mui/system";
 
 const PropertiesMenu = ({ properties }) => {
   const [elementId, setElementId] = useState();
@@ -52,27 +63,43 @@ const PropertiesMenu = ({ properties }) => {
 
   return (
     <>
-    <div  >
-    </div>
+      <div></div>
       <CurrentElemIdContext.Provider value={elementId}>
-      {isOpen && (
-        <Modal children={<NewRequestForm value={elementId} />} setIsOpen={setIsOpen} />
-      )}
+        {isOpen && (
+          <Modal
+            children={<NewRequestForm value={elementId} />}
+            setIsOpen={setIsOpen}
+          />
+        )}
       </CurrentElemIdContext.Provider>
-      <TableContainer component={Paper} sx={{ borderRadius: "10px", boxShadow: "0px 10px 40px rgba(0, 0, 0, 0.1)", position:"absolute", bottom:"0.5rem", right:"0.5rem", width: "30rem" }}>
-      <div align= "center">
-      <Button 
-        variant="contained"
-        onClick={() => {
-          handleClick();
+      <TableContainer
+        component={Paper}
+        sx={{
+          borderRadius: "10px",
+          boxShadow: "0px 10px 40px rgba(0, 0, 0, 0.1)",
+          position: "absolute",
+          bottom: "0.5rem",
+          right: "0.5rem",
+          width: "30rem",
         }}
       >
-        Create Maintenance request
-      </Button>
-      </div>
-        <Table >
+        <Box sx={{ mb: 2 }}>
+        <Table>
           <TableBody>{propertyRows}</TableBody>
         </Table>
+        </Box>
+        <div align="center">
+          <Box sx={{ mb: 2 }}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                handleClick();
+              }}
+            >
+              Create Maintenance request
+            </Button>
+          </Box>
+        </div>
       </TableContainer>
     </>
   );
@@ -163,5 +190,3 @@ export default PropertiesMenu;
 // };
 
 // export default PropertiesMenu;
-
-
