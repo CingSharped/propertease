@@ -130,7 +130,7 @@ ul, #myUL {
 }
 
 /* From uiverse.io by @barisdogansutcu */
-svg {
+svg#loading {
     margin: 1rem;
     width: 3.25em;
     transform-origin: center;
