@@ -10,7 +10,7 @@ const Modal = ({ children, setIsOpen }) => {
       <div  onClick={() => setIsOpen(false)} />
         <div className={styles.modal_centered}>
           <div className={styles.modal_modal}>
-            <Button  role="close-modal" align= "right"onClick={() => setIsOpen(false)}>x</Button>
+            <Button  role="close-modal" onClick={() => setIsOpen(false)}>x</Button>
             {/* <button className={styles.modal_closeBtn} role="close-modal" onClick={() => setIsOpen(false)}>
               <RiCloseLine style={{ marginBottom: "-3px" }} />
             </button> */}
