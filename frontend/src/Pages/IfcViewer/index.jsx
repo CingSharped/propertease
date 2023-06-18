@@ -94,7 +94,7 @@ const IfcViewer = ({ ifcProject }) => {
       window.removeEventListener("keydown", handleKeyDown);
       viewer.dispose();
     };
-  }, []); //buildingId inside array
+  }, []);
 
   const togglePropertyMenu = () => {
     setPropertyMenuVisible(!isPropertyMenuVisible);
