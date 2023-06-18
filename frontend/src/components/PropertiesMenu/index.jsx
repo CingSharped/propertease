@@ -13,6 +13,8 @@ import {
 } from "@mui/material";
 import CurrentElemIdContext from "../../context/CurrentElemIdContext";
 
+import { Box } from "@mui/system";
+
 const PropertiesMenu = ({ properties }) => {
   const [elementId, setElementId] = useState();
   const [isOpen, setIsOpen] = useState(false);
@@ -81,18 +83,22 @@ const PropertiesMenu = ({ properties }) => {
           width: "30rem",
         }}
       >
+        <Box sx={{ mb: 2 }}>
         <Table>
           <TableBody>{propertyRows}</TableBody>
         </Table>
+        </Box>
         <div align="center">
-          <Button
-            variant="contained"
-            onClick={() => {
-              handleClick();
-            }}
-          >
-            Create Maintenance request
-          </Button>
+          <Box sx={{ mb: 2 }}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                handleClick();
+              }}
+            >
+              Create Maintenance request
+            </Button>
+          </Box>
         </div>
       </TableContainer>
     </>

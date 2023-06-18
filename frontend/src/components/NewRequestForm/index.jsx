@@ -86,30 +86,37 @@ const NewRequestForm = () => {
 
   if (!open) {
     return (
-      <div className="new-request-form">
+      <div >
         <Container>
-          <Typography variant="h3">Maintenance request submitted.</Typography>
+        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+          <Typography variant="h4">Maintenance request submitted.</Typography>
+          </Box>
         </Container>
       </div>
     );
   }
   
   return (
-    <div className="new-request-form">
-      <Container>
-        <Typography variant="h3">New maintenance request</Typography>
+    // <div className="new-request-form">
+      <Container  style={{ maxWidth: open ? '100%' : 'auto' }}>
+        {/* <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}> */}
+        <Typography variant="h4">New maintenance request</Typography>
+        <Box sx={{ mb: 2,  display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <Typography variant="body1">* indicates required fields</Typography>
+        {/* </Box> */}
+        </Box>
         <form onSubmit={handleSubmit}>
-          <div className="form-row">
-            <div className="input-data">
+          {/* <div className="form-row">
+            <div className="input-data"> */}
             <Box sx={{ mb: 2 }}>
-              <FormControl>
-                <InputLabel htmlFor="work-type">Work type *</InputLabel>
-                <Select
+              <FormControl className="smaller-input">
+                <InputLabel  htmlFor="work-type">Work type *</InputLabel>
+                <Select 
                   id="work-type"
                   value={workType}
                   onChange={e => setWorkType(e.target.value)}
                   required
+                  
                 >
                   <MenuItem value=""></MenuItem>
                   <MenuItem value="electrical">Electrical</MenuItem>
@@ -119,10 +126,17 @@ const NewRequestForm = () => {
                 </Select>
               </FormControl>
               </Box>
-            </div>
-            <div className="input-data">
+            {/* </div> */}
+            {/* <div className="input-data">
             <Box sx={{ mb: 2 }}>
-              <FormControl>
+              </Box>
+            </div> */}
+          {/* </div> */}
+
+          {/* <div className="form-row">
+            <div className="input-data"> */}
+            <Box sx={{ mb: 2 }}>
+              <FormControl className="smaller-input">
                 <InputLabel htmlFor="priority">Priority *</InputLabel>
                 <Select
                   id="priority"
@@ -136,9 +150,10 @@ const NewRequestForm = () => {
                   <MenuItem value="low">Low</MenuItem>
                 </Select>
               </FormControl>
+
               </Box>
-            </div>
-          </div>
+            {/* </div>
+          </div> */}
   
           {/* <div className="form-row">
             <div className="input-data">
@@ -165,37 +180,39 @@ const NewRequestForm = () => {
             </div>
           </div> */}
   
-          <div className="form-row">
-            <div className="input-data">
+          {/* <div className="form-row">
+            <div className="input-data"> */}
             <Box sx={{ mb: 2 }}>
               <TextField
                 id="work-title"
-                label="Title *"
+                label="Title"
                 value={title}
                 onChange={e => setTitle(e.target.value)}
                 required
+                className="medium-input"
               />
               </Box>
-            </div>
-          </div>
+            {/* </div>
+          </div> */}
   
-          <div className="form-row">
-            <div className="input-data">
+          {/* <div className="form-row">
+            <div className="input-data"> */}
             <Box sx={{ mb: 2 }}>
               <TextField
                 id="work-description"
-                label="Description *"
+                label="Description"
                 value={description}
                 onChange={e => setDescription(e.target.value)}
                 multiline
                 required
+                className="medium-input"
               />
               </Box>
-            </div>
-          </div>
+            {/* </div>
+          </div> */}
   
-          <div className="form-row">
-            <div className="input-data">
+          {/* <div className="form-row">
+            <div className="input-data"> */}
             <Box sx={{ mb: 2 }}>
               <TextField
                 id="cost"
@@ -207,21 +224,23 @@ const NewRequestForm = () => {
                 onChange={e => setCost(e.target.value)}
               />
               </Box>
-            </div>
-          </div>
+            {/* </div>
+          </div> */}
   
-          <div className="form-row submit-btn">
+          {/* <div className="form-row submit-btn">
             <div className="input-data">
-              <div className="inner">
+              <div className="inner"> */}
+              <Box sx={{ mb: 2 }}>
                 <Button type="submit" variant="contained" color="primary">
                   Submit
                 </Button>
-              </div>
+                </Box>
+              {/* </div>
             </div>
-          </div>
+          </div> */}
         </form>
       </Container>
-    </div>
+    // </div>
   );
   
 }

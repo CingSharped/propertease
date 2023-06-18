@@ -1,6 +1,6 @@
 .new-request-form {
   display: flex;
-  height: 60vh;
+  max-height: 60vh;
   margin: 0;
   padding: 0;
   outline: none;
@@ -24,12 +24,19 @@
 .new-request-form .form-row{
   display: flex;
   width: 100%;
-  justify-content: start;
-  justify-content: space-between;
+
 
 }
 
 .new-request-form .input-data {
   display: flex;
   flex-direction: column;
+}
+
+.smaller-input {
+  width: 150px;
+}
+
+.medium-input {
+  width: 400px;
 }
