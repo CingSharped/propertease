@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Document, Page, pdfjs } from "react-pdf";
 import { Box, Typography, Grid, Paper } from "@mui/material";
-
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 //import "./App.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
