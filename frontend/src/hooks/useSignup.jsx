@@ -6,14 +6,14 @@ export const useSignup = () => {
   const [signupIsLoading, setSignupIsLoading] = useState(null)
   const { dispatch } = useAuthContext()
 
-  const signup = async (username, password, email, userType) => {
+  const signup = async (username, password, user_type) => {
     setSignupIsLoading(true)
     setSignupError(null)
 
-    const response = await fetch('#', {
+    const response = await fetch('https://propertease-api.onrender.com/users/signup', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ username, password,email, userType })
+      body: JSON.stringify({ username, password, user_type })
     })
     const json = await response.json()
 

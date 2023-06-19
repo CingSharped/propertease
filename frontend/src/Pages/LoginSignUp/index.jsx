@@ -8,7 +8,7 @@ const LoginSignUp = () => {
   const [activeTab, setActiveTab] = useState("login");
 
   const [userType, setUserType] = useState("")
-  const [email, setEmail] = useState("")
+  // const [email, setEmail] = useState("")
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
@@ -22,7 +22,7 @@ const LoginSignUp = () => {
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault()
-    await signup(username, password, email, userType)
+    await signup(username, password,  userType)
   }
 
   const handleTabChange = (tab) => {
@@ -61,11 +61,11 @@ const LoginSignUp = () => {
           value={password}
           type="password" 
           placeholder="Password" />
-        <input 
+        {/* <input 
           onChange={(e) => setEmail(e.target.value)}
           value={email}
           type="email" 
-          placeholder="Email" />
+          placeholder="Email" /> */}
         <select
           onChange={(e) => {setUserType(e.target.value)}}
           value={userType}
