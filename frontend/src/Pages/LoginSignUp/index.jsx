@@ -73,6 +73,7 @@ const LoginSignUp = () => {
           <option value=""></option>
           <option value="landlord">Landlord</option>
           <option value="tenant">Tenant</option>
+          <option value="service">Service</option>
         </select>
         <button type="submit">Sign Up</button>
         {signupError && <div className="error">{signupError}</div>}
