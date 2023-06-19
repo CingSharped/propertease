@@ -28,3 +28,6 @@ app.register_blueprint(property_routes, url_prefix='/properties')
 
 from application.routes.workorders import workorder_routes
 app.register_blueprint(workorder_routes, url_prefix='/workorders')
+
+from application.routes.transactions import transaction_routes
+app.register_blueprint(transaction_routes, url_prefix='/transactions')

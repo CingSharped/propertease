@@ -1,11 +1,20 @@
 
 import { Outlet, NavLink } from "react-router-dom";
 
+import { useLogout } from '../../hooks/useLogout';
+// import { useAuthContext } from '../../hooks/useAuthContext';
+
 import './style.css'
 
 const NavBar = () => {
+  const { logout } = useLogout()
+  // const { user } = useAuthContext()
+
   const styles = ({ isActive }) => ({ color: isActive ? "#ECD444" : "white" });
   
+  const handleClick = () => {
+    logout()
+  }
   return (
     <div>
       <nav className="NavBar">
@@ -21,10 +30,11 @@ const NavBar = () => {
           <NavLink to="/ifc" style={styles}>
             IFC
           </NavLink>
+          {/* Logic to be added */}
           <NavLink to="/login" style={styles}>
             Login/Sign Up
           </NavLink>
-          <NavLink to="/" style={styles}>
+          <NavLink onClick={handleClick} style={styles}>
             Logout
           </NavLink>
         </div>
