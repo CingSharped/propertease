@@ -1,4 +1,10 @@
 .new-request-form {
+  /* background-color: #1A273E; */
+  /* color: #1A273E; */
+  border-style: solid;
+  border-color: #D39B0B;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 1rem 0px #333;;
   display: flex;
   max-height: 60vh;
   margin: 0;
@@ -11,8 +17,8 @@
 }
 
 .new-request-form .container {
-  max-height: 60vh;
-  margin: 0;
+  height: max-content;
+  margin: 0rem;
   padding: 1rem;
   box-shadow: 0px 0px 10x rgba(0,0,0,0.5); 
 }

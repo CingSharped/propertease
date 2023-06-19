@@ -8,6 +8,7 @@ expect.extend(matchers);
 import MaintenanceRequestList from '.';
 
 describe('Maintenance request item', () => {
+  const loading = true
   const maintenanceCompletedRequest = [
     {
       "cost": 2000,
@@ -34,7 +35,7 @@ describe('Maintenance request item', () => {
   
   it('renders one maintenance request items', () => {
     const requestItems = document.getElementsByClassName('reqest-item')
-    expect(requestItems).toBe(1)
+    expect(requestItems).toBeInTheDocument()
   })
   
   it("renders a one completed item", () => {

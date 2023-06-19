@@ -1,10 +1,9 @@
 import "./style.css"
 
 function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
-  console.log(request)
   return (
-    request.status 
-    ? <li className="maintenance-request-item-completed" role="reqest-item">
+    request.status === true
+    ? <li className="maintenance-request-item-completed" role="completed-reqest-item">
       <div className="image-container">IMAGE PLACEHOLDER</div>
       <table className="details-container">
         <tbody>
@@ -17,12 +16,12 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
             <td>{request.title}</td>
           </tr>
           <tr>
-            <th>Location</th>
-            <td>{request.location_id}</td>
-          </tr>
-          <tr>
             <th>Description</th>
             <td>{request.description}</td>
+          </tr>
+          <tr>
+            <th>Cost </th>
+            <td>{request.cost ? <span>£ {request.cost}</span> : <span>No cost quoted</span> }</td>
           </tr>
           <tr>
             <th>Created</th>
@@ -40,9 +39,9 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
       </div>
     </li> 
 
-    : <li className="maintenance-request-item" role="reqest-item">
+    : <li className="maintenance-request-item" role="open-reqest-item">
       <div className="image-container">IMAGE PLACEHOLDER</div>
-      <table className="details-container">
+      <table className="details-container" role="details-container">
         <tbody>
           <tr>
             <th>Work type </th>
@@ -53,12 +52,12 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
             <td>{request.title}</td>
           </tr>
           <tr>
-            <th>Location</th>
-            <td>{request.location_id}</td>
-          </tr>
-          <tr>
             <th>Description</th>
             <td>{request.description}</td>
+          </tr>
+          <tr>
+            <th>Cost </th>
+            <td>{request.cost ? <span>£ {request.cost}</span> : <span>No cost quoted</span> }</td>
           </tr>
           <tr>
             <th>Created</th>

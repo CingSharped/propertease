@@ -51,5 +51,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-ifc-models
+frontend/package-lock.json
