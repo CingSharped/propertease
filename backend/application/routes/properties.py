@@ -24,9 +24,10 @@ def create_property():
   created_on = datetime.datetime.now()
   address = request_data['address'] if 'address' in request_data else None
   postcode = request_data['postcode'] if 'postcode' in request_data else None
+
+  
   if all(data is not None for data in (name, owner_id, bedrooms, bathrooms, property_type, description, address, postcode)):
-    new_property = properties.create_property(name, owner_id, model_id, rent_date, tenant_username, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode)
-    return new_property 
+    return properties.create_property(name, owner_id, model_id, rent_date, tenant_username, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode) 
   else:
     return { 'error': 'All required fields name, owner_id, bedrooms, bathrooms, property_type, description are required to create property'}
 
