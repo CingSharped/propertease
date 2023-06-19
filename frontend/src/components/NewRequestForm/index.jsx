@@ -1,33 +1,41 @@
-import React, { useContext, useState } from 'react'
-import BuildingIdContext from '../../context/BuildingIdContext';
-import CurrentElemIdContext from '../../context/CurrentElemIdContext';
-import { TextField, Button, Select, MenuItem, FormControl, InputLabel, Container, Typography } from '@mui/material';
-import {Box} from '@mui/system'
-
+import React, { useContext, useState } from "react";
+import BuildingIdContext from "../../context/BuildingIdContext";
+import CurrentElemIdContext from "../../context/CurrentElemIdContext";
+import {
+  TextField,
+  Button,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
+  Container,
+  Typography,
+} from "@mui/material";
+import { Box } from "@mui/system";
 
 import "./style.css";
 
 const NewRequestForm = () => {
   const [open, setOpen] = useState(true); // Track form open/closed state
 
-  const [workType, setWorkType] = useState()
-  const [priority, setPriority] = useState()
-  const [location, setLocation] = useState()
+  const [workType, setWorkType] = useState();
+  const [priority, setPriority] = useState();
+  const [location, setLocation] = useState();
   //const [propertyID, setPropertyID] = useState()
-  const [title, setTitle] = useState()
-  const [description, setDescription] = useState()
-  const [cost, setCost] = useState(null)
-  const [status, setStatus] = useState (false)
+  const [title, setTitle] = useState();
+  const [description, setDescription] = useState();
+  const [cost, setCost] = useState(null);
+  const [status, setStatus] = useState(false);
 
   //setLocation(elemId)
-  const buildingId = useContext(BuildingIdContext)
-  const elemId = useContext(CurrentElemIdContext)
+  const buildingId = useContext(BuildingIdContext);
+  const elemId = useContext(CurrentElemIdContext);
 
-  console.log("buiilding id: " + buildingId)
-  console.log("elemId from NewRequestForm: " + elemId)
+  console.log("buiilding id: " + buildingId);
+  console.log("elemId from NewRequestForm: " + elemId);
   //setPropertyID(buildingId)
 
-//data for database
+  //data for database
 
   // {
   //   "_id": "648b18d0ac763b34c9c4eaac",
@@ -43,119 +51,118 @@ const NewRequestForm = () => {
   //   "work_type": "Repair"
   // }
 
-  async function handleSubmit (e) {
-    e.preventDefault()
+  async function handleSubmit(e) {
+    e.preventDefault();
 
     const request = {
-      "cost": cost,
-      "created_by": "USER",
-      "description": description,
-      "location_id": elemId,
-      "priority": priority,
-      "property_id": buildingId,
-      "status": false,
-      "title": title,
-      "work_type": workType
-    }
+      cost: cost,
+      created_by: "USER",
+      description: description,
+      location_id: elemId,
+      priority: priority,
+      property_id: buildingId,
+      status: false,
+      title: title,
+      work_type: workType,
+    };
 
     const res = await fetch("https://propertease-api.onrender.com/workorders", {
-      method: 'POST',
+      method: "POST",
       body: JSON.stringify(request),
       headers: {
-        'Content-Type': 'application/json'
-      }
-    }
-    )
+        "Content-Type": "application/json",
+      },
+    });
 
-    const json = await res.json()
-    
-    console.log(json)
+    const json = await res.json();
+
+    console.log(json);
     if (res.ok) {
-      console.log("new request added", json) 
+      console.log("new request added", json);
       setOpen(false);
 
-    setCost(0)
-    setDescription("")
-    setLocation("")
-    setPriority("")
-    setTitle("")
-    setPriority("")
-    setWorkType("")
+      setCost(0);
+      setDescription("");
+      setLocation("");
+      setPriority("");
+      setTitle("");
+      setPriority("");
+      setWorkType("");
     }
   }
 
   if (!open) {
     return (
-      <div >
+      <div>
         <Container>
-        <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-          <Typography variant="h4">Maintenance request submitted.</Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              flexDirection: "column",
+            }}
+          >
+            <Typography variant="h4">Maintenance request submitted.</Typography>
           </Box>
         </Container>
       </div>
     );
   }
-  
+
   return (
     // <div className="new-request-form">
-      <Container  style={{ maxWidth: open ? '100%' : 'auto' }}>
-        {/* <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}> */}
-        <Typography variant="h4">New maintenance request</Typography>
-        <Box sx={{ mb: 2,  display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+    <Container style={{ maxWidth: open ? "100%" : "auto" }}>
+      {/* <Box sx={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}> */}
+      <Typography variant="h4">New maintenance request</Typography>
+      <Box
+        sx={{
+          mb: 2,
+          display: "flex",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
         <Typography variant="body1">* indicates required fields</Typography>
         {/* </Box> */}
+      </Box>
+      <form onSubmit={handleSubmit}>
+        <Box sx={{ mb: 2 }}>
+          <FormControl className="smaller-input">
+            <InputLabel htmlFor="work-type">Work type *</InputLabel>
+            <Select
+              id="work-type"
+              value={workType}
+              onChange={(e) => setWorkType(e.target.value)}
+              required
+            >
+              <MenuItem value=""></MenuItem>
+              <MenuItem value="electrical">Electrical</MenuItem>
+              <MenuItem value="plumbing">Plumbing</MenuItem>
+              <MenuItem value="gas">Gas</MenuItem>
+              <MenuItem value="Other">Other</MenuItem>
+            </Select>
+          </FormControl>
         </Box>
-        <form onSubmit={handleSubmit}>
-          {/* <div className="form-row">
-            <div className="input-data"> */}
-            <Box sx={{ mb: 2 }}>
-              <FormControl className="smaller-input">
-                <InputLabel  htmlFor="work-type">Work type *</InputLabel>
-                <Select 
-                  id="work-type"
-                  value={workType}
-                  onChange={e => setWorkType(e.target.value)}
-                  required
-                  
-                >
-                  <MenuItem value=""></MenuItem>
-                  <MenuItem value="electrical">Electrical</MenuItem>
-                  <MenuItem value="plumbing">Plumbing</MenuItem>
-                  <MenuItem value="gas">Gas</MenuItem>
-                  <MenuItem value="Other">Other</MenuItem>
-                </Select>
-              </FormControl>
-              </Box>
-            {/* </div> */}
-            {/* <div className="input-data">
-            <Box sx={{ mb: 2 }}>
-              </Box>
-            </div> */}
-          {/* </div> */}
-
-          {/* <div className="form-row">
-            <div className="input-data"> */}
-            <Box sx={{ mb: 2 }}>
-              <FormControl className="smaller-input">
-                <InputLabel htmlFor="priority">Priority *</InputLabel>
-                <Select
-                  id="priority"
-                  value={priority}
-                  onChange={e => setPriority(e.target.value)}
-                  required
-                >
-                  <MenuItem value=""></MenuItem>
-                  <MenuItem value="high">High</MenuItem>
-                  <MenuItem value="medium">Medium</MenuItem>
-                  <MenuItem value="low">Low</MenuItem>
-                </Select>
-              </FormControl>
-
-              </Box>
-            {/* </div>
+        <Box sx={{ mb: 2 }}>
+          <FormControl className="smaller-input">
+            <InputLabel htmlFor="priority">Priority *</InputLabel>
+            <Select
+              id="priority"
+              value={priority}
+              onChange={(e) => setPriority(e.target.value)}
+              required
+            >
+              <MenuItem value=""></MenuItem>
+              <MenuItem value="high">High</MenuItem>
+              <MenuItem value="medium">Medium</MenuItem>
+              <MenuItem value="low">Low</MenuItem>
+            </Select>
+          </FormControl>
+        </Box>
+        {/* </div>
           </div> */}
-  
-          {/* <div className="form-row">
+
+        {/* <div className="form-row">
             <div className="input-data">
             <Box sx={{ mb: 2 }}>
               <TextField
@@ -179,70 +186,47 @@ const NewRequestForm = () => {
               </Box>
             </div>
           </div> */}
-  
-          {/* <div className="form-row">
-            <div className="input-data"> */}
-            <Box sx={{ mb: 2 }}>
-              <TextField
-                id="work-title"
-                label="Title"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
-                required
-                className="medium-input"
-              />
-              </Box>
-            {/* </div>
-          </div> */}
-  
-          {/* <div className="form-row">
-            <div className="input-data"> */}
-            <Box sx={{ mb: 2 }}>
-              <TextField
-                id="work-description"
-                label="Description"
-                value={description}
-                onChange={e => setDescription(e.target.value)}
-                multiline
-                required
-                className="medium-input"
-              />
-              </Box>
-            {/* </div>
-          </div> */}
-  
-          {/* <div className="form-row">
-            <div className="input-data"> */}
-            <Box sx={{ mb: 2 }}>
-              <TextField
-                id="cost"
-                label="Cost £"
-                type="number"
-                min="0.00"
-                step="0.01"
-                value={cost}
-                onChange={e => setCost(e.target.value)}
-              />
-              </Box>
-            {/* </div>
-          </div> */}
-  
-          {/* <div className="form-row submit-btn">
-            <div className="input-data">
-              <div className="inner"> */}
-              <Box sx={{ mb: 2 }}>
-                <Button type="submit" variant="contained" color="primary">
-                  Submit
-                </Button>
-                </Box>
-              {/* </div>
-            </div>
-          </div> */}
-        </form>
-      </Container>
-    // </div>
-  );
-  
-}
 
-export default NewRequestForm
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            id="work-title"
+            label="Title"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            required
+            className="medium-input"
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            id="work-description"
+            label="Description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            multiline
+            required
+            className="medium-input"
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <TextField
+            id="cost"
+            label="Cost £"
+            type="number"
+            min="0.00"
+            step="0.01"
+            value={cost}
+            onChange={(e) => setCost(e.target.value)}
+          />
+        </Box>
+        <Box sx={{ mb: 2 }}>
+          <Button type="submit" variant="contained" color="primary">
+            Submit
+          </Button>
+        </Box>
+      </form>
+    </Container>
+  );
+};
+
+export default NewRequestForm;

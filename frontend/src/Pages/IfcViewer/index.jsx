@@ -103,10 +103,7 @@ const IfcViewer = ({ ifcProject }) => {
   return (
     <>
     {/* <div>Building id: {buildingId}</div> */}
-    <Button variant="contained" onClick={togglePropertyMenu}>Toggle Property Menu</Button>  
-      {/* <div className="button-wrapper">
-        <button onClick={togglePropertyMenu}>Toggle Property Menu</button>
-      </div> */}
+    <Button variant="contained" onClick={togglePropertyMenu}>Close menus</Button>  
       {loadingIfc && (
         <div id="loader-container">
           <svg id="loading" viewBox="25 25 50 50">
@@ -118,12 +115,6 @@ const IfcViewer = ({ ifcProject }) => {
       <div id="viewer-container" ref={containerRef} />
       {isPropertyMenuVisible && (
         <div>
-            {/* className="ifc-property-menu bottom-right" id="ifc-property-menu">   */}
-        {/* // className="ifc-property-menu bottom-right" id="ifc-property-menu">
-        //   <div className="ifc-property-item">
-        //     <div>Key</div>
-        //     <div className="ifc-property-value">Value</div>
-        //   </div> */}
           <BuildingIdContext.Provider value={buildingId}>
           <PropertiesMenu
             buildingId={buildingId}
