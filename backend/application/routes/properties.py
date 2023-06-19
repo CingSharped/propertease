@@ -33,3 +33,8 @@ def create_property():
 @property_routes.route('', methods=['GET'])
 def get_all_properties():
   return properties.get_all_properties()
+
+@property_routes.route('/<_id>', methods=['GET'])
+def get_properties_by_id(_id):
+  return properties.get_properties_by_id(_id)
+
