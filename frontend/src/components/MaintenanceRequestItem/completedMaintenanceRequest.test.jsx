@@ -10,13 +10,13 @@ import MaintenanceRequestItem from '.';
 describe('Maintenance request item', () => {
   const maintenanceCompletedRequest = [
     {
-      "cost": 2000,
+      "cost": null,
       "created_by": "6486fe5ad8920f8b400b20ef",
       "description": "The taps in the kitchen has been dripping for the past day",
       "location_id": "aeafvndoavbadv",
       "priority": "High",
       "property_id": "913rfquq",
-      "status": false,
+      "status": true,
       "title": "Leaking tap",
       "work_type": "Repair"
       }
@@ -32,19 +32,14 @@ describe('Maintenance request item', () => {
     cleanup()
   })
   
-  it('renders one maintenance request items', () => {
-    const requestItems = document.getElementsByClassName('reqest-item')
-    expect(requestItems).toBe(1)
+  it('renders one completed maintenance request items', () => {
+    const requestItems = screen.getByRole("completed-reqest-item")
+    expect(requestItems).toBeInTheDocument()
   })
   
-  it("renders a one completed item", () => {
-    const completedRequestItem = document.getElementsByClassName('maintenance-request-item-completed')
+  it("renders one open item", () => {
+    const completedRequestItem = screen.getByRole('open-reqest-item')
     expect(completedRequestItem).toBeInTheDocument()
-  })
-
-  it("renders a 'completed' button", async() => {
-    const completedImageButton = screen.getByRole('complete-btn')
-    expect(completedImageButton).toBeInTheDocument()
   })
 
   it("renders a 'delete' button", async() => {
@@ -53,9 +48,8 @@ describe('Maintenance request item', () => {
   })
 
   it('Displays a container to property details', () => {
-    const td = document.getElementsByClassName('details-container');
-    console.log(td)
-    expect(td).toBeInTheDocument()
+    const requestItem = screen.getByRole("details-container");
+    expect(requestItem).toBeInTheDocument()
   })
 
   it('has a button', () => {
