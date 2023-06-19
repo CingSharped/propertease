@@ -5,11 +5,10 @@ import userEvent from "@testing-library/user-event";
 import matchers from "@testing-library/jest-dom/matchers";
 expect.extend(matchers);
 
-import MaintenanceRequestList from '.';
+import MaintenanceRequestItem from '.';
 
 describe('Maintenance request item', () => {
-  const loading = true
-  const maintenanceCompletedRequest = [
+  const maintenanceOpenRequest = [
     {
       "cost": 2000,
       "created_by": "6486fe5ad8920f8b400b20ef",
@@ -25,7 +24,7 @@ describe('Maintenance request item', () => {
 
   beforeEach(() => {
     render(
-      < MaintenanceRequestList request={maintenanceCompletedRequest}/>
+      < MaintenanceRequestItem request={maintenanceOpenRequest}/>
     )
   })
 
@@ -34,13 +33,8 @@ describe('Maintenance request item', () => {
   })
   
   it('renders one maintenance request items', () => {
-    const requestItems = document.getElementsByClassName('reqest-item')
+    const requestItems = screen.getByRole("open-reqest-item")
     expect(requestItems).toBeInTheDocument()
-  })
-  
-  it("renders a one completed item", () => {
-    const completedRequestItem = document.getElementsByClassName('maintenance-request-item-completed')
-    expect(completedRequestItem).toBeInTheDocument()
   })
 
   it("renders a 'completed' button", async() => {
@@ -54,13 +48,12 @@ describe('Maintenance request item', () => {
   })
 
   it('Displays a container to property details', () => {
-    const td = document.getElementsByClassName('details-container');
-    console.log(td)
-    expect(td).toBeTruthy()
+    const requestItem = screen.getByRole("details-container");
+    expect(requestItem).toBeInTheDocument()
   })
 
   it('has a button', () => {
     const btn = document.querySelector('button');
-    expect(btn).toBeTruthy()
+    expect(btn).toBeInTheDocument()
   })
 })

@@ -12,6 +12,8 @@ function App() {
           <Route path="/ifc" element={<Pages.IfcViewer />} />
           <Route path="/login" element={<Pages.LoginSignUp />} />
           <Route path="/maintenance-request" element={<Pages.MaintenanceRequest/>} />
+          <Route path= "/Dashboard" element={<Pages.Dashboards/>} />
+          {/* <Route path= "/DashboardModal" element={<Pages.DashboardModal/>} /> */}
         </Route>
       </Routes>
     </div>

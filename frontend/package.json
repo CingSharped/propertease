@@ -12,14 +12,20 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "-": "^0.0.1",
     "axios": "^1.4.0",
+    "chart.js": "^4.3.0",
+    "react-chartjs-2": "^5.2.0",
+    "react-icons": "^4.9.0",
     "react-router-dom": "^6.12.1",
+    "save": "^2.9.0",
     "three": "^0.135.0",
     "web-ifc-viewer": "^1.0.216"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^14.0.0",
+    "@testing-library/react-native": "^12.1.2",
     "@testing-library/user-event": "^14.4.3",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",

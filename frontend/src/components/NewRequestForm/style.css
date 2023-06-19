@@ -1,0 +1,77 @@
+.new-request-form {
+  /* background-color: #1A273E; */
+  /* color: #1A273E; */
+  border-style: solid;
+  border-color: #D39B0B;
+  border-radius: 1rem;
+  box-shadow: 0px 0px 1rem 0px #333;;
+  display: flex;
+  height: max-content;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  box-sizing: border-box;
+  align-content: center;
+  justify-content: center;
+}
+
+.new-request-form .container {
+  height: max-content;
+  margin: 0rem;
+  padding: 1rem;
+  box-shadow: 0px 0px 10x rgba(0,0,0,0.5); 
+}
+
+.new-request-form h3 {
+
+}
+
+.new-request-form .form-row{
+  display: flex;
+  width: 100%;
+  justify-content: start;
+  justify-content: space-between;
+
+}
+
+.new-request-form .input-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.new-request-form .submit-btn{
+  display: flex;
+  justify-content: center;
+}
+
+.new-request-form .submit-btn input {
+  background-color: #D39B0B;
+  /* background-color: #1A273E; */
+  margin-top: 1rem;
+  padding: 0.75rem 2rem;
+  font-weight: 800;
+}
+
+.new-request-form .defualt-message {
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+  padding: .5rem;
+  border-radius: 1rem;
+  color: #222
+}
+
+.new-request-form .created-message {
+  border-top: 1px solid green;
+  border-bottom: 1px solid green;
+  padding: .5rem;
+  border-radius: 1rem;
+  color: green;
+}
+
+.new-request-form .error-message {
+  border-top: 1px solid red;
+  border-bottom: 1px solid red;
+  padding: .5rem;
+  border-radius: 1rem;
+  color: red;
+}

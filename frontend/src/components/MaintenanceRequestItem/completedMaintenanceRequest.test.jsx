@@ -5,19 +5,18 @@ import userEvent from "@testing-library/user-event";
 import matchers from "@testing-library/jest-dom/matchers";
 expect.extend(matchers);
 
-import MaintenanceRequestList from '.';
+import MaintenanceRequestItem from '.';
 
 describe('Maintenance request item', () => {
-  const loading = true
   const maintenanceCompletedRequest = [
     {
-      "cost": 2000,
+      "cost": null,
       "created_by": "6486fe5ad8920f8b400b20ef",
       "description": "The taps in the kitchen has been dripping for the past day",
       "location_id": "aeafvndoavbadv",
       "priority": "High",
       "property_id": "913rfquq",
-      "status": false,
+      "status": true,
       "title": "Leaking tap",
       "work_type": "Repair"
       }
@@ -25,7 +24,7 @@ describe('Maintenance request item', () => {
 
   beforeEach(() => {
     render(
-      < MaintenanceRequestList request={maintenanceCompletedRequest}/>
+      < MaintenanceRequestItem request={maintenanceCompletedRequest}/>
     )
   })
 
@@ -33,19 +32,14 @@ describe('Maintenance request item', () => {
     cleanup()
   })
   
-  it('renders one maintenance request items', () => {
-    const requestItems = document.getElementsByClassName('reqest-item')
+  it('renders one completed maintenance request items', () => {
+    const requestItems = screen.getByRole("completed-reqest-item")
     expect(requestItems).toBeInTheDocument()
   })
   
-  it("renders a one completed item", () => {
-    const completedRequestItem = document.getElementsByClassName('maintenance-request-item-completed')
+  it("renders one open item", () => {
+    const completedRequestItem = screen.getByRole('open-reqest-item')
     expect(completedRequestItem).toBeInTheDocument()
-  })
-
-  it("renders a 'completed' button", async() => {
-    const completedImageButton = screen.getByRole('complete-btn')
-    expect(completedImageButton).toBeInTheDocument()
   })
 
   it("renders a 'delete' button", async() => {
@@ -54,13 +48,12 @@ describe('Maintenance request item', () => {
   })
 
   it('Displays a container to property details', () => {
-    const td = document.getElementsByClassName('details-container');
-    console.log(td)
-    expect(td).toBeTruthy()
+    const requestItem = screen.getByRole("details-container");
+    expect(requestItem).toBeInTheDocument()
   })
 
   it('has a button', () => {
     const btn = document.querySelector('button');
-    expect(btn).toBeTruthy()
+    expect(btn).toBeInTheDocument()
   })
 })
