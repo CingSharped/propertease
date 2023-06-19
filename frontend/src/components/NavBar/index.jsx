@@ -1,20 +1,32 @@
-
 import { Outlet, NavLink } from "react-router-dom";
-
 import { useLogout } from '../../hooks/useLogout';
-// import { useAuthContext } from '../../hooks/useAuthContext';
-
-import './style.css'
+import { useAuthContext } from '../../hooks/useAuthContext';
+import './style.css';
 
 const NavBar = () => {
-  const { logout } = useLogout()
-  // const { user } = useAuthContext()
-
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
   const styles = ({ isActive }) => ({ color: isActive ? "#ECD444" : "white" });
   
   const handleClick = () => {
-    logout()
+    logout();
+  };
+
+  // Do we need a variable that allows for user type?
+  let dashboardLink;
+
+  
+  if ( user === 'Tenant') {
+    dashboardLink = '/tenant';
+  } else if ( user === 'Service Person') {
+    dashboardLink = '/service';
+  } else if ( user == 'Property Owner') {
+    dashboardLink = '/landlord';
+  } else {
+    dashboardLink = '/404';
   }
+   
+
   return (
     <div>
       <nav className="NavBar sticky">
@@ -30,6 +42,9 @@ const NavBar = () => {
           <NavLink to="/ifc" style={styles}>
             IFC
           </NavLink>
+          <NavLink to={dashboardLink} style={styles}>
+            Dashboards
+          </NavLink>
           {/* Logic to be added */}
           <NavLink to="/login" style={styles}>
             Login/Sign Up
@@ -42,6 +57,7 @@ const NavBar = () => {
       <Outlet />
     </div>
   );
-}
+};
 
-export default NavBar
+export default NavBar;
+
