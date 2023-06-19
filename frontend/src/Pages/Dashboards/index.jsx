@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './Dashboards.css';
 import { LargeModal, DashboardModal, BarChart } from '../../components';
+import{ Documents }from '../../components';
 
 const Dashboards = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -108,6 +109,7 @@ const Dashboards = () => {
 
   return (
     <div>
+        <Documents/>
       <div id="main-container">
         <div id="box1" className="fade-in" >
           Total Number of Tenants: 16
