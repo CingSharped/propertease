@@ -97,10 +97,13 @@
 }
 
 .login-signup input{
-    width: 100%;
     padding: 0.5rem;
     border-radius: 4px;
     border: 1px solid #ccc;
+    width: 90%;
+    height: 3rem;
+    outline: none;
+    border-bottom: 1px solid #111;
 }
 
 .login-signup select{
@@ -112,12 +115,6 @@
     border: 1px solid #ccc;
 }
 
-.login-signup input {
-    width: 90%;
-    height: 3rem;
-    outline: none;
-    border-bottom: 2px solid #111;
-}
 
 .login-signup .input-label{
     position: absolute;
@@ -125,8 +122,10 @@
     top: 50%;
     left: 1rem;
     color: #111;
-    transform: translateY(-100%);
+    transform: translateY(-170%);
     transition: 0.5s;
+    background-color: white;
+    padding: 0rem 1rem;
 }
 
 .login-signup .sumbit-button{
@@ -138,6 +137,7 @@
 .login-signup .sumbit-button button {
     width: 100%;
     border-radius: 0.5rem;
+    background-color: #D39B0B;
 }
 
 .login-signup .error {

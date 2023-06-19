@@ -134,10 +134,7 @@ const LoginSignUp = () => {
           Sign Up
         </button>
       </div>
-
-      {/* <div> */}
-        {activeTab === "login" ? LoginForm() : SignUpForm()}
-      {/* </div> */}
+      {activeTab === "login" ? LoginForm() : SignUpForm()}
     </div>
   );
 };
