@@ -22,6 +22,12 @@ export const useSignup = () => {
       setSignupError(json.error)
     }
     if (response.ok) {
+
+      if (json.error) {
+        setSignupError(json.error)
+        console.log(signupError)
+      }
+
       // save the user to local storage
       localStorage.setItem('user', JSON.stringify(json))
 
