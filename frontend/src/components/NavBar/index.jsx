@@ -29,8 +29,8 @@ const NavBar = () => {
 
   return (
     <div>
-      <nav className="NavBar sticky">
-        <div className="logo-container">
+      <nav className="NavBar">
+        <div className="propertease-logo-container">
           <img src="https://github.com/CingSharped/propertease/blob/staging/frontend/src/assets/images/PE_logo_D39B0B.png?raw=true" alt="" />
           <h3>PropertEase</h3>
         </div>

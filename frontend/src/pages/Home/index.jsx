@@ -12,7 +12,6 @@ const Home = () => {
 
   return (
     <div className='home'>
-      
       <Carousel propertyImage={propertyImage} />
 
       <div className="mission-statement">

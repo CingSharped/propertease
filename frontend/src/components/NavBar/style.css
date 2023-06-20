@@ -4,29 +4,34 @@
   height: 5rem;
   color: white;
   margin: 0;
-
+  display: flex;
+  justify-content: space-between;
   position: -webkit-sticky;
 	position: sticky;
-	top: 0;
 }
 
+.NavBar .Nav-Links {
+  display: flex;
+  margin-right: 1rem;
+  align-items: center;
+}
 .NavBar a {
   text-decoration: none;
   margin-left: 1.5rem;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .NavBar a:hover {
-  /* color: red; */
-  background-color: #D39B0B;
-  /* position: relative; */
-  /* text-decoration: underline; */
   transform: translateY(-5px);
   box-shadow: 0 10px 20px -10px yello;
-  
 }
 
-.NavBar .logo-container {
+.NavBar .propertease-logo-container {
   display: flex;
+  width: 20rem;
   align-content: center;
   align-items: center;
   justify-content: center;
@@ -41,11 +46,5 @@
   margin-left: 1rem;
   font-size: 2rem;
   color: #D39B0B;
-
 }
-/* 
-.sticky {
-  position: absolute;
-  top: 0px;
-  width: 100%;
-} */
+

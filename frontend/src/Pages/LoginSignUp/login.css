@@ -62,12 +62,9 @@
 
 .login-signup .form-item-container {
     width: 90%;
+    height: 80%;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-content: center;
-    align-items: center;
-    justify-content: center;
     padding: 0;
     margin: 0;
 }
@@ -80,7 +77,7 @@
     outline: none;
     position: relative;
     padding: 1rem 0rem;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .login-signup .form-items-select {
@@ -93,17 +90,17 @@
     outline: none;
     position: relative;
     padding: 1rem 0rem;
-    margin-top: 1rem;
+    margin-top: 1.5rem;
 }
 
 .login-signup input{
     padding: 0.5rem;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
     width: 90%;
     height: 3rem;
     outline: none;
-    border-bottom: 1px solid #111;
+    border: 1px solid #111;
 }
 
 .login-signup select{
@@ -112,14 +109,14 @@
     align-self: flex-end;
     padding: 0.5rem;
     border-radius: 4px;
-    border: 1px solid #ccc;
+    border: 1px solid #111;
 }
 
 
 .login-signup .input-label{
     position: absolute;
     text-align: left;
-    top: 50%;
+    top: 70%;
     left: 1rem;
     color: #111;
     transform: translateY(-170%);
