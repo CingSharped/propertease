@@ -16,14 +16,14 @@ const NavBar = () => {
   let dashboardLink;
 
   
-  if ( user === 'Tenant') {
+  if ( user === 'tenant') {
     dashboardLink = '/tenant';
-  } else if ( user === 'Service Person') {
+  } else if ( user === 'service') {
     dashboardLink = '/service';
-  } else if ( user == 'Property Owner') {
+  } else if ( user == 'landlord') {
     dashboardLink = '/landlord';
   } else {
-    dashboardLink = '/404';
+    dashboardLink = '/login';
   }
    
 
