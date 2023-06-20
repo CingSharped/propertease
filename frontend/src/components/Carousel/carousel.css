@@ -3,6 +3,10 @@
   display: flex;
   flex-wrap: nowrap;
   overflow: hidden;
+  margin-top: -5rem;
+  opacity: 80%;
+  height: 100vh;
+  height: 100vw;
   }
   
 .carousel .slideshow-item {
@@ -13,6 +17,8 @@
   align-items: center;
   justify-content: center;
   transition: 1s cubic-bezier(0.39, 0.575, 0.565, 1);
+  height: 100vh;
+  height: 100vw;
   }
   
 .carousel .left-arrow, .right-arrow {
