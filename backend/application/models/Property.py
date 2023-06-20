@@ -3,6 +3,7 @@ from application import db
 class Property:
   def __init__(self, name, owner_id, model_id, rent_date, tenant_username, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode):
     self.name = name # required
+    self.description = description # required
     self.owner_id = owner_id # required
     self.model_id = model_id
     self.rent_date = rent_date
@@ -12,7 +13,6 @@ class Property:
     self.bathrooms = bathrooms # required
     self.tenure = tenure
     self.property_type = property_type # required
-    self.description = description # required
     self.council_tax_band = council_tax_band
     self.energy_rating = energy_rating
     self.created_on = created_on

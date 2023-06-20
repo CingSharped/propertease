@@ -10,7 +10,7 @@ export const useLogin = () => {
     setLoginIsLoading(true)
     setLoginError(null)
     
-    const response = await fetch('#', {
+    const response = await fetch('https://propertease-api.onrender.com/users/login', {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({ username, password })
@@ -23,6 +23,12 @@ export const useLogin = () => {
     }
     if (response.ok) {
       // save the user to local storage
+
+      if (json.error) {
+        setLoginError(json.error)
+        console.log(loginError)
+      }
+
       localStorage.setItem('user', JSON.stringify(json))
 
       // update the auth context
