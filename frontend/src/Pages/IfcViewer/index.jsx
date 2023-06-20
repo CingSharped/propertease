@@ -25,31 +25,41 @@ const IfcViewer = ({ ifcProject }) => {
 
   const [filterButtons, setFilterButtons] = useState()
   //const elementIds = [209236, 1306]; // get from db
+//let idsArray = []
 
-  async function fetchElemsIdArray () {
-    try {
-      const res = await fetch("https://propertease-api.onrender.com/workorders")
+
+  useEffect(() => {
+
+    async function fetchElemsIdArray () {
+      try {
+        const res = await fetch("https://propertease-api.onrender.com/workorders")
+    
+        const json = await res.json()
   
-      const json = await res.json()
-
-      let idsArray = []
-
-      for (let i = 0; i < json.length; i++) {
-        const locationId = parseInt(json[i].location_id);
-        if (!isNaN(locationId) && Number.isInteger(locationId) && !idsArray.includes(locationId)) { //check if it is an integer, and eliminate repeats
-          idsArray.push(locationId);
+        let idsArray = []
+  
+        for (let i = 0; i < json.length; i++) {
+          const locationId = parseInt(json[i].location_id);
+          if (!isNaN(locationId) && Number.isInteger(locationId) && !idsArray.includes(locationId)) { //check if it is an integer, and eliminate repeats
+            idsArray.push(locationId);
+          }
         }
-      }
-      
-      console.log(idsArray)
-      setElemsIdFromDb(idsArray)
-      
-    } catch (error) {
-      console.log("error loading data")
-    }
+        
+        console.log(idsArray)
+       
+        setElemsIdFromDb(idsArray) //when is this setting?
 
-  }
+        console.log(elemsIdfromDb)
+        
+      } catch (error) {
+        console.log("error loading data")
+      }
   
+    }
+    fetchElemsIdArray()
+
+  },[])
+
   useEffect(() => {
     
     viewer = new IfcViewerAPI({
@@ -100,14 +110,32 @@ const IfcViewer = ({ ifcProject }) => {
     const elementIds = elemsIdfromDb
     console.log("elemsIdfromDb ", elemsIdfromDb)
 
+    // childNode.onclick = async () => {
+    //   viewer.IFC.selector.pickIfcItemsByID(0, [node.expressID], true);
+    //   let idsArray = [node.expressID];
+    //   const props = await viewer.IFC.getProperties(0, idsArray[0], true, false);
+    //   setSelectedProperties(props);
+    //   if (isPropertyMenuVisible == false) { togglePropertyMenu()}
+    // };
+    
+
     const createButtons = (elementIds) => {
       return elementIds.map((elementId) => {
         return (
           <Button variant="contained"
             key={elementId}
             onClick={handleButtonClick(
-              () =>
+              async () =>
+              {
                 viewer.IFC.selector.pickIfcItemsByID(0, [elementId], true)
+                      let idsArray = [elementId];
+                    const props = await viewer.IFC.getProperties(0, idsArray[0], true, false);
+                    setSelectedProperties(props);
+
+                if (!isPropertyMenuVisible) {
+                  togglePropertyMenu();
+                }
+              }
             )}
           >
             Element {elementId}
@@ -118,6 +146,7 @@ const IfcViewer = ({ ifcProject }) => {
 
     const buttons = createButtons(elementIds);
     setFilterButtons(buttons)
+
     
     return () => {
 
@@ -129,10 +158,6 @@ const IfcViewer = ({ ifcProject }) => {
     };
     
   }, []);
-
-  useEffect(() => {
-    fetchElemsIdArray()
-  },[])
   
   const handleDoubleClick = async () => {
     const result = await viewer.IFC.selector.pickIfcItem(true);
@@ -161,6 +186,9 @@ const IfcViewer = ({ ifcProject }) => {
   };
 
   const handleButtonClick = (callback) => {
+
+
+
     return () => {
       if (typeof callback === "function") {
         callback();
@@ -168,9 +196,11 @@ const IfcViewer = ({ ifcProject }) => {
     };
   };
 
+
   const togglePropertyMenu = () => {
     setPropertyMenuVisible(!isPropertyMenuVisible);
   };
+
 
   return (
     <>
