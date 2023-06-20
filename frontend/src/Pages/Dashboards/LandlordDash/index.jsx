@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { LargeModal, DashboardModal, BarChart } from '../../../components';
+import {Documents} from '../../../components';
 import './Dashboards.css';
 
 const Landlord = () => {
