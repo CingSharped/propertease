@@ -5,9 +5,13 @@ import "./home.css"
 
 const Home = () => {
   const propertyImage = [
-    "https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070_1280.jpg",
-    "https://cdn.pixabay.com/photo/2017/08/01/09/34/white-2563976_1280.jpg",
-    "https://cdn.pixabay.com/photo/2014/11/21/17/17/house-540796_1280.jpg"
+    "https://cdn.pixabay.com/photo/2017/04/26/18/28/london-2263346_1280.jpg",
+    "https://cdn.pixabay.com/photo/2018/08/22/10/17/kitchen-3623328_1280.jpg",
+    "https://cdn.pixabay.com/photo/2018/11/09/17/18/london-3805098_1280.jpg",
+    "https://images.unsplash.com/photo-1632743441209-8a09b8a37e25?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NDJ8fGxvbmRvbiUyMGhvbWUlMjBpbnRlcmlvcnxlbnwwfDB8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+    "https://images.unsplash.com/photo-1621983209348-7b5a63f23866?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80",
+    "https://images.unsplash.com/photo-1526055577108-80193f001dde?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80"
+    
   ]
 
   return (
