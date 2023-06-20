@@ -1,35 +1,49 @@
-
 import { Outlet, NavLink } from "react-router-dom";
-
 import { useLogout } from '../../hooks/useLogout';
-// import { useAuthContext } from '../../hooks/useAuthContext';
-
-import './style.css'
+import { useAuthContext } from '../../hooks/useAuthContext';
+import './style.css';
 
 const NavBar = () => {
-  const { logout } = useLogout()
-  // const { user } = useAuthContext()
-
+  const { logout } = useLogout();
+  const { user } = useAuthContext();
   const styles = ({ isActive }) => ({ color: isActive ? "#ECD444" : "white" });
   
   const handleClick = () => {
-    logout()
+    logout();
+  };
+
+  // Do we need a variable that allows for user type?
+  let dashboardLink;
+
+  
+  if ( user === 'tenant') {
+    dashboardLink = '/tenant';
+  } else if ( user === 'service') {
+    dashboardLink = '/service';
+  } else if ( user == 'landlord') {
+    dashboardLink = '/landlord';
+  } else {
+    dashboardLink = '/login';
   }
+   
+
   return (
-    <div>
+    <>
       <nav className="NavBar">
-        <div className="logo-container">
-          <img src="https://github.com/CingSharped/propertease/blob/staging/frontend/src/assets/images/PE_logo_D39B0B.png?raw=true" alt="" />
-          <h3>PropertEase</h3>
+        <div className="propertease-logo-container">
+          <NavLink to="/" ><img src="https://github.com/CingSharped/propertease/blob/staging/frontend/src/assets/images/PE_logo_D39B0B.png?raw=true" alt="" />
+          <h3>PropertEase</h3></NavLink>
         </div>
 
         <div className="Nav-Links">
-          <NavLink to="/" style={styles}>
-            Home
+          <NavLink to={dashboardLink} style={styles}>
+            Dashboard
           </NavLink>
-          <NavLink to="/ifc" style={styles}>
-            IFC
-          </NavLink>
+          
+          {/* {user === "Landlord" ? <NavLink /> : <Navlink to/>}
+          {user === "Landlord" ? <NavLink /> : <Navlink to/>}
+          {user === "Landlord" ? <NavLink /> : <Navlink to/>} */}
+
           {/* Logic to be added */}
           <NavLink to="/login" style={styles}>
             Login/Sign Up
@@ -40,8 +54,9 @@ const NavBar = () => {
         </div>
       </nav>
       <Outlet />
-    </div>
+    </>
   );
-}
+};
 
-export default NavBar
+export default NavBar;
+

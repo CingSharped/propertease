@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { LargeModal, DashboardModal, BarChart } from '../../../components';
+import {Documents} from '../../../components';
 import './Dashboards.css';
-import { LargeModal, DashboardModal, BarChart } from '../../components';
-import{ Documents }from '../../components';
 
-const Dashboards = () => {
+const Landlord = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [profitData, setProfitData] = useState([]);
 
@@ -151,4 +151,4 @@ const Dashboards = () => {
   );
 }
 
-export default Dashboards;
+export default Landlord;
