@@ -88,6 +88,12 @@ const IfcViewer = ({ ifcProject }) => {
 
     loadIfc(ifcUrl);
 
+    document.getElementById('express_209236')
+.addEventListener('click', () => {
+    viewer.IFC.selector.pickIfcItemsByID(0, [209236, 1306
+    ], true);
+})
+
     return () => {
       window.removeEventListener("dblclick", handleDoubleClick);
       window.removeEventListener("mousemove", handleMouseMove);
@@ -103,6 +109,8 @@ const IfcViewer = ({ ifcProject }) => {
   return (
     <>
     {/* <div>Building id: {buildingId}</div> */}
+    <Button variant="contained" id="express_209236">Oven</Button>
+
     <Button variant="contained" onClick={togglePropertyMenu}>Close menus</Button>  
       {loadingIfc && (
         <div id="loader-container">
