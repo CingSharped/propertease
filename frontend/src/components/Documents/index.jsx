@@ -110,7 +110,7 @@ function Documents() {
             style={{ display: "none" }}
             onChange={handleFileChange}
           />
-          <Button variant="contained" component="span" sx={{ backgroundColor: "#ff0000", color: "#ffffff" }}>
+          <Button variant="contained" component="span" sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}>
             {getButtonText()}
           </Button>
         </label>

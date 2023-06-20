@@ -1,4 +1,10 @@
-import React, { useRef, useEffect, useState, useContext, createContext } from "react";
+import React, {
+  useRef,
+  useEffect,
+  useState,
+  useContext,
+  createContext,
+} from "react";
 import { IfcViewerAPI } from "web-ifc-viewer";
 import * as THREE from "three";
 import PropertiesMenu from "../../components/PropertiesMenu";
@@ -10,14 +16,15 @@ const IfcViewer = ({ ifcProject }) => {
   const containerRef = useRef();
   const [selectedProperties, setSelectedProperties] = useState({});
   const [isPropertyMenuVisible, setPropertyMenuVisible] = useState(false);
-  const [buildingId, setBuildingId] = useState(); //store the expressId of a building 
+  const [buildingId, setBuildingId] = useState(); //store the expressId of a building
   const [loadingIfc, setLoadingIfc] = useState(true);
+  let viewer;
 
   useEffect(() => {
     //const ifcUrl = "../ifc-models/TESTED_Simple_project_01.ifc"
     const ifcUrl = "../ifc-models/rac_basic_sample_project-IFC4-2.ifc";
 
-    const viewer = new IfcViewerAPI({
+    viewer = new IfcViewerAPI({
       container: containerRef.current,
       backgroundColor: new THREE.Color(0xffffff),
     });
@@ -71,11 +78,10 @@ const IfcViewer = ({ ifcProject }) => {
       setBuildingId(ifcProject.expressID);
 
       //here assign useContext variable
-      
-      console.log("loaded ifc");
-      
-      setLoadingIfc(false);
 
+      console.log("loaded ifc");
+
+      setLoadingIfc(false);
     };
 
     viewer.axes.setAxes();
@@ -88,19 +94,47 @@ const IfcViewer = ({ ifcProject }) => {
 
     loadIfc(ifcUrl);
 
-    document.getElementById('express_209236')
-.addEventListener('click', () => {
-    viewer.IFC.selector.pickIfcItemsByID(0, [209236, 1306
-    ], true);
-})
-
+    // document.getElementById("express_209236").addEventListener("click", () => {
+    //   viewer.IFC.selector.pickIfcItemsByID(0, [209236, 1306], true);
+    // });
+    
     return () => {
+
       window.removeEventListener("dblclick", handleDoubleClick);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("keydown", handleKeyDown);
       viewer.dispose();
     };
+    
   }, []);
+  
+  //only works when the vite server updates??
+  const handleButtonClick = (callback) => {
+    return () => {
+      if (typeof callback === "function") {
+        callback();
+      }
+    };
+  };
+
+  const elementIds = [209236, 1306]; // get from db
+
+  const createButtons = (elementIds) => {
+    return elementIds.map((elementId) => {
+      return (
+        <Button variant="contained"
+          key={elementId}
+          onClick={handleButtonClick(
+            () =>
+              viewer.IFC.selector.pickIfcItemsByID(0, [elementId], true)
+          )}
+        >
+          Element {elementId}
+        </Button>
+      );
+    });
+  };
+
 
   const togglePropertyMenu = () => {
     setPropertyMenuVisible(!isPropertyMenuVisible);
@@ -108,10 +142,16 @@ const IfcViewer = ({ ifcProject }) => {
 
   return (
     <>
-    {/* <div>Building id: {buildingId}</div> */}
-    <Button variant="contained" id="express_209236">Oven</Button>
+    <div id= "button-container">{createButtons(elementIds)}</div>
+      {/* <div>Building id: {buildingId}</div> */}
+      {/* <Button variant="contained" id="express_209236">
+        Oven
+      </Button> */}
+      
 
-    <Button variant="contained" onClick={togglePropertyMenu}>Close menus</Button>  
+      {/* <Button variant="contained" onClick={togglePropertyMenu}>
+        Close menus
+      </Button> */}
       {loadingIfc && (
         <div id="loader-container">
           <svg id="loading" viewBox="25 25 50 50">
@@ -124,10 +164,10 @@ const IfcViewer = ({ ifcProject }) => {
       {isPropertyMenuVisible && (
         <div>
           <BuildingIdContext.Provider value={buildingId}>
-          <PropertiesMenu
-            buildingId={buildingId}
-            properties={selectedProperties}
-          />
+            <PropertiesMenu
+              buildingId={buildingId}
+              properties={selectedProperties}
+            />
           </BuildingIdContext.Provider>
         </div>
       )}
