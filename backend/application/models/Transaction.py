@@ -33,3 +33,25 @@ class Transaction:
         return { 'error': 'Error creating transaction'}
     except:
       return { 'error': 'Error connecting to mongodb' }
+
+  def get_transactions_by_property(_id):
+    try:
+      transactions = []
+      db_transactions = db.transactions.find({ 'property_id': _id })
+      for transaction in db_transactions:
+        transaction['_id'] = str(transaction['_id'])
+        transactions.append(transaction)
+      return transactions
+    except:
+      return { 'error': 'Error connecting to mongodb' }
+
+  def get_transactions_by_user(_id):
+    try:
+      transactions = []
+      db_transactions = db.transactions.find({ 'property_owner_id': _id })
+      for transaction in db_transactions:
+        transaction['_id'] = str(transaction['_id'])
+        transactions.append(transaction)
+      return transactions
+    except:
+      return { 'error': 'Error connecting to mongodb' }

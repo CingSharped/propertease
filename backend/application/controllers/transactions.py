@@ -12,3 +12,9 @@ def create_transaction(property_id, property_owner_id, month, money, transaction
     return new_transaction.create_transaction()
   else:
     return { 'error': 'Invalid option selected for month or transaction_type' }
+
+def get_transactions_by_property(_id):
+  return Transaction.get_transactions_by_property(_id)
+
+def get_transactions_by_user(_id):
+  return Transaction.get_transactions_by_user(_id)

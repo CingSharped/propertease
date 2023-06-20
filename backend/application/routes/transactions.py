@@ -19,3 +19,11 @@ def create_transaction():
     return transactions.create_transaction(property_id, property_owner_id, month, money, transaction_type, workorder_id, created_on)
   else:
     return {'error': 'All required fields property_id, month, money, transaction_type and property_owner_id are required'}
+
+@transaction_routes.route('/properties/<_id>', methods=['GET'])
+def get_transactions_by_property(_id):
+  return transactions.get_transactions_by_property(_id)
+
+@transaction_routes.route('/users/<_id>', methods=['GET'])
+def get_transactions_by_user(_id):
+  return transactions.get_transactions_by_user(_id)
