@@ -28,8 +28,6 @@ const LoginSignUp = () => {
     setActiveTab(tab);
   };
 
-  console.log()
-
   const LoginForm = () => {
     return (
       <>

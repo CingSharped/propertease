@@ -15,7 +15,7 @@ const NavBar = () => {
   // Do we need a variable that allows for user type?
   let dashboardLink;
 
-  
+  console.log(user)
   if ( user === 'tenant') {
     dashboardLink = '/tenant';
   } else if ( user === 'service') {
@@ -25,7 +25,6 @@ const NavBar = () => {
   } else {
     dashboardLink = '/login';
   }
-   
 
   return (
     <>
@@ -35,23 +34,42 @@ const NavBar = () => {
           <h3>PropertEase</h3></NavLink>
         </div>
 
-        <div className="Nav-Links">
-          <NavLink to={dashboardLink} style={styles}>
-            Dashboard
-          </NavLink>
-          
-          {/* {user === "Landlord" ? <NavLink /> : <Navlink to/>}
-          {user === "Landlord" ? <NavLink /> : <Navlink to/>}
-          {user === "Landlord" ? <NavLink /> : <Navlink to/>} */}
+        {!user ? 
+          <>
+            <div className="Nav-Links">
+              <NavLink to="/login" style={styles}>
+                Login/Sign Up
+              </NavLink>
+            </div>
+          </>
+          : user.user_type === "landlord" ?
+            <>
+              <div className="Nav-Links">
+                <NavLink to="/landlord" style={styles}>
+                  Dashboard
+                </NavLink>
+                <NavLink onClick={handleClick} style={styles}>
+                  Logout
+                </NavLink>
+              </div>
+            </> : ""
+        }
 
-          {/* Logic to be added */}
-          <NavLink to="/login" style={styles}>
-            Login/Sign Up
-          </NavLink>
-          <NavLink onClick={handleClick} style={styles}>
-            Logout
-          </NavLink>
-        </div>
+  
+
+
+
+          {/* <div className="Nav-Links">
+            <NavLink to={dashboardLink} style={styles}>
+              Dashboard
+            </NavLink>
+            <NavLink to="/login" style={styles}>
+              Login/Sign Up
+            </NavLink>
+            <NavLink onClick={handleClick} style={styles}>
+              Logout
+            </NavLink>
+          </div> */}
       </nav>
       <Outlet />
     </>
