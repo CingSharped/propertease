@@ -20,12 +20,36 @@ const IfcViewer = ({ ifcProject }) => {
   const [isPropertyMenuVisible, setPropertyMenuVisible] = useState(false);
   const [buildingId, setBuildingId] = useState(); //store the expressId of a building
   const [loadingIfc, setLoadingIfc] = useState(true);
+  const [elemsIdfromDb, setElemsIdFromDb] = useState([])
   let viewer;
 
-  const elementIds = [209236, 1306]; // get from db
-
   const [filterButtons, setFilterButtons] = useState()
+  //const elementIds = [209236, 1306]; // get from db
 
+  async function fetchElemsIdArray () {
+    try {
+      const res = await fetch("https://propertease-api.onrender.com/workorders")
+  
+      const json = await res.json()
+
+      let idsArray = []
+
+      for (let i = 0; i < json.length; i++) {
+        const locationId = parseInt(json[i].location_id);
+        if (!isNaN(locationId) && Number.isInteger(locationId) && !idsArray.includes(locationId)) { //check if it is an integer, and eliminate repeats
+          idsArray.push(locationId);
+        }
+      }
+      
+      console.log(idsArray)
+      setElemsIdFromDb(idsArray)
+      
+    } catch (error) {
+      console.log("error loading data")
+    }
+
+  }
+  
   useEffect(() => {
     
     viewer = new IfcViewerAPI({
@@ -73,6 +97,9 @@ const IfcViewer = ({ ifcProject }) => {
 
     loadIfc(ifcUrl);
 
+    const elementIds = elemsIdfromDb
+    console.log("elemsIdfromDb ", elemsIdfromDb)
+
     const createButtons = (elementIds) => {
       return elementIds.map((elementId) => {
         return (
@@ -102,6 +129,10 @@ const IfcViewer = ({ ifcProject }) => {
     };
     
   }, []);
+
+  useEffect(() => {
+    fetchElemsIdArray()
+  },[])
   
   const handleDoubleClick = async () => {
     const result = await viewer.IFC.selector.pickIfcItem(true);
