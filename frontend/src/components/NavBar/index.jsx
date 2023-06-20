@@ -36,15 +36,14 @@ const NavBar = () => {
         </div>
 
         <div className="Nav-Links">
-          {/* <NavLink to="/" style={styles}>
-            Home
-          </NavLink> */}
-          {/* <NavLink to="/properties" style={styles}>
-            IFC
-          </NavLink> */}
           <NavLink to={dashboardLink} style={styles}>
             Dashboard
           </NavLink>
+          
+          {/* {user === "Landlord" ? <NavLink /> : <Navlink to/>}
+          {user === "Landlord" ? <NavLink /> : <Navlink to/>}
+          {user === "Landlord" ? <NavLink /> : <Navlink to/>} */}
+
           {/* Logic to be added */}
           <NavLink to="/login" style={styles}>
             Login/Sign Up

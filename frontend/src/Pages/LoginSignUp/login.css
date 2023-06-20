@@ -116,7 +116,7 @@
 .login-signup .input-label{
     position: absolute;
     text-align: left;
-    top: 70%;
+    top: 50%;
     left: 1rem;
     color: #111;
     transform: translateY(-170%);
