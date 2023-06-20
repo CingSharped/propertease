@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { LargeModal, DashboardModal, BarChart } from '../../../components';
+
+import {Footer} from '../../../components'
 import './Dashboards.css';
 
 const Landlord = () => {
@@ -107,7 +109,10 @@ const Landlord = () => {
   // };
 
   return (
-    <div>
+    <>
+    <div className='dashboard'>
+      <h4 className='dashboard-heading-title'>Landlord Dashboard</h4>
+
       <div id="main-container">
         <div id="box1" className="fade-in" >
           Total Number of Tenants: 16
@@ -118,9 +123,15 @@ const Landlord = () => {
         <div id="box3" className="fade-in" >
           Amount of Outstanding Maintenance Orders: 3
         </div>
+
+        <h4>Overall profit per month</h4>
+
         <div id="box4" className="fade-in" >
           <BarChart chartData={chartData} />
         </div>
+
+        <h4>My properties</h4>
+
         <div
           id="box5"
           className="fade-in"
@@ -128,7 +139,7 @@ const Landlord = () => {
           Property Listing 1<br />
           Property Location: Tottenham<br />
           Current Tenant: Harley Quin
-          {isOpen && <LargeModal children={<DashboardModal />} setIsOpen={setIsOpen} />}
+          {isOpen && <LargeModal children={<DashboardModal setIsOpen={setIsOpen}/>} setIsOpen={setIsOpen} />}
         </div>
         <div
           id="box6"
@@ -146,6 +157,8 @@ const Landlord = () => {
         </div>
       </div>
     </div>
+    <Footer />
+    </>
   );
 }
 
