@@ -13,6 +13,8 @@ import BuildingIdContext from "../../context/BuildingIdContext";
 import { Button } from "@mui/material";
 
 const IfcViewer = ({ ifcProject }) => {
+
+  const ifcUrl = "../ifc-models/rac_basic_sample_project-IFC4-2.ifc";
   const containerRef = useRef();
   const [selectedProperties, setSelectedProperties] = useState({});
   const [isPropertyMenuVisible, setPropertyMenuVisible] = useState(false);
@@ -20,40 +22,16 @@ const IfcViewer = ({ ifcProject }) => {
   const [loadingIfc, setLoadingIfc] = useState(true);
   let viewer;
 
-  useEffect(() => {
-    //const ifcUrl = "../ifc-models/TESTED_Simple_project_01.ifc"
-    const ifcUrl = "../ifc-models/rac_basic_sample_project-IFC4-2.ifc";
+  const elementIds = [209236, 1306]; // get from db
 
+  const [filterButtons, setFilterButtons] = useState()
+
+  useEffect(() => {
+    
     viewer = new IfcViewerAPI({
       container: containerRef.current,
       backgroundColor: new THREE.Color(0xffffff),
     });
-
-    const handleDoubleClick = async () => {
-      const result = await viewer.IFC.selector.pickIfcItem(true);
-      if (!result) return;
-
-      const { modelID, id } = result;
-      //id = expressId
-
-      const props = await viewer.IFC.getProperties(modelID, id, true, false);
-
-      console.log(props);
-      setSelectedProperties(props);
-      if (!isPropertyMenuVisible) {
-        togglePropertyMenu();
-      }
-    };
-
-    const handleMouseMove = () => viewer.IFC.selector.prePickIfcItem();
-
-    const handleKeyDown = (event) => {
-      if (event.code === "KeyP") {
-        viewer.clipper.createPlane();
-      } else if (event.code === "KeyO") {
-        viewer.clipper.deletePlane();
-      }
-    };
 
     const loadIfc = async (url) => {
       //await viewer.IFC.setWasmPath("../../../");
@@ -91,24 +69,66 @@ const IfcViewer = ({ ifcProject }) => {
     window.addEventListener("dblclick", handleDoubleClick);
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("click", handleButtonClick)
 
     loadIfc(ifcUrl);
 
-    // document.getElementById("express_209236").addEventListener("click", () => {
-    //   viewer.IFC.selector.pickIfcItemsByID(0, [209236, 1306], true);
-    // });
+    const createButtons = (elementIds) => {
+      return elementIds.map((elementId) => {
+        return (
+          <Button variant="contained"
+            key={elementId}
+            onClick={handleButtonClick(
+              () =>
+                viewer.IFC.selector.pickIfcItemsByID(0, [elementId], true)
+            )}
+          >
+            Element {elementId}
+          </Button>
+        );
+      });
+    };
+
+    const buttons = createButtons(elementIds);
+    setFilterButtons(buttons)
     
     return () => {
 
       window.removeEventListener("dblclick", handleDoubleClick);
       window.removeEventListener("mousemove", handleMouseMove);
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("click", handleButtonClick);
       viewer.dispose();
     };
     
   }, []);
   
-  //only works when the vite server updates??
+  const handleDoubleClick = async () => {
+    const result = await viewer.IFC.selector.pickIfcItem(true);
+    if (!result) return;
+
+    const { modelID, id } = result;
+    //id = expressId
+
+    const props = await viewer.IFC.getProperties(modelID, id, true, false);
+
+    console.log(props);
+    setSelectedProperties(props);
+    if (!isPropertyMenuVisible) {
+      togglePropertyMenu();
+    }
+  };
+
+  const handleMouseMove = () => viewer.IFC.selector.prePickIfcItem();
+
+  const handleKeyDown = (event) => {
+    if (event.code === "KeyP") {
+      viewer.clipper.createPlane();
+    } else if (event.code === "KeyO") {
+      viewer.clipper.deletePlane();
+    }
+  };
+
   const handleButtonClick = (callback) => {
     return () => {
       if (typeof callback === "function") {
@@ -117,37 +137,13 @@ const IfcViewer = ({ ifcProject }) => {
     };
   };
 
-  const elementIds = [209236, 1306]; // get from db
-
-  const createButtons = (elementIds) => {
-    return elementIds.map((elementId) => {
-      return (
-        <Button variant="contained"
-          key={elementId}
-          onClick={handleButtonClick(
-            () =>
-              viewer.IFC.selector.pickIfcItemsByID(0, [elementId], true)
-          )}
-        >
-          Element {elementId}
-        </Button>
-      );
-    });
-  };
-
-
   const togglePropertyMenu = () => {
     setPropertyMenuVisible(!isPropertyMenuVisible);
   };
 
   return (
     <>
-    <div id= "button-container">{createButtons(elementIds)}</div>
-      {/* <div>Building id: {buildingId}</div> */}
-      {/* <Button variant="contained" id="express_209236">
-        Oven
-      </Button> */}
-      
+    <div id= "button-container">{filterButtons}</div>   
 
       {/* <Button variant="contained" onClick={togglePropertyMenu}>
         Close menus
