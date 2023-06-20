@@ -15,7 +15,7 @@ const NavBar = () => {
   // Do we need a variable that allows for user type?
   let dashboardLink;
 
-  console.log(user)
+  // console.log(user)
   if ( user === 'tenant') {
     dashboardLink = '/tenant';
   } else if ( user === 'service') {
@@ -72,6 +72,8 @@ const NavBar = () => {
           </div> */}
       </nav>
       <Outlet />
+      
+
     </>
   );
 };

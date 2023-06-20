@@ -1,5 +1,5 @@
 .NavBar {
-  background-color: #1a273e8a;
+  background-color: #1a273e;
   height: 5rem;
   color: white;
   width: 100%;
@@ -10,6 +10,7 @@
   top: 0;
   left: 0;
   z-index: 1;
+  box-shadow: 0px 8px 6px -6px rgba(0, 0, 0, 0.5) ;
 }
 
 .NavBar .Nav-Links {
