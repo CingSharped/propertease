@@ -72,6 +72,12 @@ div[id^='box']:hover {
   color: #D39B0B;
 }
 
+.dashboard .work-orders {
+  width: 85%;
+  padding: 0;
+  margin: 0;
+}
+
 @-webkit-keyframes fade {
   from {
     opacity: .5
@@ -91,3 +97,4 @@ div[id^='box']:hover {
     opacity: 2
   }
 }
+
