@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { LargeModal, PropertyInformation, BarChart } from "../../../components";
+import { LargeModal, PropertyInformation, BarChart } from "../../components";
 
-import { Footer } from "../../../components";
-import "../Dashboards.css";
+import { Footer } from "../../components";
+import "./Dashboards.css";
 
 const Landlord = () => {
   const [isOpen, setIsOpen] = useState(false);
