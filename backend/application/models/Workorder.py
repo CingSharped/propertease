@@ -1,7 +1,9 @@
 from application import db
+from bson.objectid import ObjectId
 
 class Workorder:
-  def __init__(self, title, description, work_type, location_id, cost, status, priority, property_id, property_owner_id, created_on, created_by):
+  def __init__(self, _id, title, description, work_type, location_id, cost, status, priority, property_id, property_owner_id, created_on, created_by, completed):
+    self._id = _id
     self.title = title # required
     self.description = description # required
     self.work_type = work_type # required
@@ -12,7 +14,8 @@ class Workorder:
     self.property_id = property_id # required
     self.created_on = created_on
     self.created_by = created_by # required
-    self.property_owner_id = property_owner_id
+    self.property_owner_id = property_owner_id # required
+    self.completed = completed
         
   def create_workorder(self):
     try:
@@ -30,7 +33,8 @@ class Workorder:
         'property_id': self.property_id,
         'created_on': self.created_on,
         'created_by': self.created_by,
-        'property_owner_id': self.property_owner_id
+        'property_owner_id': self.property_owner_id,
+        'completed': self.completed
       })
       new_workorder = db.workorders.find_one({'title': self.title, 'property_id': self.property_id, 'location_id': self.location_id})
       if new_workorder:
@@ -72,3 +76,31 @@ class Workorder:
       return workorders
     except:
       return { 'error': 'Error connecting to mongodb' }
+
+  def update_workorder(self):
+    try:
+      exists_in_db = db.workorders.find_one({'_id': ObjectId(self._id)})
+
+      db.workorders.update_one({'_id': ObjectId(self._id)}, {'$set': {
+          'title': self.title,
+          'description': self.description,
+          'work_type': self.work_type,
+          'location_id': self.location_id,
+          'cost': self.cost,
+          'status': self.status,
+          'priority': self.priority,
+          'property_id': self.property_id,
+          'created_on': self.created_on,
+          'created_by': self.created_by,
+          'property_owner_id': self.property_owner_id,
+          'completed': self.completed
+      }})
+      # Retrieve the updated workorder
+      updated_workorder = db.workorders.find_one({'_id': ObjectId(self._id)})
+      print(updated_workorder)
+      if updated_workorder:
+          return {**updated_workorder, '_id': str(updated_workorder['_id'])}
+      else:
+          return {'error': 'Error updating workorder'}
+    except:
+      return {'error': 'Error connecting to MongoDB'}
