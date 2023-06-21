@@ -14,8 +14,10 @@ import {
 import CurrentElemIdContext from "../../context/CurrentElemIdContext";
 
 import { Box } from "@mui/system";
+//import styles from "../Modal/Modal.module.css";
 
-const PropertiesMenu = ({ properties }) => {
+
+const PropertiesMenu = ({ properties, propertyMenuVisible }) => {
   const [elementId, setElementId] = useState();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -95,10 +97,15 @@ const PropertiesMenu = ({ properties }) => {
               onClick={() => {
                 handleClick();
               }}
+              sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
             >
               Create Maintenance request
             </Button>
           </Box>
+          {/* <Box  >
+            <Button variant="contained" onClick={() => {propertyMenuVisible=!propertyMenuVisible
+            console.log(propertyMenuVisible)}}>x</Button>
+          </Box> */}
         </div>
       </TableContainer>
     </>

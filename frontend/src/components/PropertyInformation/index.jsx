@@ -5,6 +5,7 @@ import './dashboardmodal.css';
 const PropertyInformation = () => {
 
     return (
+   
       <div>
         <div id="main-container">
           <h1>Property 1</h1>
@@ -14,6 +15,7 @@ const PropertyInformation = () => {
           <div id="boxno2" className="fade-in">
           Bar Graph
           </div>
+          
           <div id="boxno3" className="fade-in">
           Description
           </div>
