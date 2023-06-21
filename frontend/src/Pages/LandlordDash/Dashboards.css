@@ -13,46 +13,32 @@
   transition: opacity 500ms ease-out;
 }
 
-#box1, #box2, #box3 {
+/* All Boxes */
+#box1, #box2, #box3, #box4, #box5, #box6, #box7 {
   box-shadow: 0px 0px 10px #D39B0B;
   background-color: #F9F2EB;
   border-radius: 1rem;
+}
+
+/* Basic Info Box */
+#box1, #box2, #box3 {
   padding: 15px;
   width: 25%;
   height: 100px;
 }
-
+/* Bar Chart Box */
 #box4 {
-  /* border: 1px solid rgba(211, 154, 11, 0.273); */
-  /* border-radius: 20px; */
-  box-shadow: 0px 0px 10px #D39B0B;
-  background-color: #F9F2EB;
-  border-radius: 1rem;
   width: 85%;
   height: 400px;
   padding: 20px;
 }
 
+/* Property Listing Boxes */
 #box5, #box6, #box7 {
-  border: 1px solid rgba(211, 154, 11, 0.273);
-  box-shadow: 0px 0px 10px #D39B0B;
-  background-color: #F9F2EB;
   border-radius: 1rem;
   padding: 20px;
   width: 85%;
   height: 50px;
-}
-
-div[id^='box'] {
-  width: 100px;
-  height: 100px;
-  background-color: #ccc;
-  margin: 10px;
-  cursor: pointer;
-}
-
-div[id^='box']:hover {
-  background-color: #ddd;
 }
 
 #main-container {
@@ -68,12 +54,6 @@ div[id^='box']:hover {
   padding-top: 1rem;
   font-size: 2rem;
   color: #D39B0B;
-}
-
-.dashboard .work-orders {
-  width: 85%;
-  padding: 0;
-  margin: 0;
 }
 
 @-webkit-keyframes fade {
@@ -96,3 +76,61 @@ div[id^='box']:hover {
   }
 }
 
+/* Management Accordian */
+
+.accordion1, .accordion2 {
+  font-size: larger;
+  font-family: 'Lora', serif;
+  margin: 2%;
+}
+
+.accordion1 {
+  background-color: #F9F2EB;
+  cursor: pointer;
+  padding: 18px;
+  width: 50%;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  margin-top: 5%;
+  border-radius: 1rem;
+}
+
+.accordion2 {
+  background-color: #F9F2EB;
+  display: center;
+  cursor: pointer;
+  margin-left: 25%;
+  padding: 18px;
+  width: 50%;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  border-radius: 1rem;
+}
+
+.active, .accordion:hover {
+  background-color: #D39B0B;
+}
+
+.panel1 {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 5%;
+  margin-left: 8%;
+  
+}
+
+.panel2 {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  width: 100%;
+  
+}
+
+.show {
+  display: block;
+}
