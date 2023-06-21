@@ -1,10 +1,11 @@
 import "./style.css"
 
-function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
+function MaintenanceRequestItem ({request, deleteRequest, completeRequest, redirectPage}) {
   return (
     request.status === true
     ? <li className="maintenance-request-item-completed" role="completed-reqest-item">
       {/* <div className="image-container">IMAGE PLACEHOLDER</div> */}
+      <div style={{backgroundColor:"red"}}>
       <table className="details-container">
         <tbody>
           <tr>
@@ -29,7 +30,13 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
           </tr>
         </tbody>
       </table>
+      </div>
       <div className="request-editor">
+        <button
+          onClick={() => redirectPage(request)}
+        >
+          <span>View property</span>
+        </button>
         <button 
           aria-label="delete request" 
           className="trash-btn" 
@@ -65,6 +72,12 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
         </tbody>
       </table>
       <div className="request-editor">
+      <button
+          className="view-property-button"
+          onClick={() => redirectPage(request)}
+        >
+          <span>View property</span>
+        </button>
         <button 
           className="complete-btn" 
           role="complete-btn"
