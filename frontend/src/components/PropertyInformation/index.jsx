@@ -1,7 +1,8 @@
 import React from 'react';
 import './dashboardmodal.css';
 
-const DashboardModal = () => {
+
+const PropertyInformation = () => {
 
     return (
       <div>
@@ -28,4 +29,4 @@ const DashboardModal = () => {
     );
   }
 
-export default DashboardModal;
+export default PropertyInformation;
