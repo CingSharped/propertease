@@ -2,7 +2,7 @@ import React from 'react';
 import './dashboardmodal.css';
 
 
-const DashboardModal = () => {
+const PropertyInformation = () => {
 
     return (
    
@@ -31,4 +31,4 @@ const DashboardModal = () => {
     );
   }
 
-export default DashboardModal;
+export default PropertyInformation;

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { useLogin } from "../../hooks/useLogin";
 import "./login.css";
@@ -11,17 +12,41 @@ const LoginSignUp = () => {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
+  const navigate = useNavigate()
+
+  
+
   const {login, loginError, loginIsLoading} = useLogin()
   const {signup, signupIsLoading, signupError} = useSignup()
 
   const handleLoginSubmit = async (e) => {
     e.preventDefault()
     await login(username, password)
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    let userID
+    try {
+      userID = user._id
+    } catch (error) {
+      console.log("no user id")
+    }
+
+    userID ? navigate("/landlord") : ""
   }
 
   const handleSignupSubmit = async (e) => {
     e.preventDefault()
     await signup(username, password, userType)
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    let userID
+    try {
+      userID = user._id
+    } catch (error) {
+      console.log("no user id")
+    }
+
+    userID ? navigate("/landlord") : ""
   }
 
   const handleTabChange = (tab) => {
