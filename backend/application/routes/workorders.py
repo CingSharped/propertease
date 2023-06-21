@@ -19,9 +19,10 @@ def create_workorder():
   property_owner_id = request_data['property_owner_id'] if 'property_owner_id' in request_data else None
   created_on = datetime.datetime.now()
   created_by = request_data['created_by'] if 'created_by' in request_data else None
+  completed = False
 
   if all(data is not None for data in (title, description, work_type, location_id, priority, property_id, property_owner_id, created_by)):
-    new_workorder = workorders.create_workorder(title, description, work_type, location_id, cost, status, priority, property_id, property_owner_id, created_on, created_by)
+    new_workorder = workorders.create_workorder(title, description, work_type, location_id, cost, status, priority, property_id, property_owner_id, created_on, created_by, completed)
     return new_workorder
   else:
     return { 'error': 'All required fields title, description, work_type, location_id, priority, property_id and created_by are required to create a workorder'}

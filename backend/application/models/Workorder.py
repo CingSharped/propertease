@@ -1,7 +1,7 @@
 from application import db
 
 class Workorder:
-  def __init__(self, title, description, work_type, location_id, cost, status, priority, property_id, property_owner_id, created_on, created_by):
+  def __init__(self, title, description, work_type, location_id, cost, status, priority, property_id, property_owner_id, created_on, created_by, completed):
     self.title = title # required
     self.description = description # required
     self.work_type = work_type # required
@@ -12,7 +12,8 @@ class Workorder:
     self.property_id = property_id # required
     self.created_on = created_on
     self.created_by = created_by # required
-    self.property_owner_id = property_owner_id
+    self.property_owner_id = property_owner_id # required
+    self.completed = completed
         
   def create_workorder(self):
     try:
@@ -30,7 +31,8 @@ class Workorder:
         'property_id': self.property_id,
         'created_on': self.created_on,
         'created_by': self.created_by,
-        'property_owner_id': self.property_owner_id
+        'property_owner_id': self.property_owner_id,
+        'completed': self.completed
       })
       new_workorder = db.workorders.find_one({'title': self.title, 'property_id': self.property_id, 'location_id': self.location_id})
       if new_workorder:
