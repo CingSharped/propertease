@@ -101,10 +101,10 @@ const PropertiesMenu = ({ properties, propertyMenuVisible }) => {
               Create Maintenance request
             </Button>
           </Box>
-          <Box  >
+          {/* <Box  >
             <Button variant="contained" onClick={() => {propertyMenuVisible=!propertyMenuVisible
             console.log(propertyMenuVisible)}}>x</Button>
-          </Box>
+          </Box> */}
         </div>
       </TableContainer>
     </>
