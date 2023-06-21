@@ -1,6 +1,8 @@
-import { Outlet, NavLink } from "react-router-dom";
+import { Outlet, NavLink, useNavigate } from "react-router-dom";
+
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthContext } from '../../hooks/useAuthContext';
+
 import './style.css';
 
 const NavBar = () => {
@@ -42,7 +44,7 @@ const NavBar = () => {
               </NavLink>
             </div>
           </>
-          : user.user_type === "landlord" ?
+          : user.user_type?
             <>
               <div className="Nav-Links">
                 <NavLink to="/landlord" style={styles}>
