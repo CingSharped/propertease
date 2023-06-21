@@ -4,7 +4,7 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
   return (
     request.status === true
     ? <li className="maintenance-request-item-completed" role="completed-reqest-item">
-      <div className="image-container">IMAGE PLACEHOLDER</div>
+      {/* <div className="image-container">IMAGE PLACEHOLDER</div> */}
       <table className="details-container">
         <tbody>
           <tr>
@@ -40,7 +40,6 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
     </li> 
 
     : <li className="maintenance-request-item" role="open-reqest-item">
-      <div className="image-container">IMAGE PLACEHOLDER</div>
       <table className="details-container" role="details-container">
         <tbody>
           <tr>

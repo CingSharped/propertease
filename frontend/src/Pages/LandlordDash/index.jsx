@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { LargeModal, DashboardModal, BarChart } from '../../../components';
+import { LargeModal, PropertyInformation, BarChart, Modal, MaintenanceRequestList} from '../../components';
 
-import {Footer} from '../../../components'
+import {Footer} from '../../components'
 import './Dashboards.css';
 
 const Landlord = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [profitData, setProfitData] = useState([]);
+
+  async function getLandlordPropertyDetails () {
+
+  } 
 
   const transactions = [
     {
@@ -101,6 +105,8 @@ const Landlord = () => {
     ],
   };
 
+
+
   // const navigateTo = (url) => {
   //   document.body.classList.add('fade-out');
   //   setTimeout(() => {
@@ -139,7 +145,8 @@ const Landlord = () => {
           Property Listing 1<br />
           Property Location: Tottenham<br />
           Current Tenant: Harley Quin
-          {isOpen && <LargeModal children={<DashboardModal setIsOpen={setIsOpen}/>} setIsOpen={setIsOpen} />}
+          {/* {isOpen && <LargeModal children={<DashboardModal setIsOpen={setIsOpen}/>} setIsOpen={setIsOpen} />} */}
+          {isOpen &&  <Modal children={<PropertyInformation setIsOpen={setIsOpen}/>} setIsOpen={setIsOpen} />}
         </div>
         <div
           id="box6"
@@ -147,13 +154,19 @@ const Landlord = () => {
           Property Listing 2<br />
           Property Location: Shoreditch<br />
           Current Tenant: Michael Scott 
-          {isOpen && <LargeModal children={<DashboardModal />} setIsOpen={setIsOpen} />}
+          {isOpen && <LargeModal children={<PropertyInformation />} setIsOpen={setIsOpen} />}
         </div>
         <div id="box7" className="fade-in"onClick={() => setIsOpen(true)}>
           Property Listing 3<br />
           Property Location: Notting Hill<br />
           Current Tenant: Beyonce Knowles
-          {isOpen && <LargeModal children={<DashboardModal />} setIsOpen={setIsOpen} />}
+          {isOpen && <LargeModal children={<PropertyInformation />} setIsOpen={setIsOpen} />}
+        </div>
+
+
+        <div className="work-orders">
+          <h4>Outstanding work orders</h4>
+          <MaintenanceRequestList />
         </div>
       </div>
     </div>

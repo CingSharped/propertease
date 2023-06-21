@@ -4,7 +4,13 @@
   margin: 0rem 0.5rem 0.5rem 0.5rem;
   list-style-type: none;
   border-radius: .5rem;
-  border: 1px solid red;
+
+  border: 1px solid rgba(211, 154, 11, 0.273);
+  box-shadow: 0px 0px 10px #D39B0B;
+  background-color: #F9F2EB;
+  background-color: #F9F2EB;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
 }
 
 .maintenance-request-item .image-container {
@@ -34,13 +40,18 @@
 
 /* COMPLETED ITEMS */
 .maintenance-request-item-completed {
-  background-color: #e9d192;
-  opacity: 50%;
+  background-color: #e9d192;;
   display: flex;
   margin: 0rem 0.5rem 0.5rem 0.5rem;
   list-style-type: none;
   border-radius: .5rem;
-  border: 1px solid green;
+  opacity: 30%;
+  border: 1px solid rgba(211, 154, 11, 0.273);
+  box-shadow: 0px 0px 10px #D39B0B;
+  background-color: #F9F2EB;
+  background-color: #F9F2EB;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
 }
 
 .maintenance-request-item-completed .image-container {

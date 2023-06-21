@@ -2,9 +2,10 @@ import React from 'react';
 import './dashboardmodal.css';
 
 
-const DashboardModal = () => {
+const PropertyInformation = () => {
 
     return (
+   
       <div>
         <div id="main-container">
           <h1>Property 1</h1>
@@ -14,6 +15,7 @@ const DashboardModal = () => {
           <div id="boxno2" className="fade-in">
           Bar Graph
           </div>
+          
           <div id="boxno3" className="fade-in">
           Description
           </div>
@@ -29,4 +31,4 @@ const DashboardModal = () => {
     );
   }
 
-export default DashboardModal;
+export default PropertyInformation;
