@@ -1,8 +1,7 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import * as Pages from "./pages";
+import * as Pages from "./Pages";
 import { NavBar } from './components';
-import "./App.css";
 
 function App() {
   return (
@@ -12,6 +11,11 @@ function App() {
           <Route index element={<Pages.Home />} />
           <Route path="/ifc" element={<Pages.IfcViewer />} />
           <Route path="/login" element={<Pages.LoginSignUp />} />
+          {/* <Route path="/maintenance-request" element={<Pages.MaintenanceRequest/>} /> */}
+          <Route path= "/landlord" element={<Pages.Landlord/>} />
+          <Route path= "/tenant" element={<Pages.Tenant/>} />
+          <Route path= "/service" element={<Pages.Service/>} />
+          {/* <Route path= "/DashboardModal" element={<Pages.DashboardModal/>} /> */}
         </Route>
       </Routes>
     </div>

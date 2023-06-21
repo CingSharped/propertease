@@ -17,11 +17,14 @@ build/
 .idea/
 docs/_build/
 .vscode
+package-lock.json
+./frontend/package-lock.json
 
 # Coverage reports
 htmlcov/
 .coverage
 .coverage.*
+coverage
 *,cover
 coverage/
 # Logs
@@ -48,3 +51,4 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+frontend/package-lock.json

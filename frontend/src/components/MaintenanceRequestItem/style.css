@@ -1,0 +1,133 @@
+.maintenance-request-item {
+  background-color: #e9d192;;
+  display: flex;
+  margin: 0rem 0.5rem 0.5rem 0.5rem;
+  list-style-type: none;
+  border-radius: .5rem;
+
+  border: 1px solid rgba(211, 154, 11, 0.273);
+  box-shadow: 0px 0px 10px #D39B0B;
+  background-color: #F9F2EB;
+  background-color: #F9F2EB;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+.maintenance-request-item .image-container {
+  background-color: gray;
+  border-radius: .5rem 0rem 0rem .5rem;
+  width: 20%;
+  padding-right: 0.25rem;
+}
+
+.maintenance-request-item .details-container {
+  width: 100%;
+}
+
+.maintenance-request-item td {
+  padding: 5px;
+  text-align: left;
+  margin: 0;
+}
+
+.maintenance-request-item th{
+  padding: 5px;
+  text-align: left;
+  margin: 0px;
+  width: 10%;
+}
+
+.view-property-button {
+  margin-top: 55px;
+  margin-right: 50px;
+  height: 3rem;
+  padding: 5%;
+}
+
+/* COMPLETED ITEMS */
+.maintenance-request-item-completed {
+  background-color: #e9d192;;
+  display: flex;
+  margin: 0rem 0.5rem 0.5rem 0.5rem;
+  list-style-type: none;
+  border-radius: .5rem;
+  opacity: 30%;
+  border: 1px solid rgba(211, 154, 11, 0.273);
+  box-shadow: 0px 0px 10px #D39B0B;
+  background-color: #F9F2EB;
+  background-color: #F9F2EB;
+  border-radius: 1rem;
+  margin-bottom: 1rem;
+}
+
+.maintenance-request-item-completed .image-container {
+  background-color: gray;
+  border-radius: .5rem 0rem 0rem .5rem;
+  width: 20%;
+  padding-right: 0.25rem;
+}
+
+.maintenance-request-item-completed .details-container {
+  width: 100%;
+}
+
+.maintenance-request-item-completed td {
+  padding: 5px;
+  text-align: left;
+  margin: 0;
+}
+
+.maintenance-request-item-completed th{
+  padding: 5px;
+  text-align: left;
+  margin: 0px;
+  width: 10%;
+}
+
+.request-editor {
+  width: 40%;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 800,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.maintenance-request-item-completed .request-editor{
+  display: flex;
+  justify-content: center;
+}
+
+.maintenance-request-item-completed .request-editor button {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.maintenance-request-item .request-editor{
+  display: flex;
+  justify-content: center;
+}
+
+.maintenance-request-item .request-editor .complete-btn, .trash-btn {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  border: none;
+  cursor: pointer;
+  overflow: hidden;
+  outline: none;
+}
+
+.complete-btn {
+  color: green;
+}
+
+.trash-btn {
+  color: red;
+}

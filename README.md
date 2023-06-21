@@ -9,3 +9,11 @@
 ## Testing
 - `npm run test`
 - `npm run coverage`
+
+## Endpoints
+- /login
+- /ifc
+- /maintenance-request
+- /landlord
+- /tenant
+- /service
