@@ -1,6 +1,6 @@
 .modal_darkBG {
   background-color: rgba(0, 0, 0, 0.2);
-  width: 200vw;
+  /* width: 200vw; */
   height: 200vh;
   z-index: 0;
   top: 50%;
@@ -11,7 +11,7 @@
 
 .modal_centered {
   width: 80%;
-  height: 80%;
+  height: 70%;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -20,10 +20,10 @@
 
 .modal_modal {
   width: 100%;
-  background: white;
+  background: #1a273e;
   z-index: 10;
   border-radius: 16px;
-  box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 0px 10px #D39B0B;
 }
 
 .modal_modalContent{
