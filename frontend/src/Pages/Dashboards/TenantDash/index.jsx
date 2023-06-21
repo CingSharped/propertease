@@ -1,5 +1,5 @@
 import React from 'react';
-import './tenant.css';
+import '../Dashboards.css';
 
 const Tenant = () => {
 

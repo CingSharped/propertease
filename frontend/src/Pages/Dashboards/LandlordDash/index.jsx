@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { LargeModal, DashboardModal, BarChart } from '../../../components';
+import React, { useState, useEffect } from "react";
+import { LargeModal, DashboardModal, BarChart } from "../../../components";
 
-import {Footer} from '../../../components'
-import './Dashboards.css';
+import { Footer } from "../../../components";
+import "../Dashboards.css";
 
 const Landlord = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [profitData, setProfitData] = useState([]);
+  const [activeAccordion, setActiveAccordion] = useState(null);
 
   const transactions = [
     {
@@ -108,58 +109,107 @@ const Landlord = () => {
   //   }, 500);
   // };
 
+  // JS to Toggle Accordian Panels
+  useEffect(() => {
+    const acc = document.getElementsByClassName("accordion");
+    const panels = document.getElementsByClassName("panel");
+
+    const togglePanel = (index) => {
+      panels[index].classList.toggle("show");
+    };
+
+    const handleAccordionClick = (index) => {
+      setActiveAccordion((prevActive) => (prevActive === index ? null : index));
+      togglePanel(index);
+    };
+
+    for (let i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", () => handleAccordionClick(i));
+    }
+  }, []);
+
   return (
     <>
-    <div className='dashboard'>
-      <h4 className='dashboard-heading-title'>Landlord Dashboard</h4>
+      <div className="dashboard">
+        <h4 className="dashboard-heading-title">Landlord Dashboard</h4>
 
-      <div id="main-container">
-        <div id="box1" className="fade-in" >
-          Total Number of Tenants: 16
-        </div>
-        <div id="box2" className="fade-in" >
-          Total Number of Properties: 3
-        </div>
-        <div id="box3" className="fade-in" >
-          Amount of Outstanding Maintenance Orders: 3
+        <div id="main-container">
+          <div id="box1" className="fade-in">
+            Total Number of Tenants: 16
+          </div>
+          <div id="box2" className="fade-in">
+            Total Number of Properties: 3
+          </div>
+          <div id="box3" className="fade-in">
+            Amount of Outstanding Maintenance Orders: 3
+          </div>
+
+          <h4>Overall profit per month</h4>
+
+          <div id="box4" className="fade-in">
+            <BarChart chartData={chartData} />
+          </div>
+
+          <button
+            className={`accordion1 ${activeAccordion === 1 ? "active" : ""}`}
+            onClick={() => setActiveAccordion(1)}
+          >
+            All Properties
+          </button>
+          <div className={`panel1 ${activeAccordion === 1 ? "show" : ""}`}>
+
+            <div id="box5" className="fade-in" onClick={() => setIsOpen(true)}>
+              Property Listing 1<br />
+              Property Location: Tottenham
+              <br />
+              Current Tenant: Harley Quin
+              {isOpen && (
+                <LargeModal
+                  children={<DashboardModal setIsOpen={setIsOpen} />}
+                  setIsOpen={setIsOpen}
+                />
+              )}
+            </div>
+            <div id="box6" className="fade-in" onClick={() => setIsOpen(true)}>
+              Property Listing 2<br />
+              Property Location: Shoreditch
+              <br />
+              Current Tenant: Michael Scott
+              {isOpen && (
+                <LargeModal
+                  children={<DashboardModal />}
+                  setIsOpen={setIsOpen}
+                />
+              )}
+            </div>
+            <div id="box7" className="fade-in" onClick={() => setIsOpen(true)}>
+              Property Listing 3<br />
+              Property Location: Notting Hill
+              <br />
+              Current Tenant: Beyonce Knowles
+              {isOpen && (
+                <LargeModal
+                  children={<DashboardModal />}
+                  setIsOpen={setIsOpen}
+                />
+              )}
+            </div>
+          </div>
         </div>
 
-        <h4>Overall profit per month</h4>
-
-        <div id="box4" className="fade-in" >
-          <BarChart chartData={chartData} />
-        </div>
-
-        <h4>My properties</h4>
-
-        <div
-          id="box5"
-          className="fade-in"
-          onClick={() => setIsOpen(true)}>
-          Property Listing 1<br />
-          Property Location: Tottenham<br />
-          Current Tenant: Harley Quin
-          {isOpen && <LargeModal children={<DashboardModal setIsOpen={setIsOpen}/>} setIsOpen={setIsOpen} />}
-        </div>
-        <div
-          id="box6"
-          className="fade-in"onClick={() => setIsOpen(true)}>
-          Property Listing 2<br />
-          Property Location: Shoreditch<br />
-          Current Tenant: Michael Scott 
-          {isOpen && <LargeModal children={<DashboardModal />} setIsOpen={setIsOpen} />}
-        </div>
-        <div id="box7" className="fade-in"onClick={() => setIsOpen(true)}>
-          Property Listing 3<br />
-          Property Location: Notting Hill<br />
-          Current Tenant: Beyonce Knowles
-          {isOpen && <LargeModal children={<DashboardModal />} setIsOpen={setIsOpen} />}
+        <button
+          className={`accordion2 ${activeAccordion === 2 ? "active" : ""}`}
+          onClick={() => setActiveAccordion(2)}
+        >
+          All Work Orders
+        </button>
+        <div className={`panel2 ${activeAccordion === 2 ? "show" : ""}`}>
+          <p>Work Orders to go here</p>
         </div>
       </div>
-    </div>
-    <Footer />
+      <Footer />
     </>
   );
-}
+};
 
 export default Landlord;
