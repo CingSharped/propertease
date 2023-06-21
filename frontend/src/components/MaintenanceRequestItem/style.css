@@ -37,6 +37,12 @@
   width: 10%;
 }
 
+.view-property-button {
+  margin-top: 55px;
+  margin-right: 50px;
+  height: 3rem;
+  padding: 5%;
+}
 
 /* COMPLETED ITEMS */
 .maintenance-request-item-completed {
