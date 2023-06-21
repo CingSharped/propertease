@@ -97,6 +97,7 @@ const PropertiesMenu = ({ properties, propertyMenuVisible }) => {
               onClick={() => {
                 handleClick();
               }}
+              sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
             >
               Create Maintenance request
             </Button>

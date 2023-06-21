@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { LargeModal, DashboardModal, BarChart } from '../../../components';
-import {Documents} from '../../../components';
 import './Dashboards.css';
 
 const Landlord = () => {
@@ -109,7 +108,6 @@ const Landlord = () => {
 
   return (
     <div>
-        <Documents/>
       <div id="main-container">
         <div id="box1" className="fade-in" >
           Total Number of Tenants: 16

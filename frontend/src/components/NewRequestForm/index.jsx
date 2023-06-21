@@ -51,8 +51,8 @@ const NewRequestForm = () => {
   //   "work_type": "Repair"
   // }
 
-//property_owner_id = useContext?
-//completed = False
+  //property_owner_id = useContext?
+  //completed = False
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -67,7 +67,10 @@ const NewRequestForm = () => {
       status: false,
       title: title,
       work_type: workType,
+      property_owner_id: "asdf",
     };
+
+    console.log(request);
 
     const res = await fetch("https://propertease-api.onrender.com/workorders", {
       method: "POST",
@@ -95,6 +98,10 @@ const NewRequestForm = () => {
   }
 
   if (!open) {
+    // Refresh the page after 2 seconds - this should be changed
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
     return (
       <div>
         <Container>
@@ -223,7 +230,7 @@ const NewRequestForm = () => {
           />
         </Box>
         <Box sx={{ mb: 2 }}>
-          <Button type="submit" variant="contained" color="primary">
+          <Button type="submit" variant="contained" sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}>
             Submit
           </Button>
         </Box>

@@ -175,6 +175,7 @@ const IfcViewer = ({ ifcProject }) => {
                 togglePropertyMenu();
               }
             })}
+            sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
           >
             {title} - {locationId}
           </Button>
