@@ -14,6 +14,8 @@ const MaintenanceRequestList = ({}) => {
       const json = await res.json()
       
       setData(json)
+      console.log(data)
+      console.log(json)
       
       data.length === 0
       ? setIsLoading(false) 

@@ -97,14 +97,15 @@ const PropertiesMenu = ({ properties, propertyMenuVisible }) => {
               onClick={() => {
                 handleClick();
               }}
+              sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
             >
               Create Maintenance request
             </Button>
           </Box>
-          <Box  >
+          {/* <Box  >
             <Button variant="contained" onClick={() => {propertyMenuVisible=!propertyMenuVisible
             console.log(propertyMenuVisible)}}>x</Button>
-          </Box>
+          </Box> */}
         </div>
       </TableContainer>
     </>

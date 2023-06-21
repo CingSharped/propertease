@@ -5,7 +5,7 @@ import { Bar } from "react-chartjs-2";
 const BarChart = ({ chartData }) => {
   return (
     <div>
-      <Bar height='60px' data={chartData} />
+      <Bar height='100%' data={chartData} />
     </div>
   );
 };
