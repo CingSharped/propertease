@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { LargeModal, DashboardModal, BarChart } from "../../../components";
+import { LargeModal, PropertyInformation, BarChart, Modal, MaintenanceRequestList} from "../../../components";
 
 import { Footer } from "../../../components";
 import "../Dashboards.css";
@@ -8,6 +8,13 @@ const Landlord = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [profitData, setProfitData] = useState([]);
   const [activeAccordion, setActiveAccordion] = useState(null);
+  async function getLandlordPropertyDetails () {
+
+  } 
+
+  async function getLandlordPropertyDetails () {
+
+  } 
 
   const transactions = [
     {
@@ -101,6 +108,8 @@ const Landlord = () => {
       },
     ],
   };
+
+
 
   // const navigateTo = (url) => {
   //   document.body.classList.add('fade-out');
