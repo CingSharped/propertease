@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { LargeModal, PropertyInformation, BarChart, Modal, MaintenanceRequestList} from '../../../components';
+import { LargeModal, PropertyInformation, BarChart, Modal, MaintenanceRequestList} from '../../components';
 
-import {Footer} from '../../../components'
+import {Footer} from '../../components'
 import './Dashboards.css';
 
 const Landlord = () => {
