@@ -1,13 +1,13 @@
 from application import db
 
 class Property:
-  def __init__(self, name, owner_id, model_id, rent_date, tenant_username, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode):
+  def __init__(self, name, owner_id, model_id, rent_date, tenant_id, rental_cost, bedrooms, bathrooms, tenure, property_type, description, council_tax_band, energy_rating, created_on, address, postcode):
     self.name = name # required
     self.description = description # required
     self.owner_id = owner_id # required
     self.model_id = model_id
     self.rent_date = rent_date
-    self.tenant_username = tenant_username
+    self.tenant_id = tenant_id
     self.rental_cost = rental_cost
     self.bedrooms = bedrooms # required
     self.bathrooms = bathrooms # required
@@ -31,7 +31,7 @@ class Property:
         'owner_id': self.owner_id,
         'model_id': self.model_id,
         'rent_date': self.rent_date,
-        'tenant_username': self.tenant_username,
+        'tenant_id': self.tenant_id,
         'rental_cost': self.rental_cost,
         'bedrooms': self.bedrooms,
         'bathrooms': self.bathrooms,
@@ -68,6 +68,17 @@ class Property:
     try:
       properties = []
       db_properties = db.properties.find({ 'owner_id': _id })
+      for property in db_properties:
+        property['_id'] = str(property['_id'])
+        properties.append(property)
+      return properties
+    except:
+      return { 'error': 'Error connecting to mongodb' }
+
+  def get_properties_by_tenant(_id):
+    try:
+      properties = []
+      db_properties = db.properties.find({ 'tenant_id': _id })
       for property in db_properties:
         property['_id'] = str(property['_id'])
         properties.append(property)
