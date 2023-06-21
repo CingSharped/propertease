@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import * as Pages from './pages';
+import * as Pages from './Pages';
 import { NavBar } from './components';
 
 function App() {
