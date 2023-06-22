@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { LargeModal, PropertyInformation, BarChart } from "../../components";
+import { LargeModal, PropertyInformation, BarChart, MaintenanceRequestList } from "../../components";
 
 import { Footer } from "../../components";
 import "./Dashboards.css";
@@ -204,7 +204,7 @@ const Landlord = () => {
           All Work Orders
         </button>
         <div className={`panel2 ${activeAccordion === 2 ? "show" : ""}`}>
-          <p>Work Orders to go here</p>
+        <MaintenanceRequestList />
         </div>
       </div>
       <Footer />

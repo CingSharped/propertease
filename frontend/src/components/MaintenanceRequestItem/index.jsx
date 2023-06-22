@@ -1,10 +1,11 @@
 import "./style.css"
 
-function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
+function MaintenanceRequestItem ({request, deleteRequest, completeRequest, redirectPage}) {
   return (
     request.status === true
     ? <li className="maintenance-request-item-completed" role="completed-reqest-item">
       {/* <div className="image-container">IMAGE PLACEHOLDER</div> */}
+      <div style={{backgroundColor:"red"}}>
       <table className="details-container">
         <tbody>
           <tr>
@@ -29,7 +30,13 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
           </tr>
         </tbody>
       </table>
+      </div>
       <div className="request-editor">
+        <button
+          onClick={() => redirectPage(request)}
+        >
+          <span>View property</span>
+        </button>
         <button 
           aria-label="delete request" 
           className="trash-btn" 
@@ -65,6 +72,13 @@ function MaintenanceRequestItem ({request, deleteRequest, completeRequest}) {
         </tbody>
       </table>
       <div className="request-editor">
+      <button
+          className="view-property-button"
+          onClick={() => redirectPage(request)}
+        >
+          <span className="material-symbols-outlined">Home</span>
+        </button>
+        {/* <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" clip-rule="evenodd"><path d="M22 11.414v12.586h-20v-12.586l-1.293 1.293-.707-.707 12-12 12 12-.707.707-1.293-1.293zm-6 11.586h5v-12.586l-9-9-9 9v12.586h5v-9h8v9zm-1-7.889h-6v7.778h6v-7.778z"/></svg> */}
         <button 
           className="complete-btn" 
           role="complete-btn"
