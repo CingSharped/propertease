@@ -1,4 +1,5 @@
-import { Outlet, NavLink, useNavigate } from "react-router-dom";
+import { Outlet, NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { useLogout } from '../../hooks/useLogout';
 import { useAuthContext } from '../../hooks/useAuthContext';
@@ -9,24 +10,44 @@ const NavBar = () => {
   const { logout } = useLogout();
   const { user } = useAuthContext();
   const styles = ({ isActive }) => ({ color: isActive ? "#ECD444" : "white" });
-  
+  const navigate = useNavigate();
   const handleClick = () => {
     logout();
   };
 
-  // Do we need a variable that allows for user type?
-  let dashboardLink;
+  const handleDashboardClick = (e) => {
+    e.preventDefault()
 
-  // console.log(user)
-  if ( user === 'tenant') {
-    dashboardLink = '/tenant';
-  } else if ( user === 'service') {
-    dashboardLink = '/service';
-  } else if ( user == 'landlord') {
-    dashboardLink = '/landlord';
-  } else {
-    dashboardLink = '/login';
+    user.user_type ? navigate (`/${user.user_type}`) : "" 
+    
+//     if ( user.user_type == "Tenant") {
+      
+//       return navigate("/tenant") 
+//       console.log("I'm in tenant")
+//     } else if ( user.user_type  === 'Service') {
+//       navigate('/service') 
+//     } else if ( user.user_type  === 'Landlord') {
+//       navigate('/landlord') 
+//     } else {
+//       navigate('/login') 
+//     }
+// console.log(user.user_type)
   }
+
+  // Do we need a variable that allows for user type?
+  // let dashboardLink;
+ 
+// let user = null;
+
+//   try {
+
+//     user = JSON.parse(localStorage.getItem('user'));
+//     user = user.user_type
+
+//   }
+
+ 
+ 
 
   return (
     <>
@@ -44,17 +65,17 @@ const NavBar = () => {
               </NavLink>
             </div>
           </>
-          : user.user_type?
+          : 
             <>
               <div className="Nav-Links">
-                <NavLink to="/landlord" style={styles}>
+                < NavLink onClick={(e) => handleDashboardClick(e)} style={styles}>
                   Dashboard
                 </NavLink>
-                <NavLink onClick={handleClick} style={styles}>
+                <NavLink onClick={(e) => logout(e)} style={styles}>
                   Logout
                 </NavLink>
               </div>
-            </> : ""
+            </> 
         }
 
   
