@@ -108,6 +108,17 @@ const PropertiesMenu = ({ properties }) => {
               Create Maintenance request
             </Button>
           </Box>
+          {/* <Box sx={{ mb: 2 }}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                alert("Maintenance request closed")
+              }}
+              sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
+            >
+              Close Maintenance request
+            </Button>
+          </Box> */}
           <Box sx={{ mb: 2 }}>
             <Button
               variant="contained"
