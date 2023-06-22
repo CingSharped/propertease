@@ -24,7 +24,6 @@ const IfcViewer = ({ ifcProject }) => {
   const [elemsFromDb, setElemsFromDb] = useState([])
   const [filterButtons, setFilterButtons] = useState();
   const [workordersData, setWorkordersData] = useState([]) //get workorders data to display on the properties menu
-  //const elementIds = [209236, 1306]; // get from db
   let viewer;
   let idsArray = []
   let maintArray = []
@@ -34,23 +33,6 @@ const IfcViewer = ({ ifcProject }) => {
       const res = await fetch(`https://propertease-api.onrender.com/workorders`)
   
       const json = await res.json()
-
-      //filter the workorders data
-      //       Work type	Repair
-      // Title	Leaking tap
-      // Description	The taps in the kitchen has been dripping for the past day
-      // Cost	£ 2000
-      // Created	Thu, 15 Jun 2023 13:57:36 GMT
-
-    //       cost
-    // created_on
-    // description
-    // location_id
-    // property_id
-    // title
-    // work_type
-
-
       
       setWorkordersData(json)
       // console.log(data)
@@ -166,12 +148,24 @@ const IfcViewer = ({ ifcProject }) => {
 
               //console.log(locationId)
 
-             //console.log(workordersData)
+              const keysToFilter = ["cost", "created_on", "description", "location_id", "property_id", "title", "work_type"];
 
-              for (let i = 0; i < workordersData.length; i++)
+              const filteredArray = workordersData.map(obj => {
+                const filteredObj = {};
+                keysToFilter.forEach(key => {
+                  if (key in obj) {
+                    filteredObj[key] = obj[key];
+                  }
+                });
+                return filteredObj;
+              });
+
+            console.log("filtered array: ", filteredArray)
+
+              for (let i = 0; i < filteredArray.length; i++)
               {
-                if (workordersData[i].location_id == locationId)
-                  setSelectedProperties(workordersData[i]) //set the workorder data to show on properties menu based on location_id
+                if (filteredArray[i].location_id == locationId)
+                  setSelectedProperties(filteredArray[i]) //set the workorder data to show on properties menu based on location_id
                 
               }
               //get db data here and display it - assign using setSelectedProperties([data])
@@ -198,7 +192,6 @@ const IfcViewer = ({ ifcProject }) => {
       });
     };
     
-
     const buttons = createButtons(elemsFromDb);
     setFilterButtons(buttons);
 
@@ -211,7 +204,7 @@ const IfcViewer = ({ ifcProject }) => {
     };
   }, [buildingId]); //trigger reload of the viewer, workaround to get buttons working? - buildingId should not be inside of the array
 
-
+//need to handle undefined etc values here (filter out)
   const handleDoubleClick = async () => {
     const result = await viewer.IFC.selector.pickIfcItem(true);
     if (!result) return;
