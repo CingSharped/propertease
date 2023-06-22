@@ -20,7 +20,7 @@ const PropertiesMenu = ({ properties }) => {
   const [elementId, setElementId] = useState();
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log(properties);
+  console.log("properties from properties menu " , properties);
 
   const removeNullUndefinedKeys = (obj) => {
     const newObj = { ...obj };
@@ -30,10 +30,14 @@ const PropertiesMenu = ({ properties }) => {
     return newObj;
   };
 
+  //edited to remove null & undefined values
   const createPropertyRow = (key, value) => {
-    if (value === null || value === undefined) value = "undefined";
-    else if (value.value) value = value.value;
-
+    if (value === null || value === undefined) {
+      return null;
+    } else if (value.value) {
+      value = value.value;
+    }
+  
     return (
       <TableRow key={key}>
         <TableCell>{key}</TableCell>
@@ -41,6 +45,7 @@ const PropertiesMenu = ({ properties }) => {
       </TableRow>
     );
   };
+  
 
   const renderPropertyRows = (properties) => {
     const filteredProperties = removeNullUndefinedKeys(properties);
@@ -103,6 +108,17 @@ const PropertiesMenu = ({ properties }) => {
               Create Maintenance request
             </Button>
           </Box>
+          {/* <Box sx={{ mb: 2 }}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                alert("Maintenance request closed")
+              }}
+              sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
+            >
+              Close Maintenance request
+            </Button>
+          </Box> */}
           <Box sx={{ mb: 2 }}>
             <Button
               variant="contained"
