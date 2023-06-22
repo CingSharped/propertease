@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../../hooks/useAuthContext';
 
@@ -8,7 +9,9 @@ import MaintenanceRequestItem from "../MaintenanceRequestItem"
 
 
 
-const MaintenanceRequestList = ({}) => {
+const MaintenanceRequestList = ({data, isLoading}) => {
+  const navigate = useNavigate()
+
   // const user = useAuthContext()
   const user = JSON.parse(localStorage.getItem("user"));
   let userId
@@ -20,32 +23,7 @@ const MaintenanceRequestList = ({}) => {
   }
   // const userId = user._id
 
-  const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
 
-  async function fetchRequests () {
-    try {
-      const res = await fetch(`https://propertease-api.onrender.com/workorders`)
-  
-      const json = await res.json()
-      
-      setData(json)
-      console.log(data)
-      console.log(json)
-      
-      data.length === 0
-      ? setIsLoading(false) 
-      : ""
-      
-    } catch (error) {
-      console.log("error loading data")
-    }
-
-  }
-  
-  useEffect(() => {
-    fetchRequests()
-  },[])
   
   function deleteRequest(request){
     console.log(`delete`, request)
@@ -56,6 +34,12 @@ const MaintenanceRequestList = ({}) => {
     console.log("complete", request)
     //API CALL TO MARK AS COMPLETE
   }
+
+  function redirectPage(request){
+    console.log("redirect", request)
+    localStorage.setItem("property", JSON.stringify(request))
+    navigate("/ifc")
+  }
   
 
   return (
@@ -63,7 +47,7 @@ const MaintenanceRequestList = ({}) => {
       <ul className='maintenance-request-list'>
        { isLoading === false 
         ? data.map((request, index) => 
-        <MaintenanceRequestItem key={index} request={request} deleteRequest={deleteRequest} completeRequest={completeRequest} />
+        <MaintenanceRequestItem key={index} request={request} deleteRequest={deleteRequest} completeRequest={completeRequest} redirectPage={redirectPage}/>
         )
         :  <p>Loading...</p>}
 
