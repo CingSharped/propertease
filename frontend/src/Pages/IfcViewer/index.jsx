@@ -111,7 +111,7 @@ const IfcViewer = ({ ifcProject }) => {
 
     viewer.axes.setAxes();
     viewer.grid.setGrid();
-    viewer.clipper.active = true;
+   // viewer.clipper.active = true; //enable/disable clipping planes
 
     window.addEventListener("dblclick", handleDoubleClick);
     window.addEventListener("mousemove", handleMouseMove);
@@ -120,38 +120,6 @@ const IfcViewer = ({ ifcProject }) => {
 
     loadIfc(ifcUrl);
 
-    //const elementIds = elemsFromDb.map(elemId => elemId.locationId);
-    //console.log("elemsIdfromDb ", elemsIdfromDb);
-
-    // const elementIds = idsArray
-
-    // const createButtons = (elementIds) => {
-    //   return elementIds.map((elementId) => {
-    //     return (
-    //       <Button
-    //         variant="contained"
-    //         key={elementId}
-    //         onClick={handleButtonClick(async () => {
-    //           viewer.IFC.selector.pickIfcItemsByID(0, [elementId], true);
-    //           let idsArray = [elementId];
-    //           const props = await viewer.IFC.getProperties(
-    //             0,
-    //             idsArray[0],
-    //             true,
-    //             false
-    //           );
-    //           setSelectedProperties(props);
-
-    //           if (!isPropertyMenuVisible) {
-    //             togglePropertyMenu();
-    //           }
-    //         })}
-    //       >
-    //         Element {elementId}
-    //       </Button>
-    //     );
-    //   });
-    // };
 
     const createButtons = (elements) => {
       return elements.map((element) => {
@@ -163,13 +131,51 @@ const IfcViewer = ({ ifcProject }) => {
             onClick={handleButtonClick(async () => {
               viewer.IFC.selector.pickIfcItemsByID(0, [locationId], true);
               let idsArray = [locationId];
-              const props = await viewer.IFC.getProperties(
-                0,
-                idsArray[0],
-                true,
-                false
-              );
-              setSelectedProperties(props);
+
+              //get db data here and display it - assign using setSelectedProperties([data])
+
+              let data =            {
+                "_id": "649361484a773c6a6a1fc762",
+                "completed": false,
+                "cost": null,
+                "created_by": "USER",
+                "created_on": "Wed, 21 Jun 2023 20:44:56 GMT",
+                "description": "window is broken",
+                "location_id": 43339,
+                "priority": "high",
+                "property_id": 360773,
+                "property_owner_id": "asdf",
+                "status": false,
+                "title": "broken window",
+                "work_type": "Other"
+            }
+
+            let data2 = 
+            {
+              "_id": "649350a3471d1f5067d0b6dd",
+              "completed": false,
+              "cost": null,
+              "created_by": "USER",
+              "created_on": "Wed, 21 Jun 2023 19:33:55 GMT",
+              "description": "oven stopped working",
+              "location_id": 209236,
+              "priority": "medium",
+              "property_id": 360773,
+              "property_owner_id": "asdf",
+              "status": false,
+              "title": "oven stopped working",
+              "work_type": "electrical"
+          }
+              
+              setSelectedProperties(data)
+              //setSelectedProperties([elemsFromDb])
+              // const props = await viewer.IFC.getProperties(
+              //   0,
+              //   idsArray[0],
+              //   true,
+              //   false
+              // );
+              // setSelectedProperties(props);
     
               if (!isPropertyMenuVisible) {
                 togglePropertyMenu();
@@ -194,7 +200,8 @@ const IfcViewer = ({ ifcProject }) => {
       window.removeEventListener("click", handleButtonClick);
       viewer.dispose();
     };
-  }, [buildingId]); //trigger reload of the viewer, workaround to get buttons working? - buildingId should not be inside of the array...
+  }, [buildingId]); //trigger reload of the viewer, workaround to get buttons working? - buildingId should not be inside of the array
+
 
   const handleDoubleClick = async () => {
     const result = await viewer.IFC.selector.pickIfcItem(true);
@@ -203,6 +210,7 @@ const IfcViewer = ({ ifcProject }) => {
     const { modelID, id } = result;
     //id = expressId
 
+    
     const props = await viewer.IFC.getProperties(modelID, id, true, false);
 
     console.log(props);
@@ -224,6 +232,8 @@ const IfcViewer = ({ ifcProject }) => {
 
   const handleButtonClick = (callback) => {
     return () => {
+      // console.log("handle button click")
+      // setSelectedProperties({"name": "name", "value": "value"})
       if (typeof callback === "function") {
         callback();
       }
@@ -236,6 +246,7 @@ const IfcViewer = ({ ifcProject }) => {
 
   return (
     <>
+    {/* <div>{buildingId}</div>  */}
       <div id="button-container">{filterButtons}</div>
 
       {/* <Button variant="contained" onClick={togglePropertyMenu}>

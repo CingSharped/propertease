@@ -128,7 +128,7 @@ const NewRequestForm = () => {
         sx={{
           mb: 2,
           display: "flex",
-          alignItems: "center",
+          // alignItems: "center",
           flexDirection: "column",
         }}
       >
@@ -233,6 +233,8 @@ const NewRequestForm = () => {
           <Button type="submit" variant="contained" sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}>
             Submit
           </Button>
+        </Box>
+        <Box sx={{ mb: 2, style: "display:block; height: 10px;" }}>
         </Box>
       </form>
     </Container>

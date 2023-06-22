@@ -21,6 +21,8 @@ const PropertiesMenu = ({ properties, propertyMenuVisible }) => {
   const [elementId, setElementId] = useState();
   const [isOpen, setIsOpen] = useState(false);
 
+  console.log(properties)
+
   const removeNullUndefinedKeys = (obj) => {
     const newObj = { ...obj };
     delete newObj.psets;
@@ -100,6 +102,17 @@ const PropertiesMenu = ({ properties, propertyMenuVisible }) => {
               sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
             >
               Create Maintenance request
+            </Button>
+          </Box>
+          <Box sx={{ mb: 2 }}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                console.log("go back to dashboard")
+              }}
+              sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
+            >
+              View Maintenance requests
             </Button>
           </Box>
           {/* <Box  >
