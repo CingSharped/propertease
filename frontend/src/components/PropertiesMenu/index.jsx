@@ -13,8 +13,8 @@ import {
 } from "@mui/material";
 import CurrentElemIdContext from "../../context/CurrentElemIdContext";
 
-import { useNavigate } from "react-router-dom";
-import { useAuthContext } from '../../hooks/useAuthContext';
+//import { useNavigate } from "react-router-dom";
+//import { useAuthContext } from '../../hooks/useAuthContext';
 
 import { Box } from "@mui/system";
 //import styles from "../Modal/Modal.module.css";
@@ -22,9 +22,9 @@ import { Box } from "@mui/system";
 const PropertiesMenu = ({ properties }) => {
   const [elementId, setElementId] = useState();
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useAuthContext();
+  //const { user } = useAuthContext();
 
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   console.log("properties from properties menu " , properties);
 
   const removeNullUndefinedKeys = (obj) => {
@@ -124,7 +124,7 @@ const PropertiesMenu = ({ properties }) => {
               Close Maintenance request
             </Button>
           </Box> */}
-          <Box sx={{ mb: 2 }}>
+          {/* <Box sx={{ mb: 2 }}>
             <Button
               variant="contained"
               onClick={() => {
@@ -136,7 +136,7 @@ const PropertiesMenu = ({ properties }) => {
             >
               Dashboard
             </Button>
-          </Box>
+          </Box> */}
           {/* <Box  >
             <Button variant="contained" onClick={() => {propertyMenuVisible=!propertyMenuVisible
             console.log(propertyMenuVisible)}}>x</Button>

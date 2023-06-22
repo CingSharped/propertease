@@ -192,6 +192,7 @@ const IfcViewer = ({ ifcProject }) => {
       });
     };
     
+
     const buttons = createButtons(elemsFromDb);
     setFilterButtons(buttons);
 
@@ -204,6 +205,7 @@ const IfcViewer = ({ ifcProject }) => {
     };
   }, [buildingId]); //trigger reload of the viewer, workaround to get buttons working? - buildingId should not be inside of the array
 
+  
 //need to handle undefined etc values here (filter out)
   const handleDoubleClick = async () => {
     const result = await viewer.IFC.selector.pickIfcItem(true);
