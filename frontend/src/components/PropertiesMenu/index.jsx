@@ -13,13 +13,18 @@ import {
 } from "@mui/material";
 import CurrentElemIdContext from "../../context/CurrentElemIdContext";
 
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from '../../hooks/useAuthContext';
+
 import { Box } from "@mui/system";
 //import styles from "../Modal/Modal.module.css";
 
 const PropertiesMenu = ({ properties }) => {
   const [elementId, setElementId] = useState();
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAuthContext();
 
+  const navigate = useNavigate();
   console.log("properties from properties menu " , properties);
 
   const removeNullUndefinedKeys = (obj) => {
@@ -124,10 +129,12 @@ const PropertiesMenu = ({ properties }) => {
               variant="contained"
               onClick={() => {
                 console.log("go back to dashboard");
+                user.user_type ? navigate (`/${user.user_type}`) : "" 
+
               }}
               sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
             >
-              View Maintenance requests
+              Dashboard
             </Button>
           </Box>
           {/* <Box  >
