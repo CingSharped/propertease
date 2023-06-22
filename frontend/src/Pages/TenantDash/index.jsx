@@ -1,4 +1,5 @@
 import React from 'react';
+import { MaintenanceRequestList } from "../../components";
 import './tenant.css';
 
 const Tenant = () => {
@@ -17,7 +18,7 @@ const Tenant = () => {
           Tenure, Energy Rating, Bathrooms, Council Tax Band
           </div>
           <div id="boxno4" className="fade-in">
-          Outstanding workorders
+          <MaintenanceRequestList />
           </div>
         </div>
       </div>
