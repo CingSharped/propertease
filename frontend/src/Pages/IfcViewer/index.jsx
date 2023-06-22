@@ -166,12 +166,24 @@ const IfcViewer = ({ ifcProject }) => {
 
               //console.log(locationId)
 
-             //console.log(workordersData)
+              const keysToFilter = ["cost", "created_on", "description", "location_id", "property_id", "title", "work_type"];
 
-              for (let i = 0; i < workordersData.length; i++)
+              const filteredArray = workordersData.map(obj => {
+                const filteredObj = {};
+                keysToFilter.forEach(key => {
+                  if (key in obj) {
+                    filteredObj[key] = obj[key];
+                  }
+                });
+                return filteredObj;
+              });
+
+            console.log("filtered array: ", filteredArray)
+
+              for (let i = 0; i < filteredArray.length; i++)
               {
-                if (workordersData[i].location_id == locationId)
-                  setSelectedProperties(workordersData[i]) //set the workorder data to show on properties menu based on location_id
+                if (filteredArray[i].location_id == locationId)
+                  setSelectedProperties(filteredArray[i]) //set the workorder data to show on properties menu based on location_id
                 
               }
               //get db data here and display it - assign using setSelectedProperties([data])
