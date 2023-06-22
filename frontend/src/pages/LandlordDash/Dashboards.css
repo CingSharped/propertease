@@ -25,6 +25,7 @@
   padding: 15px;
   width: 25%;
   height: 100px;
+  text-align: center;
 }
 /* Bar Chart Box */
 #box4 {
@@ -38,7 +39,7 @@
   border-radius: 1rem;
   padding: 20px;
   width: 85%;
-  height: 50px;
+  height: 100px;
 }
 
 #main-container {
