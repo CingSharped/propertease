@@ -25,6 +25,7 @@ const IfcViewer = ({ ifcProject }) => {
   const [elemsFromDb, setElemsFromDb] = useState([])
   const [filterButtons, setFilterButtons] = useState();
   const [workordersData, setWorkordersData] = useState([]) //get workorders data to display on the properties menu
+  const [buttonText, setButtonText] = useState('Create Work Order')
   let viewer;
   let idsArray = []
   let maintArray = []
@@ -149,6 +150,7 @@ const IfcViewer = ({ ifcProject }) => {
             variant="contained"
             key={locationId}
             onClick={handleButtonClick(async () => {
+              setButtonText("Close Work Order")
               viewer.IFC.selector.pickIfcItemsByID(0, [locationId], true);
               //let idsArray = [locationId];
 
@@ -225,6 +227,8 @@ const IfcViewer = ({ ifcProject }) => {
 
     console.log(props);
     setSelectedProperties(props);
+    setButtonText('Create Work Order')
+
     if (!isPropertyMenuVisible) {
       togglePropertyMenu();
     }
@@ -276,6 +280,7 @@ const IfcViewer = ({ ifcProject }) => {
             <PropertiesMenu
               buildingId={buildingId}
               properties={selectedProperties}
+              buttonText={buttonText}
             />
           </BuildingIdContext.Provider>
         </div>
