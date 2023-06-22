@@ -15,7 +15,7 @@ gunicorn = "*"
 [scripts]
 dev='python app.py'
 test='pytest .'
-coverage = "pytest --cov-report term-missing --cov=./tests"
+coverage = "pytest --cov-report term-missing --cov=./"
 
 [dev-packages]
 pytest = "*"
