@@ -44,6 +44,14 @@
   margin-right: 50px;
   height: 3rem;
   padding: 5%;
+  padding-bottom: 10%;
+  margin: auto 2rem;
+  background-color: #D39B0B;
+  border-radius: 1rem;
+}
+
+.view-property-button:hover {
+  background-color: #e9d192;
 }
 
 /* COMPLETED ITEMS */

@@ -1,5 +1,7 @@
 .maintenance-request-list {
   padding: 0;
   margin: 0;
-  width: 85%;
+  width: 90%;
+  margin-left: 5.5%;
+  margin-right: 5%;
 }
