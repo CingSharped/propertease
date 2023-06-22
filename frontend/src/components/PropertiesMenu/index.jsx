@@ -16,10 +16,11 @@ import CurrentElemIdContext from "../../context/CurrentElemIdContext";
 import { Box } from "@mui/system";
 //import styles from "../Modal/Modal.module.css";
 
-
-const PropertiesMenu = ({ properties, propertyMenuVisible }) => {
+const PropertiesMenu = ({ properties }) => {
   const [elementId, setElementId] = useState();
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log("properties from properties menu " , properties);
 
   const removeNullUndefinedKeys = (obj) => {
     const newObj = { ...obj };
@@ -29,10 +30,14 @@ const PropertiesMenu = ({ properties, propertyMenuVisible }) => {
     return newObj;
   };
 
+  //edited to remove null & undefined values
   const createPropertyRow = (key, value) => {
-    if (value === null || value === undefined) value = "undefined";
-    else if (value.value) value = value.value;
-
+    if (value === null || value === undefined) {
+      return null;
+    } else if (value.value) {
+      value = value.value;
+    }
+  
     return (
       <TableRow key={key}>
         <TableCell>{key}</TableCell>
@@ -40,6 +45,7 @@ const PropertiesMenu = ({ properties, propertyMenuVisible }) => {
       </TableRow>
     );
   };
+  
 
   const renderPropertyRows = (properties) => {
     const filteredProperties = removeNullUndefinedKeys(properties);
@@ -86,9 +92,9 @@ const PropertiesMenu = ({ properties, propertyMenuVisible }) => {
         }}
       >
         <Box sx={{ mb: 2 }}>
-        <Table>
-          <TableBody>{propertyRows}</TableBody>
-        </Table>
+          <Table>
+            <TableBody>{propertyRows}</TableBody>
+          </Table>
         </Box>
         <div align="center">
           <Box sx={{ mb: 2 }}>
@@ -100,6 +106,28 @@ const PropertiesMenu = ({ properties, propertyMenuVisible }) => {
               sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
             >
               Create Maintenance request
+            </Button>
+          </Box>
+          {/* <Box sx={{ mb: 2 }}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                alert("Maintenance request closed")
+              }}
+              sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
+            >
+              Close Maintenance request
+            </Button>
+          </Box> */}
+          <Box sx={{ mb: 2 }}>
+            <Button
+              variant="contained"
+              onClick={() => {
+                console.log("go back to dashboard");
+              }}
+              sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
+            >
+              View Maintenance requests
             </Button>
           </Box>
           {/* <Box  >
