@@ -9,6 +9,31 @@ const Landlord = () => {
   const [profitData, setProfitData] = useState([]);
   const [activeAccordion, setActiveAccordion] = useState(null);
 
+  const [data, setData] = useState([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  async function fetchRequests () {
+    try {
+      const res = await fetch(`https://propertease-api.onrender.com/workorders`)
+  
+      const json = await res.json()
+      
+      setData(json)
+      
+      data.length === 0
+      ? setIsLoading(false) 
+      : ""
+      
+    } catch (error) {
+      console.log("error loading data")
+    }
+
+  }
+  
+  useEffect(() => {
+    fetchRequests()
+  },[])
+
   const transactions = [
     {
       _id: "oiew493hun3j",
@@ -204,7 +229,7 @@ const Landlord = () => {
           All Work Orders
         </button>
         <div className={`panel2 ${activeAccordion === 2 ? "show" : ""}`}>
-        <MaintenanceRequestList />
+        <MaintenanceRequestList data={data} isLoading={isLoading}/>
         </div>
       </div>
       <Footer />
