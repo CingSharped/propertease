@@ -9,7 +9,7 @@ import MaintenanceRequestItem from "../MaintenanceRequestItem"
 
 
 
-const MaintenanceRequestList = ({}) => {
+const MaintenanceRequestList = ({data, isLoading}) => {
   const navigate = useNavigate()
 
   // const user = useAuthContext()
@@ -23,30 +23,7 @@ const MaintenanceRequestList = ({}) => {
   }
   // const userId = user._id
 
-  const [data, setData] = useState([])
-  const [isLoading, setIsLoading] = useState(true)
 
-  async function fetchRequests () {
-    try {
-      const res = await fetch(`https://propertease-api.onrender.com/workorders`)
-  
-      const json = await res.json()
-      
-      setData(json)
-      
-      data.length === 0
-      ? setIsLoading(false) 
-      : ""
-      
-    } catch (error) {
-      console.log("error loading data")
-    }
-
-  }
-  
-  useEffect(() => {
-    fetchRequests()
-  },[])
   
   function deleteRequest(request){
     console.log(`delete`, request)
