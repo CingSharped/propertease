@@ -17,6 +17,27 @@ const Landlord = () => {
   const [data, setData] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 
+  const property = {
+    _id: "64944c85abec2e395db04c4e",
+    address: "430 London Rd, Westcliff-on-Sea, Southend-on-Sea",
+    bathrooms: 8,
+    bedrooms: 0,
+    council_tax_band: "F",
+    created_on: "Thu, 15 Jun 2023 20:21:46 GMT",
+    description: "The Palace Theatre, located in Southend on Sea",
+    energy_rating: "D",
+    model_id: "jhbv43kjh34jh",
+    name: "The Palace Theatre",
+    owner_id: "648b1ecf800c2596b4c79aa1",
+    postcode: "SS0 9LA",
+    property_type: "Terraced",
+    rent_date: null,
+    rental_cost: 5000,
+    tenant_id: "648b1ecf800c2596b4c79aa1",
+    tenure: null,
+  };
+
+
   async function fetchRequests () {
     try {
       const res = await fetch(`https://propertease-api.onrender.com/workorders`)
@@ -34,6 +55,8 @@ const Landlord = () => {
     }
 
   }
+
+  
   
   useEffect(() => {
     fetchRequests()
@@ -155,46 +178,46 @@ const Landlord = () => {
           >
             All Properties
           </button>
-         { false ?  ( <div className={`panel1 ${activeAccordion === 1 ? "show" : ""}`}>
+            <div className={`panel1 ${activeAccordion === 1 ? "show" : ""}`}>
 
             <div id="box5" className="fade-in" onClick={() => setIsOpen(true)}>
               Property Listing 1<br />
-              <p>{ properties[0].address}</p>
+              <p>{ property.address}</p>
               
               <br />
               Current Tenant: Harley Quin
               {isOpen && (
                 <LargeModal
-                  children={<PropertyInformation property={ properties[0]} setIsOpen={setIsOpen} />}
+                  children={<PropertyInformation property={ property} setIsOpen={setIsOpen} />}
                   setIsOpen={setIsOpen}
                 />
               )}
             </div>
             <div id="box6" className="fade-in" onClick={() => setIsOpen(true)}>
               Property Listing 2<br />
-              <p>{ properties[1].address}</p>
+              <p>{ property.address}</p>
               <br />
               Current Tenant: Michael Scott
               {isOpen && (
                 <LargeModal
-                  children={<PropertyInformation property={ properties[1]} setIsOpen={setIsOpen} />}
+                  children={<PropertyInformation property={ property} setIsOpen={setIsOpen} />}
                   setIsOpen={setIsOpen}
                 />
               )}
             </div>
             <div id="box7" className="fade-in" onClick={() => setIsOpen(true)}>
               Property Listing 3<br />
-              <p>{ properties[2].address}</p>
+              <p>{ property.address}</p>
               <br />
               Current Tenant: Beyonce Knowles
               {isOpen && (
                 <LargeModal
-                  children={<PropertyInformation property={ properties[2]} setIsOpen={setIsOpen}/>}
+                  children={<PropertyInformation property={ property} setIsOpen={setIsOpen}/>}
                   setIsOpen={setIsOpen}
                 />
               )}
             </div>
-          </div> ) : "loading..." }
+          </div> )}
          
         </div>
 
