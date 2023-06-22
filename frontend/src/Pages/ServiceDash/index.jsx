@@ -1,4 +1,6 @@
 import React from 'react';
+import { MaintenanceRequestList } from "../../components";
+import { Footer } from "../../components";
 import './service.css';
 
 const Service = () => {
@@ -17,9 +19,10 @@ const Service = () => {
           
           </div> */}
           <div id="boxno4" className="fade-in">
-          Outstanding workorders
+          <MaintenanceRequestList />
           </div>
         </div>
+        <Footer />
       </div>
     
     );
