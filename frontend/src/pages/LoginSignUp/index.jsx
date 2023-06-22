@@ -26,12 +26,12 @@ const LoginSignUp = () => {
     const user = JSON.parse(localStorage.getItem("user"));
     let userID
     try {
-      userID = user._id
+      userID = user.user_type
     } catch (error) {
       console.log("no user id")
     }
 
-    userID ? navigate("/landlord") : ""
+    userID ? navigate (`/${userID}`) : "" 
   }
 
   const handleSignupSubmit = async (e) => {
@@ -46,7 +46,7 @@ const LoginSignUp = () => {
       console.log("no user id")
     }
 
-    userID ? navigate("/landlord") : ""
+    userID ? navigate (`/${userID}`) : "" 
   }
 
   const handleTabChange = (tab) => {
@@ -125,9 +125,9 @@ const LoginSignUp = () => {
               required
             >
               <option value=""></option>
-              <option value="landlord">Landlord</option>
-              <option value="tenant">Tenant</option>
-              <option value="service">Service</option>
+              <option value="Landlord">Landlord</option>
+              <option value="Tenant">Tenant</option>
+              <option value="Service">Service</option>
             </select>
           </div>
         </div>
