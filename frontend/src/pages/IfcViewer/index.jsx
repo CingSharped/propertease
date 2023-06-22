@@ -22,12 +22,31 @@ const IfcViewer = ({ ifcProject }) => {
   const [loadingIfc, setLoadingIfc] = useState(true);
   //const [elemsIdfromDb, setElemsIdFromDb] = useState([]);
   const [elemsFromDb, setElemsFromDb] = useState([])
-  let viewer;
-
   const [filterButtons, setFilterButtons] = useState();
-  //const elementIds = [209236, 1306]; // get from db
+  const [workordersData, setWorkordersData] = useState([]) //get workorders data to display on the properties menu
+  let viewer;
   let idsArray = []
   let maintArray = []
+
+  async function fetchWorkorders () {
+    try {
+      const res = await fetch(`https://propertease-api.onrender.com/workorders`)
+  
+      const json = await res.json()
+      
+      setWorkordersData(json)
+      // console.log(data)
+      console.log(json)
+      
+    } catch (error) {
+      console.log("error loading data")
+    }
+
+  }
+  
+  useEffect(() => {
+    fetchWorkorders()
+  },[])
 
   const fetchElemsIdArray = useCallback( async() => {
     try {
@@ -63,11 +82,6 @@ const IfcViewer = ({ ifcProject }) => {
       console.log("error loading data");
     }
   }, [])
-
-  // useEffect(() => {
-  //   fetchElemsIdArray();
-  //   console.log("useEffetc: ", elemsIdfromDb)
-  // }, [elemsIdfromDb])
 
   useEffect(() => {
     fetchElemsIdArray();
@@ -111,7 +125,7 @@ const IfcViewer = ({ ifcProject }) => {
 
     viewer.axes.setAxes();
     viewer.grid.setGrid();
-    viewer.clipper.active = true;
+   // viewer.clipper.active = true; //enable/disable clipping planes
 
     window.addEventListener("dblclick", handleDoubleClick);
     window.addEventListener("mousemove", handleMouseMove);
@@ -120,38 +134,6 @@ const IfcViewer = ({ ifcProject }) => {
 
     loadIfc(ifcUrl);
 
-    //const elementIds = elemsFromDb.map(elemId => elemId.locationId);
-    //console.log("elemsIdfromDb ", elemsIdfromDb);
-
-    // const elementIds = idsArray
-
-    // const createButtons = (elementIds) => {
-    //   return elementIds.map((elementId) => {
-    //     return (
-    //       <Button
-    //         variant="contained"
-    //         key={elementId}
-    //         onClick={handleButtonClick(async () => {
-    //           viewer.IFC.selector.pickIfcItemsByID(0, [elementId], true);
-    //           let idsArray = [elementId];
-    //           const props = await viewer.IFC.getProperties(
-    //             0,
-    //             idsArray[0],
-    //             true,
-    //             false
-    //           );
-    //           setSelectedProperties(props);
-
-    //           if (!isPropertyMenuVisible) {
-    //             togglePropertyMenu();
-    //           }
-    //         })}
-    //       >
-    //         Element {elementId}
-    //       </Button>
-    //     );
-    //   });
-    // };
 
     const createButtons = (elements) => {
       return elements.map((element) => {
@@ -162,14 +144,41 @@ const IfcViewer = ({ ifcProject }) => {
             key={locationId}
             onClick={handleButtonClick(async () => {
               viewer.IFC.selector.pickIfcItemsByID(0, [locationId], true);
-              let idsArray = [locationId];
-              const props = await viewer.IFC.getProperties(
-                0,
-                idsArray[0],
-                true,
-                false
-              );
-              setSelectedProperties(props);
+              //let idsArray = [locationId];
+
+              //console.log(locationId)
+
+              const keysToFilter = ["cost", "created_on", "description", "location_id", "property_id", "title", "work_type"];
+
+              const filteredArray = workordersData.map(obj => {
+                const filteredObj = {};
+                keysToFilter.forEach(key => {
+                  if (key in obj) {
+                    filteredObj[key] = obj[key];
+                  }
+                });
+                return filteredObj;
+              });
+
+            console.log("filtered array: ", filteredArray)
+
+              for (let i = 0; i < filteredArray.length; i++)
+              {
+                if (filteredArray[i].location_id == locationId)
+                  setSelectedProperties(filteredArray[i]) //set the workorder data to show on properties menu based on location_id
+                
+              }
+              //get db data here and display it - assign using setSelectedProperties([data])
+
+              
+              //setSelectedProperties([elemsFromDb])
+              // const props = await viewer.IFC.getProperties(
+              //   0,
+              //   idsArray[0],
+              //   true,
+              //   false
+              // );
+              // setSelectedProperties(props);
     
               if (!isPropertyMenuVisible) {
                 togglePropertyMenu();
@@ -183,7 +192,6 @@ const IfcViewer = ({ ifcProject }) => {
       });
     };
     
-
     const buttons = createButtons(elemsFromDb);
     setFilterButtons(buttons);
 
@@ -194,8 +202,9 @@ const IfcViewer = ({ ifcProject }) => {
       window.removeEventListener("click", handleButtonClick);
       viewer.dispose();
     };
-  }, [buildingId]); //trigger reload of the viewer, workaround to get buttons working? - buildingId should not be inside of the array...
+  }, [buildingId]); //trigger reload of the viewer, workaround to get buttons working? - buildingId should not be inside of the array
 
+//need to handle undefined etc values here (filter out)
   const handleDoubleClick = async () => {
     const result = await viewer.IFC.selector.pickIfcItem(true);
     if (!result) return;
@@ -236,6 +245,7 @@ const IfcViewer = ({ ifcProject }) => {
 
   return (
     <>
+    {/* <div>{buildingId}</div>  */}
       <div id="button-container">{filterButtons}</div>
 
       {/* <Button variant="contained" onClick={togglePropertyMenu}>
@@ -256,7 +266,6 @@ const IfcViewer = ({ ifcProject }) => {
             <PropertiesMenu
               buildingId={buildingId}
               properties={selectedProperties}
-              propertyVisible = {isPropertyMenuVisible} //passing this as props - still not able to toggle propertyMenu
             />
           </BuildingIdContext.Provider>
         </div>
