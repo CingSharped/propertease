@@ -38,8 +38,8 @@
 #box5, #box6, #box7 {
   border-radius: 1rem;
   padding: 20px;
-  width: 85%;
-  height: 100px;
+  width: 95%;
+  height: 50px;
 }
 
 #main-container {
@@ -101,7 +101,7 @@
   background-color: #F9F2EB;
   display: center;
   cursor: pointer;
-  margin-left: 25%;
+  /* margin-left: 25%; */
   padding: 18px;
   width: 50%;
   border: none;
@@ -120,7 +120,8 @@
   overflow: hidden;
   width: 100%;
   margin-bottom: 5%;
-  margin-left: 8%;
+  margin-left: 5%;
+  margin-right: 3%;
   
 }
 
@@ -128,7 +129,7 @@
   padding: 0 18px;
   display: none;
   overflow: hidden;
-  width: 100%;
+  /* width: 85%; */
   
 }
 
