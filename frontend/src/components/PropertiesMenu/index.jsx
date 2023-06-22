@@ -10,8 +10,11 @@ import {
   TableRow,
   Paper,
   Button,
+  Grid
 } from "@mui/material";
 import CurrentElemIdContext from "../../context/CurrentElemIdContext";
+
+import axios from 'axios';
 
 //import { useNavigate } from "react-router-dom";
 //import { useAuthContext } from '../../hooks/useAuthContext';
@@ -25,7 +28,50 @@ const PropertiesMenu = ({ properties }) => {
   //const { user } = useAuthContext();
 
   //const navigate = useNavigate();
-  console.log("properties from properties menu " , properties);
+  //console.log("properties from properties menu " , properties);
+
+  //create a function to send the request to mark WO "completed": true
+  //get all WOs, if elemId == location_id , change status to completed (patch? -> resend the data just changing "completed" = true)
+
+
+  
+  async function updateWorkOrderByLocationId(locationId) {
+    try {
+      // Step 1: Retrieve all work orders
+      const response = await axios.get('https://propertease-api.onrender.com/workorders');
+  
+      // Step 2: Find the work order with the matching location_id
+      const workOrder = response.data.find(order => order.location_id === locationId);
+  
+      if (!workOrder) {
+        console.log('No work order found with the provided location_id.');
+        return;
+      }
+  
+      // Step 3: Extract work order's _id
+      const { _id } = workOrder;
+      console.log({ _id })
+  
+      // Step 4: Create PATCH request URL
+      const patchUrl = `https://propertease-api.onrender.com/workorders/${_id}`;
+  
+      // Step 5: Create PATCH request payload
+      const payload = {
+        completed: true
+      };
+  
+      // Step 6: Send PATCH request
+      await axios.patch(patchUrl, payload);
+  
+      console.log(`Work order ${_id} updated successfully.`);
+    } catch (error) {
+      console.error('An error occurred:', error.message);
+    }
+  }
+  
+
+  //also buttons need to show based on status = completed...
+  //and button to show only when WO button is clicked (i.e. when form is triggered by clicking on WO button)
 
   const removeNullUndefinedKeys = (obj) => {
     const newObj = { ...obj };
@@ -63,11 +109,23 @@ const PropertiesMenu = ({ properties }) => {
     for (let i = 0; i < Object.keys(properties).length; i++) {
       if (Object.keys(properties)[i] === "expressID") {
         const locationId = Object.values(properties)[i];
-        console.log("locationId from PropertiesMenu", locationId);
+        console.log("locationId from PropertiesMenu create work ordder", locationId);
         setElementId(locationId);
       }
     }
     setIsOpen(true);
+  };
+
+  //for Close work order button
+  const handleClick2 = () => {
+    for (let i = 0; i < Object.keys(properties).length; i++) {
+      if (Object.keys(properties)[i] === "location_id") {
+        const locationId = Object.values(properties)[i];
+        console.log("locationId close work order button", locationId);
+        setElementId(locationId);
+      }
+    }
+    
   };
 
   useEffect(() => {}, [properties]);
@@ -103,6 +161,7 @@ const PropertiesMenu = ({ properties }) => {
         </Box>
         <div align="center">
           <Box sx={{ mb: 2 }}>
+          <Grid item xs={10} style={{ display: "flex", gap: "1rem", align:"center" }}>
             <Button
               variant="contained"
               onClick={() => {
@@ -110,8 +169,26 @@ const PropertiesMenu = ({ properties }) => {
               }}
               sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
             >
-              Create Maintenance request
+              Create work order
             </Button>
+            <Button
+              variant="contained"
+              onClick={() => {
+                // console.log("go back to dashboard");
+                // user.user_type ? navigate (`/${user.user_type}`) : "" 
+                //send request to close
+                handleClick2()
+                console.log(elementId)
+                updateWorkOrderByLocationId(elementId)
+                //need the lcoation id here - elementId? / or locationId
+
+
+              }}
+              sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
+            >
+              Close work order
+            </Button>
+            </Grid>
           </Box>
           {/* <Box sx={{ mb: 2 }}>
             <Button
@@ -124,19 +201,9 @@ const PropertiesMenu = ({ properties }) => {
               Close Maintenance request
             </Button>
           </Box> */}
-          {/* <Box sx={{ mb: 2 }}>
-            <Button
-              variant="contained"
-              onClick={() => {
-                console.log("go back to dashboard");
-                user.user_type ? navigate (`/${user.user_type}`) : "" 
+          <Box sx={{ mb: 2 }}>
 
-              }}
-              sx={{ backgroundColor: "rgb(26, 39, 62)", color: "#ffffff" }}
-            >
-              Dashboard
-            </Button>
-          </Box> */}
+          </Box>
           {/* <Box  >
             <Button variant="contained" onClick={() => {propertyMenuVisible=!propertyMenuVisible
             console.log(propertyMenuVisible)}}>x</Button>

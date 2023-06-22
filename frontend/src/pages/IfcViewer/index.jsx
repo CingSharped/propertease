@@ -13,6 +13,7 @@ import "./IfcViewer.css";
 import BuildingIdContext from "../../context/BuildingIdContext";
 import { Button } from "@mui/material";
 
+
 const IfcViewer = ({ ifcProject }) => {
   const ifcUrl = "../ifc-models/rac_basic_sample_project-IFC4-2.ifc";
   const containerRef = useRef();
@@ -27,6 +28,7 @@ const IfcViewer = ({ ifcProject }) => {
   let viewer;
   let idsArray = []
   let maintArray = []
+
 
   async function fetchWorkorders () {
     try {
@@ -68,12 +70,13 @@ const IfcViewer = ({ ifcProject }) => {
           //check if it is an integer, and eliminate repeats
           idsArray.push(locationId);
 
-          maintArray.push({"title": json[i].title , "locationId" : locationId})
+          //maintArray.push({"title": json[i].title , "locationId" : locationId})
+          maintArray.push({"title": json[i].title , "locationId" : locationId, "completed": json[i].completed})
         }
       }
 
       //console.log(idsArray);
-      //console.log(maintArray)
+      console.log(maintArray)
 
       //setElemsIdFromDb(idsArray); 
       setElemsFromDb(maintArray)
@@ -136,8 +139,11 @@ const IfcViewer = ({ ifcProject }) => {
 
 
     const createButtons = (elements) => {
-      return elements.map((element) => {
+      return elements
+      .filter((element) => element.completed === false)
+      .map((element) => {
         const { title, locationId } = element;
+        //console.log(completed)
         return (
           <Button
             variant="contained"
@@ -205,7 +211,8 @@ const IfcViewer = ({ ifcProject }) => {
     };
   }, [buildingId]); //trigger reload of the viewer, workaround to get buttons working? - buildingId should not be inside of the array
 
-  
+
+
 //need to handle undefined etc values here (filter out)
   const handleDoubleClick = async () => {
     const result = await viewer.IFC.selector.pickIfcItem(true);
@@ -245,6 +252,7 @@ const IfcViewer = ({ ifcProject }) => {
     setPropertyMenuVisible(!isPropertyMenuVisible);
   };
 
+
   return (
     <>
     {/* <div>{buildingId}</div>  */}
@@ -275,5 +283,6 @@ const IfcViewer = ({ ifcProject }) => {
     </>
   );
 };
+
 
 export default IfcViewer;
