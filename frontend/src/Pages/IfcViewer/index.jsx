@@ -22,12 +22,49 @@ const IfcViewer = ({ ifcProject }) => {
   const [loadingIfc, setLoadingIfc] = useState(true);
   //const [elemsIdfromDb, setElemsIdFromDb] = useState([]);
   const [elemsFromDb, setElemsFromDb] = useState([])
-  let viewer;
-
   const [filterButtons, setFilterButtons] = useState();
+  const [workordersData, setWorkordersData] = useState([]) //get workorders data to display on the properties menu
   //const elementIds = [209236, 1306]; // get from db
+  let viewer;
   let idsArray = []
   let maintArray = []
+
+  async function fetchWorkorders () {
+    try {
+      const res = await fetch(`https://propertease-api.onrender.com/workorders`)
+  
+      const json = await res.json()
+
+      //filter the workorders data
+      //       Work type	Repair
+      // Title	Leaking tap
+      // Description	The taps in the kitchen has been dripping for the past day
+      // Cost	£ 2000
+      // Created	Thu, 15 Jun 2023 13:57:36 GMT
+
+    //       cost
+    // created_on
+    // description
+    // location_id
+    // property_id
+    // title
+    // work_type
+
+
+      
+      setWorkordersData(json)
+      // console.log(data)
+      console.log(json)
+      
+    } catch (error) {
+      console.log("error loading data")
+    }
+
+  }
+  
+  useEffect(() => {
+    fetchWorkorders()
+  },[])
 
   const fetchElemsIdArray = useCallback( async() => {
     try {
@@ -63,11 +100,6 @@ const IfcViewer = ({ ifcProject }) => {
       console.log("error loading data");
     }
   }, [])
-
-  // useEffect(() => {
-  //   fetchElemsIdArray();
-  //   console.log("useEffetc: ", elemsIdfromDb)
-  // }, [elemsIdfromDb])
 
   useEffect(() => {
     fetchElemsIdArray();
@@ -130,44 +162,21 @@ const IfcViewer = ({ ifcProject }) => {
             key={locationId}
             onClick={handleButtonClick(async () => {
               viewer.IFC.selector.pickIfcItemsByID(0, [locationId], true);
-              let idsArray = [locationId];
+              //let idsArray = [locationId];
 
+              //console.log(locationId)
+
+             //console.log(workordersData)
+
+              for (let i = 0; i < workordersData.length; i++)
+              {
+                if (workordersData[i].location_id == locationId)
+                  setSelectedProperties(workordersData[i]) //set the workorder data to show on properties menu based on location_id
+                
+              }
               //get db data here and display it - assign using setSelectedProperties([data])
 
-              let data =            {
-                "_id": "649361484a773c6a6a1fc762",
-                "completed": false,
-                "cost": null,
-                "created_by": "USER",
-                "created_on": "Wed, 21 Jun 2023 20:44:56 GMT",
-                "description": "window is broken",
-                "location_id": 43339,
-                "priority": "high",
-                "property_id": 360773,
-                "property_owner_id": "asdf",
-                "status": false,
-                "title": "broken window",
-                "work_type": "Other"
-            }
-
-            let data2 = 
-            {
-              "_id": "649350a3471d1f5067d0b6dd",
-              "completed": false,
-              "cost": null,
-              "created_by": "USER",
-              "created_on": "Wed, 21 Jun 2023 19:33:55 GMT",
-              "description": "oven stopped working",
-              "location_id": 209236,
-              "priority": "medium",
-              "property_id": 360773,
-              "property_owner_id": "asdf",
-              "status": false,
-              "title": "oven stopped working",
-              "work_type": "electrical"
-          }
               
-              setSelectedProperties(data)
               //setSelectedProperties([elemsFromDb])
               // const props = await viewer.IFC.getProperties(
               //   0,
@@ -210,7 +219,6 @@ const IfcViewer = ({ ifcProject }) => {
     const { modelID, id } = result;
     //id = expressId
 
-    
     const props = await viewer.IFC.getProperties(modelID, id, true, false);
 
     console.log(props);
@@ -232,8 +240,6 @@ const IfcViewer = ({ ifcProject }) => {
 
   const handleButtonClick = (callback) => {
     return () => {
-      // console.log("handle button click")
-      // setSelectedProperties({"name": "name", "value": "value"})
       if (typeof callback === "function") {
         callback();
       }
@@ -267,7 +273,6 @@ const IfcViewer = ({ ifcProject }) => {
             <PropertiesMenu
               buildingId={buildingId}
               properties={selectedProperties}
-              propertyVisible = {isPropertyMenuVisible} //passing this as props - still not able to toggle propertyMenu
             />
           </BuildingIdContext.Provider>
         </div>
