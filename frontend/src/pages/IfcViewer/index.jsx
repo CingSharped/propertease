@@ -178,7 +178,7 @@ const IfcViewer = ({ ifcProject }) => {
               }
               //get db data here and display it - assign using setSelectedProperties([data])
 
-              
+            
               //setSelectedProperties([elemsFromDb])
               // const props = await viewer.IFC.getProperties(
               //   0,
