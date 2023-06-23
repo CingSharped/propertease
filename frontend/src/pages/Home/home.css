@@ -41,15 +41,13 @@
 
 .home .screenshot-carousel{
   height: 90vh;
-  /* background-color: #D39B0B; */
-  background-color: #1a273e;;
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: #1a273e;
 }
 
 .home .screenshot-container{
-  border: 2px solid #1a273e;
   border: 2px solid #D39B0B;
   height: 95%;
   width: 95%;
@@ -67,21 +65,25 @@
 }
 
 .home .screenshot-div-container{
-  border: 2px solid #1a273e;
   border: 2px solid #D39B0B;
   width: 100%;
   margin: .5rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
+  overflow: auto;
+  box-sizing: border-box;
+  padding: 20px;
 }
 
 .home .screenshot-image {
-  height: 100%;  
+  max-width: 100%;
+  height: auto; 
 }
 
 .home .screenshot-description{
-  height: 100%;
+  margin-top: auto;
 }
 
 .home .text {
@@ -91,5 +93,11 @@
 .home .screenshot-description p{
   margin: 0;
   padding: 1rem;
+  font-size: 1.5rem;
   color: white;
+}
+
+.home .screenshot-image img {
+  max-width: 100%;
+  height: 40rem;
 }

@@ -34,9 +34,9 @@ const Home = () => {
         <div className='screenshot-container'>
           <div className='screenshot-div-container'>
             <div className='screenshot-image'>
-              s
-              <img src="" alt="" />
+              <img src="../../../request.png" alt="dashboard" />
             </div>
+            IMAGE NEEDS TO BE CHANGED
             <div className='screenshot-description'>
               <p>
                 Easy to use and intuitive dashboard to see and manage all your properties in one page.
@@ -46,7 +46,7 @@ const Home = () => {
 
           <div className='screenshot-div-container'>
             <div className='screenshot-image'>
-              <img src="" alt="" />s
+              <img src="../../../ifcviewer.png" alt="3D model" />
             </div>
             <div className='screenshot-description'>
               <p>Use our IFC viewer to view 3D models of your properties to quickly select regions which needs addressing to reduce ambiguity. </p>
@@ -55,7 +55,7 @@ const Home = () => {
 
           <div className='screenshot-div-container'>
             <div className='screenshot-image'>
-              <img src="" alt="" />s
+              <img src="../../../request.png" alt="request" />
             </div>
             <div className='screenshot-description'>
               <p>Easy to use reporting lets you easily select the property in question and report incidents which can be easily viewed by all relevant people.</p>
