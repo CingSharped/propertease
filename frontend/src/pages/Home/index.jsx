@@ -34,7 +34,7 @@ const Home = () => {
         <div className='screenshot-container'>
           <div className='screenshot-div-container'>
             <div className='screenshot-image'>
-              <img src="../../../public/Dashboard screenshot.PNG" alt="dashboard" />
+              <img src="/Dashboard screenshot.PNG" alt="dashboard" />
             </div>
             <div className='screenshot-description'>
               <p>
