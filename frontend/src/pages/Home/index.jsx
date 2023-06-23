@@ -34,9 +34,8 @@ const Home = () => {
         <div className='screenshot-container'>
           <div className='screenshot-div-container'>
             <div className='screenshot-image'>
-              <img src="../../../request.png" alt="dashboard" />
+              <img src="../../../public/Dashboard screenshot.PNG" alt="dashboard" />
             </div>
-            IMAGE NEEDS TO BE CHANGED
             <div className='screenshot-description'>
               <p>
                 Easy to use and intuitive dashboard to see and manage all your properties in one page.
