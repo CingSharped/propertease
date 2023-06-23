@@ -13,6 +13,7 @@ import "./IfcViewer.css";
 import BuildingIdContext from "../../context/BuildingIdContext";
 import { Button } from "@mui/material";
 
+
 const IfcViewer = ({ ifcProject }) => {
   const ifcUrl = "../ifc-models/rac_basic_sample_project-IFC4-2.ifc";
   const containerRef = useRef();
@@ -24,9 +25,11 @@ const IfcViewer = ({ ifcProject }) => {
   const [elemsFromDb, setElemsFromDb] = useState([])
   const [filterButtons, setFilterButtons] = useState();
   const [workordersData, setWorkordersData] = useState([]) //get workorders data to display on the properties menu
+  const [buttonText, setButtonText] = useState('Create Work Order')
   let viewer;
   let idsArray = []
   let maintArray = []
+
 
   async function fetchWorkorders () {
     try {
@@ -68,12 +71,13 @@ const IfcViewer = ({ ifcProject }) => {
           //check if it is an integer, and eliminate repeats
           idsArray.push(locationId);
 
-          maintArray.push({"title": json[i].title , "locationId" : locationId})
+          //maintArray.push({"title": json[i].title , "locationId" : locationId})
+          maintArray.push({"title": json[i].title , "locationId" : locationId, "completed": json[i].completed})
         }
       }
 
       //console.log(idsArray);
-      //console.log(maintArray)
+      console.log(maintArray)
 
       //setElemsIdFromDb(idsArray); 
       setElemsFromDb(maintArray)
@@ -136,13 +140,17 @@ const IfcViewer = ({ ifcProject }) => {
 
 
     const createButtons = (elements) => {
-      return elements.map((element) => {
+      return elements
+      .filter((element) => element.completed === false)
+      .map((element) => {
         const { title, locationId } = element;
+        //console.log(completed)
         return (
           <Button
             variant="contained"
             key={locationId}
             onClick={handleButtonClick(async () => {
+              setButtonText("Close Work Order")
               viewer.IFC.selector.pickIfcItemsByID(0, [locationId], true);
               //let idsArray = [locationId];
 
@@ -170,7 +178,7 @@ const IfcViewer = ({ ifcProject }) => {
               }
               //get db data here and display it - assign using setSelectedProperties([data])
 
-              
+            
               //setSelectedProperties([elemsFromDb])
               // const props = await viewer.IFC.getProperties(
               //   0,
@@ -192,6 +200,7 @@ const IfcViewer = ({ ifcProject }) => {
       });
     };
     
+
     const buttons = createButtons(elemsFromDb);
     setFilterButtons(buttons);
 
@@ -203,6 +212,8 @@ const IfcViewer = ({ ifcProject }) => {
       viewer.dispose();
     };
   }, [buildingId]); //trigger reload of the viewer, workaround to get buttons working? - buildingId should not be inside of the array
+
+
 
 //need to handle undefined etc values here (filter out)
   const handleDoubleClick = async () => {
@@ -216,6 +227,8 @@ const IfcViewer = ({ ifcProject }) => {
 
     console.log(props);
     setSelectedProperties(props);
+    setButtonText('Create Work Order')
+
     if (!isPropertyMenuVisible) {
       togglePropertyMenu();
     }
@@ -243,6 +256,7 @@ const IfcViewer = ({ ifcProject }) => {
     setPropertyMenuVisible(!isPropertyMenuVisible);
   };
 
+
   return (
     <>
     {/* <div>{buildingId}</div>  */}
@@ -266,6 +280,7 @@ const IfcViewer = ({ ifcProject }) => {
             <PropertiesMenu
               buildingId={buildingId}
               properties={selectedProperties}
+              buttonText={buttonText}
             />
           </BuildingIdContext.Provider>
         </div>
@@ -273,5 +288,6 @@ const IfcViewer = ({ ifcProject }) => {
     </>
   );
 };
+
 
 export default IfcViewer;
