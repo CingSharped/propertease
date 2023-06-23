@@ -5,9 +5,9 @@ class Property:
     self.name = name # required
     self.description = description # required
     self.owner_id = owner_id # required
-    self.model_id = model_id
-    self.rent_date = rent_date
-    self.tenant_id = tenant_id
+    self.model_id = model_id 
+    self.rent_date = rent_date 
+    self.tenant_id = tenant_id 
     self.rental_cost = rental_cost
     self.bedrooms = bedrooms # required
     self.bathrooms = bathrooms # required

@@ -1,53 +1,43 @@
 import React, { useState, useEffect } from "react";
-import './dashboardmodal.css';
-import BarChart from '../BarChart';
+import axios from "axios";
+import "./dashboardmodal.css";
+import BarChart from "../BarChart";
 import MaintenanceRequestList from "../MaintenanceRequestList";
 
+const PropertyInformation = ({ property, setIsOpen }) => {
+  const [chartData, setChartData] = useState();
+  // const user = localStorage.getItem('user')
 
-const PropertyInformation = () => {
-  const [profitData, setProfitData] = useState([]);
- 
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  const transactions = [
-    {
-      _id: "oiew493hun3j",
-      property_id: "i43bh43b3",
-      property_owner_id: "ij43ublik3jb",
-      month: "January",
-      money: "1000",
-      transaction_type: "Income",
-      workorder_id: "3ikjbol435iuhb",
-    },
-    {
-      _id: "oiew493hun3j",
-      property_id: "i43bh43b3",
-      property_owner_id: "ij43ublik3jb",
-      month: "Feburary",
-      money: "2000",
-      transaction_type: "Income",
-      workorder_id: "3ikjbol435iuhb",
-    },
-    {
-      _id: "oiew493hun3j",
-      property_id: "i43bh43b3",
-      property_owner_id: "ij43ublik3jb",
-      month: "January",
-      money: "300",
-      transaction_type: "Expense",
-      workorder_id: "3ikjbol435iuhb",
-    },
-    {
-      _id: "oiew493hun3j",
-      property_id: "i43bh43b3",
-      property_owner_id: "ij43ublik3jb",
-      month: "Feburary",
-      money: "300",
-      transaction_type: "Expense",
-      workorder_id: "3ikjbol435iuhb",
-    },
-  ];
+  async function fetchRequests() {
+    try {
+      const res = await fetch(
+        `https://propertease-api.onrender.com/workorders/properties/648b64ca2431694eaff1d1dc`
+      );
 
-  function createProfitData(transactions) {
+      const json = await res.json();
+
+      setData(json);
+
+      data.length === 0 ? setIsLoading(false) : "";
+    } catch (error) {
+      console.log("error loading data");
+    }
+  }
+
+  useEffect(() => {
+    fetchRequests();
+  }, []);
+
+
+  async function createProfitData() {
+        const response = await axios.get(
+      `https://propertease-api.onrender.com/transactions/properties/648b64ca2431694eaff1d1dc`
+    );
+    const transactions = response.data
+    console.log(transactions)
     if (transactions != undefined) {
       const months = [];
       transactions.map((transaction) => {
@@ -56,78 +46,111 @@ const PropertyInformation = () => {
         }
       });
       console.log(months);
-
-      const profits = [];
+      const grossProfit = [];
+      const profits = []
+      const expenses = []
       months.map((month) => {
-        profits.push({
+        grossProfit.push({
           month: month,
           profit: 0,
         });
+        profits.push({
+          month: month,
+          income: 0
+        })
+        expenses.push({
+          month: month,
+          expense: 0
+        })
       });
       transactions.map((transaction) => {
         if (transaction.transaction_type == "Income") {
-          profits.forEach((profitData) => {
+          grossProfit.forEach((profitData) => {
             if (profitData.month == transaction.month) {
               profitData.profit =
                 parseInt(profitData.profit) + parseInt(transaction.money);
             }
           });
+          profits.forEach(profitData => {
+            if (profitData.month == transaction.month) {
+              profitData.income = parseInt(transaction.money)
+            }
+          })
         }
         if (transaction.transaction_type == "Expense") {
-          profits.forEach((profitData) => {
+          grossProfit.forEach((profitData) => {
             if (profitData.month == transaction.month) {
               profitData.profit =
                 parseInt(profitData.profit) - parseInt(transaction.money);
             }
           });
+          expenses.forEach(expenseData => {
+            if (expenseData.month == transaction.month) {
+              expenseData.expense = parseInt(transaction.money)
+            }
+          })
         }
+        // grossProfit.map((data) => data.month)
+        setChartData({
+          labels: ['January', 'February', 'March', 'April'],
+          datasets: [
+            {
+              label: "Profits",
+              data: profits.map((data) => data.income),
+            },
+            {
+              label: "Expenses",
+              data: expenses.map((data) => data.expense),
+            },
+            {
+              label: "Gross Profit",
+              data: grossProfit.map((data) => data.profit),
+            },
+          ],
+        });
       });
       console.log(profits);
-      setProfitData(profits);
+      
     }
   }
 
   useEffect(() => {
-    createProfitData(transactions);
+    createProfitData();
   }, []);
 
-  const chartData = {
-    labels: profitData.map((data) => data.month),
-    datasets: [
-      {
-        label: "Users Gained",
-        data: profitData.map((data) => data.profit),
-      },
-    ],
-  };
+  return (
+    <div>
+      <div id="main-container">
+        <h1>{property.title}</h1>
+        <div
+          id="boxno1"
+          className="fade-in"
+          onClick={() => this.navigateTo("./ifc")}
+        >
+          {property.name}
+        </div>
+        <div id="boxno2" className="fade-in">
+          {chartData ? <BarChart chartData={chartData} /> : "Loading..."}
+        </div>
 
-
-
-    return (
-   
-      <div>
-        <div id="main-container">
-          <h1>Property 1</h1>
-          <div id="boxno1" className="fade-in" onClick={() => this.navigateTo('./ifc')}>
-            Address: 
-          </div>
-          <div id="boxno2" className="fade-in">
-            <BarChart chartData={chartData} />
-          </div>
-          
-          <div id="boxno3" className="fade-in">
-          Description
-          </div>
-          <div id="boxno4" className="fade-in">
-          Tenure, Energy Rating, Bathrooms, Council Tax Band
-          </div>
-          <div id="boxno5" className="fade-in">
-          <MaintenanceRequestList />
-            </div>
+        <div id="boxno3" className="fade-in">
+          Description:
+          <br />
+          <br />
+          {property.description}
+        </div>
+        <div id="boxno4" className="fade-in">
+          <p>Tenure: {property.tenure}</p>
+          <p>Energy Rating: {property.energy_rating}</p>
+          <p>Bathrooms: {property.bathrooms}</p>
+          <p>Council Tax Band: {property.council_tax_band}</p>
+        </div>
+        <div id="boxno5" className="fade-in">
+          <MaintenanceRequestList data={data} isLoading={isLoading} />
         </div>
       </div>
-    
-    );
-  }
+    </div>
+  );
+};
 
 export default PropertyInformation;
