@@ -33,10 +33,11 @@
 
 .home .mission-statement{
   width: 100%;
-  height: 90vh;
+  height: 50vh;
   display: flex;
   justify-content: center;
   align-items: center;
+  
 }
 
 .home .screenshot-carousel{
@@ -49,7 +50,7 @@
 
 .home .screenshot-container{
   border: 2px solid #D39B0B;
-  height: 95%;
+  /* height: 95%; */
   width: 95%;
   display: flex;
   justify-content: space-between;
@@ -62,6 +63,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+}
+
+.home .div-border p {
+    font-size: xx-large;
 }
 
 .home .screenshot-div-container{
