@@ -36,6 +36,7 @@ const IfcViewer = ({ ifcProject }) => {
       const res = await fetch(`https://propertease-api.onrender.com/workorders`)
   
       const json = await res.json()
+
       
       setWorkordersData(json)
       // console.log(data)
@@ -91,7 +92,7 @@ const IfcViewer = ({ ifcProject }) => {
     fetchElemsIdArray();
     //console.log("useEffetc: ", elemsIdfromDb)
   }, [elemsFromDb])
-
+  
   useEffect(() => {
     viewer = new IfcViewerAPI({
       container: containerRef.current,
@@ -178,7 +179,7 @@ const IfcViewer = ({ ifcProject }) => {
               }
               //get db data here and display it - assign using setSelectedProperties([data])
 
-            
+
               //setSelectedProperties([elemsFromDb])
               // const props = await viewer.IFC.getProperties(
               //   0,
