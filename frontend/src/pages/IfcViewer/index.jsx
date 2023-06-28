@@ -2,8 +2,6 @@ import React, {
   useRef,
   useEffect,
   useState,
-  useContext,
-  createContext,
   useCallback,
 } from "react";
 import { IfcViewerAPI } from "web-ifc-viewer";
@@ -12,7 +10,6 @@ import PropertiesMenu from "../../components/PropertiesMenu";
 import "./IfcViewer.css";
 import BuildingIdContext from "../../context/BuildingIdContext";
 import { Button } from "@mui/material";
-
 
 const IfcViewer = ({ ifcProject }) => {
   const ifcUrl = "../ifc-models/rac_basic_sample_project-IFC4-2.ifc";
@@ -26,10 +23,11 @@ const IfcViewer = ({ ifcProject }) => {
   const [filterButtons, setFilterButtons] = useState();
   const [workordersData, setWorkordersData] = useState([]) //get workorders data to display on the properties menu
   const [buttonText, setButtonText] = useState('Create Work Order')
+  const [isDataLoaded, setIsDataLoaded] = useState(false); //wait for the data to be fetched
+
   let viewer;
   let idsArray = []
   let maintArray = []
-
 
   async function fetchWorkorders () {
     try {
@@ -37,7 +35,6 @@ const IfcViewer = ({ ifcProject }) => {
   
       const json = await res.json()
 
-      
       setWorkordersData(json)
       // console.log(data)
       console.log(json)
@@ -82,6 +79,7 @@ const IfcViewer = ({ ifcProject }) => {
 
       //setElemsIdFromDb(idsArray); 
       setElemsFromDb(maintArray)
+      setIsDataLoaded(true)
 
     } catch (error) {
       console.log("error loading data");
@@ -94,11 +92,12 @@ const IfcViewer = ({ ifcProject }) => {
   }, [elemsFromDb])
   
   useEffect(() => {
+    
     viewer = new IfcViewerAPI({
       container: containerRef.current,
       backgroundColor: new THREE.Color(0xffffff),
     });
-
+  
     const loadIfc = async (url) => {
       //await viewer.IFC.setWasmPath("../../../");
       const model = await viewer.IFC.loadIfcUrl(url);
@@ -136,9 +135,6 @@ const IfcViewer = ({ ifcProject }) => {
     window.addEventListener("mousemove", handleMouseMove);
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("click", handleButtonClick);
-
-    loadIfc(ifcUrl);
-
 
     const createButtons = (elements) => {
       return elements
@@ -201,9 +197,14 @@ const IfcViewer = ({ ifcProject }) => {
       });
     };
     
-
     const buttons = createButtons(elemsFromDb);
     setFilterButtons(buttons);
+
+    //render the viewer only when the data is loaded
+    if (isDataLoaded) {
+
+      loadIfc(ifcUrl);
+    }
 
     return () => {
       window.removeEventListener("dblclick", handleDoubleClick);
@@ -212,11 +213,8 @@ const IfcViewer = ({ ifcProject }) => {
       window.removeEventListener("click", handleButtonClick);
       viewer.dispose();
     };
-  }, [buildingId]); //trigger reload of the viewer, workaround to get buttons working? - buildingId should not be inside of the array
+  }, [isDataLoaded]); //render the viewer when the data is loaded
 
-
-
-//need to handle undefined etc values here (filter out)
   const handleDoubleClick = async () => {
     const result = await viewer.IFC.selector.pickIfcItem(true);
     if (!result) return;
@@ -257,15 +255,9 @@ const IfcViewer = ({ ifcProject }) => {
     setPropertyMenuVisible(!isPropertyMenuVisible);
   };
 
-
   return (
     <>
-    {/* <div>{buildingId}</div>  */}
       <div id="button-container">{filterButtons}</div>
-
-      {/* <Button variant="contained" onClick={togglePropertyMenu}>
-        Close menu
-      </Button> */}
       {loadingIfc && (
         <div id="loader-container">
           <svg id="loading" viewBox="25 25 50 50">
@@ -289,6 +281,5 @@ const IfcViewer = ({ ifcProject }) => {
     </>
   );
 };
-
 
 export default IfcViewer;
