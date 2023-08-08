@@ -1,6 +1,6 @@
 # PropertEase
 
-This is a fullstack property management app with IFC/BIM integration using IFC.js. The app is built using React and allows Landlords, Tenants and Service Workers to view and manage properties, including opening and closing maintenance requests associated to speficic building elements, directly from the IFC model viewer. User and property (i.e. building) details are stored in a MongoDB database. Created to [this brief](https://gist.github.com/msgilling/53f4954b9818eace10d88c0b09854501#deliverables).  
+This is a fullstack property management app with IFC/BIM integration using IFC.js. The app is built using React and allows Landlords, Tenants and Service Workers to view and manage properties, including opening and closing maintenance requests associated to specific building elements, directly from the IFC model viewer. User and property (i.e. building) details are stored in a MongoDB database. Created to [this brief](https://gist.github.com/msgilling/53f4954b9818eace10d88c0b09854501#deliverables).  
 
 ## Features
 
@@ -95,8 +95,8 @@ Click the [link](http://localhost:5173/) on the terminal to access the website
 | Method | Endpoint                          | Purpose                                                 | Body                                                                                                                                         | Return Data Format          |
 | ------ | --------------------------------- | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------- |
 | POST   | /transactions                     | create a new transaction                                | `{ month, money, property_id, property_owner_id, transaction_type, workorder_id }`                                                           | New transaction       `{ _id, month, money, property_id, property_owner_id, transaction_type, workorder_id }`       |
-| GET    | /transactions/users/<_id>         | returns all transactions where _id matches property_owner_id |                                             | Array of transactions<br>`{`<br>`transaction,`<br>`transaction,`<br>`transaction`<br>`}`       
-| GET    | /transactions/properties/<_id>    | returns all transactions where _id matches property_id    |                                                 | Array of transactions<br>`{`<br>`transaction,`<br>`transaction,`<br>`transaction`<br>`}`   
+| GET    | /transactions/users/<_id>         | returns all transactions where _id matches property_owner_id |                                             | Array of transactions `{transaction,transaction,transaction}`       
+| GET    | /transactions/properties/<_id>    | returns all transactions where _id matches property_id    |                                                 | Array of transactions`{transaction,transaction,transaction}`   
 
 
 ## Technologies
@@ -124,4 +124,5 @@ Click the [link](http://localhost:5173/) on the terminal to access the website
 
 ## Known bugs
 
-- Issue in the implementation of useState in the IFC viewer, maintenance data does not always load 
+- Rendering issues in IFC viewer
+- CORS issue when closing maintenance request
