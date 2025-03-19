@@ -9,7 +9,7 @@ This is a fullstack property management app with IFC/BIM integration using IFC.j
 - IFC model viewer integrated with maintenance database: create and track the status of maintenance workorders linked to specific building elements
 
 ## Demo
-
+![Demo](https://github.com/CingSharped/propertease/blob/staging/frontend/src/assets/images/propertease%20demo%20gif%201.gif)
 ![Demo](https://github.com/CingSharped/propertease/blob/staging/frontend/src/assets/images/propertease%20demo%20gif%202.gif)
 
 ## Contributors
